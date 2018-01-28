@@ -6,29 +6,34 @@ const slash = require(`slash`)
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
   return new Promise((resolve, reject) => {
+    //Generate pages from "Page" content type
     graphql(
       `
         {
-          allContentfulProduct(filter: { node_locale: { eq: "en-US" } }) {
+          allContentfulPage {
             edges {
               node {
                 id
                 slug
+                node_locale
+                category {
+                  slug
+                }
               }
             }
           }
         }
       `
-    )
-      .then(result => {
+      ).then(result => {
         if (result.errors) {
           reject(result.errors)
         }
+        const productTemplate = path.resolve(`./src/templates/simple-page.js`)
+        _.each(result.data.allContentfulPage.edges, edge => {
 
-        const productTemplate = path.resolve(`./src/templates/product.js`)
-        _.each(result.data.allContentfulProduct.edges, edge => {
+          let category = edge.node.category === null ? "" : edge.node.category.slug + "/"
           createPage({
-            path: `/en/products/${edge.node.slug}/`,
+            path: `/${edge.node.node_locale}/${category}${edge.node.slug}/`,
             component: slash(productTemplate),
             context: {
               id: edge.node.id,
@@ -36,15 +41,31 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           })
         })
       })
+      //Generate Home Pages
+      .then(() => {
+        const homeTemplate = path.resolve(`./src/templates/home.js`)
+        const locales = ["en", "es"]
+        _.each(locales, locale => {
+          createPage({
+            path: `/${locale === "en" ? "" : locale + "/"}`,
+            component: slash(homeTemplate),
+            context: {
+              locale: locale,
+            },
+          })
+        })
+      })
+      //Generate products
       .then(() => {
         graphql(
           `
             {
-              allContentfulProduct(filter: { node_locale: { eq: "es" } }) {
+              allContentfulProduct {
                 edges {
                   node {
                     id
                     slug
+                    node_locale
                   }
                 }
               }
@@ -57,7 +78,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           const productTemplate = path.resolve(`./src/templates/product.js`)
           _.each(result.data.allContentfulProduct.edges, edge => {
             createPage({
-              path: `/es/productos/${edge.node.slug}/`,
+              path: `/${edge.node.node_locale}/${edge.node.node_locale === "en" ? "products" : "productos"}/${edge.node.slug}/`,
               component: slash(productTemplate),
               context: {
                 id: edge.node.id,
