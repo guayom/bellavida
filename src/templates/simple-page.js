@@ -15,8 +15,8 @@ class SimplePageTemplate extends React.Component {
     } = page
     return (
       <div>
-        <h1>{product.title}</h1>
-        <p>{product.content.content}</p>
+        <h1>{page.title}</h1>
+        <p>{page.content.content}</p>
       </div>
     )
   }
