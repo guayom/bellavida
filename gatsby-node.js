@@ -4,7 +4,19 @@ const path = require(`path`)
 const slash = require(`slash`)
 
 exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators
+  const { createPage, createLayout } = boundActionCreators
+  const locales = ["en", "es"]
+
+  locales.forEach(locale => {
+    createLayout({
+      component: path.resolve(`./src/templates/default-layout.js`),
+      id: locale,
+      context: {
+        locale: locale
+      }
+    })
+  })
+
   return new Promise((resolve, reject) => {
     //Generate pages from "Page" content type
     graphql(
@@ -35,6 +47,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           createPage({
             path: `/${edge.node.node_locale}/${category}${edge.node.slug}/`,
             component: slash(productTemplate),
+            layout: locale,
             context: {
               id: edge.node.id,
             },
@@ -44,11 +57,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
       //Generate Home Pages
       .then(() => {
         const homeTemplate = path.resolve(`./src/templates/home.js`)
-        const locales = ["en", "es"]
         _.each(locales, locale => {
           createPage({
             path: `/${locale === "en" ? "" : locale + "/"}`,
             component: slash(homeTemplate),
+            layout: locale,
             context: {
               locale: locale,
             },
@@ -80,6 +93,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             createPage({
               path: `/${edge.node.node_locale}/${edge.node.node_locale === "en" ? "products" : "productos"}/${edge.node.slug}/`,
               component: slash(productTemplate),
+              layout: locale,
               context: {
                 id: edge.node.id,
               },

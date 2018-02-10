@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 
 import Header from '../components/Header'
-import './index.css'
+import '../layouts/index.css'
 
-const TemplateWrapper = ({ data, children }) => (
+const TemplateWrapper = ({ data, children, layoutContext }) => (
   <div>
     <Helmet
       title="Gatsby Default Starter"
@@ -22,7 +22,7 @@ const TemplateWrapper = ({ data, children }) => (
         paddingTop: 0,
       }}
     >
-      This page is using the default layout. It should use either es or en
+      <Header products={data.allContentfulProduct} locale={layoutContext.locale}/>
       {children()}
     </div>
   </div>
@@ -33,3 +33,17 @@ TemplateWrapper.propTypes = {
 }
 
 export default TemplateWrapper
+
+export const pageQuery = graphql`
+  query menuQuery($locale: String!) {
+    allContentfulProduct(filter: { node_locale: { eq: $locale } }) {
+      edges {
+        node {
+          id
+          title
+          node_locale
+        }
+      }
+    }
+  }
+`

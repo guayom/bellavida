@@ -13,7 +13,6 @@ function ItemsList(props) {
 
 class Menu extends React.Component {
   render(){
-    const pages = this.props.pages.edges
     const products = this.props.products.edges
     return (
       <div>
@@ -22,8 +21,6 @@ class Menu extends React.Component {
         </ul>
         <h2>Products</h2>
         <ItemsList items={products} />
-        <h2>Pages</h2>
-        <ItemsList items={pages} />
       </div>
     )
   }
