@@ -1,10 +1,10 @@
 import React from 'react'
 import Link from 'gatsby-link'
+import Menu from '../../components/Header/Menu'
 
-const Header = () => (
+const Header = (props) => (
   <div
     style={{
-      background: 'rebeccapurple',
       marginBottom: '1.45rem',
     }}
   >
@@ -19,13 +19,13 @@ const Header = () => (
         <Link
           to="/"
           style={{
-            color: 'white',
             textDecoration: 'none',
           }}
         >
-          Gatsby
+          Logo here
         </Link>
       </h1>
+      <Menu products={props.products} pages={props.pages}/>
     </div>
   </div>
 )

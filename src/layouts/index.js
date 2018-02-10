@@ -5,7 +5,7 @@ import Helmet from 'react-helmet'
 import Header from '../components/Header'
 import './index.css'
 
-const TemplateWrapper = ({ children }) => (
+const TemplateWrapper = ({ data, children }) => (
   <div>
     <Helmet
       title="Gatsby Default Starter"
@@ -22,6 +22,7 @@ const TemplateWrapper = ({ children }) => (
         paddingTop: 0,
       }}
     >
+      <Header pages={data.allContentfulPage} products={data.allContentfulProduct}/>
       {children()}
     </div>
   </div>
@@ -32,3 +33,27 @@ TemplateWrapper.propTypes = {
 }
 
 export default TemplateWrapper
+
+export const pageQuery = graphql`
+  query menuQuery {
+    allContentfulProduct {
+      edges {
+        node {
+          id
+          title
+          node_locale
+        }
+      }
+    }
+    allContentfulPage {
+      edges {
+        node{
+          id
+          title
+          node_locale
+        }
+      }
+    }
+
+  }
+`
