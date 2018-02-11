@@ -2,6 +2,7 @@ import React from "react"
 import Link from "gatsby-link"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
+import Helmet from 'react-helmet'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -17,6 +18,13 @@ class ProductTemplate extends React.Component {
     } = product
     return (
       <div>
+        <Helmet
+          title={this.props.pathContext.pageTitle}
+          meta={[
+            { name: 'description', content: 'Sample' },
+            { name: 'keywords', content: 'sample, something' },
+          ]}
+        />
         <h1>{product.title}</h1>
         <p>{product.description.description}</p>
       </div>

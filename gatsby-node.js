@@ -50,6 +50,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             layout: edge.node.node_locale,
             context: {
               id: edge.node.id,
+              pageTitle: edge.node.title,
             },
           })
         })
@@ -64,6 +65,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             layout: locale,
             context: {
               locale: locale,
+              pageTitle: "Bella Vida Costa Rica"
             },
           })
         })
@@ -96,6 +98,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               layout: edge.node.node_locale,
               context: {
                 id: edge.node.id,
+                pageTitle: edge.node.title,
               },
             })
           })

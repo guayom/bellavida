@@ -1,5 +1,6 @@
 import React from "react"
 import * as PropTypes from "prop-types"
+import Helmet from 'react-helmet'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -15,6 +16,13 @@ class SimplePageTemplate extends React.Component {
     } = page
     return (
       <div>
+        <Helmet
+          title={this.props.pathContext.pageTitle}
+          meta={[
+            { name: 'description', content: 'Sample' },
+            { name: 'keywords', content: 'sample, something' },
+          ]}
+        />
         <h1>{page.title}</h1>
         <p>{page.content.content}</p>
       </div>

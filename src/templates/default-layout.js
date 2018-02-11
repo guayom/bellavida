@@ -7,13 +7,6 @@ import '../layouts/index.css'
 
 const TemplateWrapper = ({ data, children, layoutContext }) => (
   <div>
-    <Helmet
-      title="Gatsby Default Starter"
-      meta={[
-        { name: 'description', content: 'Sample' },
-        { name: 'keywords', content: 'sample, something' },
-      ]}
-    />
     <div
       style={{
         margin: '0 auto',
