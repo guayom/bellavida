@@ -22,7 +22,7 @@ const TemplateWrapper = ({ data, children, layoutContext }) => (
         paddingTop: 0,
       }}
     >
-      <Header products={data.allContentfulProduct} locale={layoutContext.locale}/>
+      <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale}/>
       {children()}
     </div>
   </div>
@@ -42,6 +42,15 @@ export const pageQuery = graphql`
           id
           title
           node_locale
+        }
+      }
+    }
+    allContentfulProductBrand {
+      edges {
+        node {
+          id
+          title
+          slug
         }
       }
     }

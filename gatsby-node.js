@@ -47,7 +47,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           createPage({
             path: `/${edge.node.node_locale}/${category}${edge.node.slug}/`,
             component: slash(productTemplate),
-            layout: locale,
+            layout: edge.node.node_locale,
             context: {
               id: edge.node.id,
             },
@@ -93,7 +93,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             createPage({
               path: `/${edge.node.node_locale}/${edge.node.node_locale === "en" ? "products" : "productos"}/${edge.node.slug}/`,
               component: slash(productTemplate),
-              layout: locale,
+              layout: edge.node.node_locale,
               context: {
                 id: edge.node.id,
               },

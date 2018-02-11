@@ -25,7 +25,7 @@ const Header = (props) => (
           Logo here
         </Link>
       </h1>
-      <Menu products={props.products} pages={props.pages}/>
+      <Menu products={props.products} locale={props.locale} brands={props.brands}/>
     </div>
   </div>
 )
