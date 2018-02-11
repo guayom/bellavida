@@ -72,13 +72,24 @@ const SubMenuTitle = styled.h3`
   margin: 0;
 `
 
+function ItemsList(props) {
+  const items = props.items;
+  return (
+    <List>
+      {items.map(function(item){
+        return (<ListItem item={item} key={item.id} linkPrefix={props.linkPrefix} locale={props.locale}/>)
+      })}
+    </List>
+  );
+}
+
 const SubMenu = (props) => (
   <SubmenuContainer className="SubmenuContainer">
     {props.items.map(function(submenu){
       return(
         <SubmenuColumn key={submenu.id}>
           <SubMenuTitle>{submenu.title}</SubMenuTitle>
-          <ItemsList items={submenu.items} />
+          <ItemsList items={submenu.items} linkPrefix={"/"+props.locale+"/"+submenu.id+"/"}/>
         </SubmenuColumn>
       )
     })}
@@ -87,21 +98,12 @@ const SubMenu = (props) => (
 
 const ListItem = (props) => (
   <Item key={props.item.id} hasChildren={props.item.children}>
-    {props.item.title}
-    {props.item.children ? <SubMenu items={props.item.children} /> : null}
+    <Link to={props.linkPrefix+props.item.slug}>{props.item.title}</Link>
+    {props.item.children ? <SubMenu items={props.item.children} locale={props.locale}/> : null}
   </Item>
 )
 
-function ItemsList(props) {
-  const items = props.items;
-  return (
-    <List>
-      {items.map(function(item){
-        return (<ListItem item={item} key={item.id} />)
-      })}
-    </List>
-  );
-}
+
 
 class Menu extends React.Component {
   render(){
@@ -206,7 +208,7 @@ class Menu extends React.Component {
 
     return (
       <MenuContainer>
-        <ItemsList items={pages} />
+        <ItemsList items={pages} locale={locale} linkPrefix={"/"+locale+"/"} />
       </MenuContainer>
     )
   }
