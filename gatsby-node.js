@@ -108,6 +108,21 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           })
         })
       })
+      //Generate Products Index
+      .then(() => {
+        const productsIndexTemplate = path.resolve(`./src/templates/products-index.js`)
+        _.each(locales, locale => {
+          createPage({
+            path: `/${locale}/${locale === "en" ? "products" : "productos"}`,
+            component: slash(productsIndexTemplate),
+            layout: locale,
+            context: {
+              locale: locale,
+              pageTitle: locale === "en" ? "Products" : "Productos"
+            },
+          })
+        })
+      })
       //Generate products
       .then(() => {
         graphql(
