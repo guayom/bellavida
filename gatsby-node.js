@@ -150,6 +150,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     title
                     slug
                     node_locale
+                    content{
+                      content
+                    }
                   }
                 }
               }
@@ -160,6 +163,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             reject(result.errors)
           }
           const listPageTemplate = path.resolve(`./src/templates/list-page.js`)
+          const singlePageTemplate = path.resolve(`./src/templates/single.js`)
           const products = result.data.allContentfulProduct.edges
           const brands = result.data.allContentfulProductBrand.edges
           const environmentPages = result.data.allContentfulPage.edges
@@ -204,6 +208,18 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 pageTitle: locale === "en" ? "Projects" : "Proyectos",
                 items: projects.filter(p => p.node.node_locale === locale),
               },
+            })
+            _.each(result.data.allContentfulProject.edges, edge => {
+              createPage({
+                path: `/${edge.node.node_locale}/${edge.node.node_locale === "en" ? "projects" : "proyectos"}/${edge.node.slug}/`,
+                component: slash(singlePageTemplate),
+                layout: edge.node.node_locale,
+                context: {
+                  id: edge.node.id,
+                  pageTitle: edge.node.title,
+                  pageContent: edge.node
+                },
+              })
             })
           })
         })
