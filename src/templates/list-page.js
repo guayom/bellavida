@@ -10,6 +10,7 @@ class AllProductsPageTemplate extends React.Component {
   render() {
     console.log(this.props)
     const items = this.props.pathContext.items
+    const path = this.props.location.pathname
 
     return (
       <div>
@@ -22,8 +23,8 @@ class AllProductsPageTemplate extends React.Component {
         />
         <h1>All Products</h1>
         <ul>
-          {items.map(product =>
-            <li>{product.node.title}</li>
+          {items.map(page =>
+            <li><a href={path+"/"+page.node.slug}>{page.node.title}</a></li>
           )}
         </ul>
       </div>
