@@ -8,8 +8,8 @@ const propTypes = {
 
 class AllProductsPageTemplate extends React.Component {
   render() {
-    const products = this.props.data.allContentfulProduct.edges
-    const brands = this.props.data.allContentfulProductBrand.edges
+    console.log(this.props)
+    const items = this.props.pathContext.items
 
     return (
       <div>
@@ -22,7 +22,7 @@ class AllProductsPageTemplate extends React.Component {
         />
         <h1>All Products</h1>
         <ul>
-          {products.map(product =>
+          {items.map(product =>
             <li>{product.node.title}</li>
           )}
         </ul>
@@ -34,28 +34,3 @@ class AllProductsPageTemplate extends React.Component {
 AllProductsPageTemplate.propTypes = propTypes
 
 export default AllProductsPageTemplate
-
-export const pageQuery = graphql`
-  query allProductsQuery($locale: String!) {
-    allContentfulProduct(filter: { node_locale: { eq: $locale } }) {
-      edges {
-        node {
-          id
-          title
-          slug
-          node_locale
-        }
-      }
-    }
-    allContentfulProductBrand(filter: { node_locale: { eq: $locale } }){
-      edges {
-        node {
-          id
-          title
-          slug
-          node_locale
-        }
-      }
-    }
-  }
-`
