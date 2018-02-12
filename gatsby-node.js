@@ -141,6 +141,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           }
           const productsIndexTemplate = path.resolve(`./src/templates/list-page.js`)
           const products = result.data.allContentfulProduct.edges
+          const brands = result.data.allContentfulProductBrand.edges
           _.each(locales, locale => {
             createPage({
               path: `/${locale}/${locale === "en" ? "products" : "productos"}`,
@@ -150,6 +151,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 locale: locale,
                 pageTitle: locale === "en" ? "Products" : "Productos",
                 items: products.filter(p => p.node.node_locale === locale),
+              },
+            })
+            createPage({
+              path: `/${locale}/${locale === "en" ? "brands" : "marcas"}`,
+              component: slash(productsIndexTemplate),
+              layout: locale,
+              context: {
+                locale: locale,
+                pageTitle: locale === "en" ? "Brands" : "Nuestras Marcas",
+                items: brands.filter(p => p.node.node_locale === locale),
               },
             })
           })
