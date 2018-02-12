@@ -39,12 +39,13 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulProductBrand {
+    allContentfulProductBrand(filter: { node_locale: { eq: $locale } }){
       edges {
         node {
           id
           title
           slug
+          node_locale
         }
       }
     }

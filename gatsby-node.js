@@ -55,6 +55,44 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           })
         })
       })
+      //Generate Brand Pages
+      .then(() => {
+        graphql(
+          `
+            {
+              allContentfulProductBrand {
+                edges {
+                  node {
+                    id
+                    slug
+                    title
+                    node_locale
+                  }
+                }
+              }
+            }
+          `
+        ).then(result => {
+          if (result.errors) {
+            reject(result.errors)
+          }
+          const brandTemplate = path.resolve(`./src/templates/brand.js`)
+          _.each(result.data.allContentfulProductBrand.edges, edge => {
+            const section =  edge.node.node_locale === "en" ? "brands" : "marcas"
+            createPage({
+              path: `/${[edge.node.node_locale, section, edge.node.slug].join("/")}/`,
+              component: slash(brandTemplate),
+              layout: edge.node.node_locale,
+              context: {
+                locale:  edge.node.node_locale,
+                pageTitle: "Bella Vida Costa Rica",
+                id: edge.node.id
+              },
+            })
+          })
+        })
+        }
+      )
       //Generate Home Pages
       .then(() => {
         const homeTemplate = path.resolve(`./src/templates/home.js`)
