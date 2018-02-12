@@ -143,20 +143,31 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   }
                 }
               }
+              allContentfulProject {
+                edges {
+                  node {
+                    id
+                    title
+                    slug
+                    node_locale
+                  }
+                }
+              }
             }
           `
         ).then(result => {
           if (result.errors) {
             reject(result.errors)
           }
-          const productsIndexTemplate = path.resolve(`./src/templates/list-page.js`)
+          const listPageTemplate = path.resolve(`./src/templates/list-page.js`)
           const products = result.data.allContentfulProduct.edges
           const brands = result.data.allContentfulProductBrand.edges
           const environmentPages = result.data.allContentfulPage.edges
+          const projects = result.data.allContentfulProject.edges
           _.each(locales, locale => {
             createPage({
               path: `/${locale}/${locale === "en" ? "products" : "productos"}`,
-              component: slash(productsIndexTemplate),
+              component: slash(listPageTemplate),
               layout: locale,
               context: {
                 locale: locale,
@@ -166,7 +177,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             })
             createPage({
               path: `/${locale}/${locale === "en" ? "brands" : "marcas"}`,
-              component: slash(productsIndexTemplate),
+              component: slash(listPageTemplate),
               layout: locale,
               context: {
                 locale: locale,
@@ -176,12 +187,22 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             })
             createPage({
               path: `/${locale}/${locale === "en" ? "environment" : "medio-ambiente"}`,
-              component: slash(productsIndexTemplate),
+              component: slash(listPageTemplate),
               layout: locale,
               context: {
                 locale: locale,
                 pageTitle: locale === "en" ? "Environment" : "Medio Ambiente",
                 items: environmentPages.filter(p => p.node.node_locale === locale),
+              },
+            })
+            createPage({
+              path: `/${locale}/${locale === "en" ? "projects" : "proyectos"}`,
+              component: slash(listPageTemplate),
+              layout: locale,
+              context: {
+                locale: locale,
+                pageTitle: locale === "en" ? "Projects" : "Proyectos",
+                items: projects.filter(p => p.node.node_locale === locale),
               },
             })
           })
