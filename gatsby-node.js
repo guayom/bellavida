@@ -133,6 +133,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   }
                 }
               }
+              allContentfulPage(filter: {category: {contentful_id: {eq: "2XUCff1tqo6SKIW68wmo2e"}}}) {
+                edges {
+                  node {
+                    id
+                    title
+                    slug
+                    node_locale
+                  }
+                }
+              }
             }
           `
         ).then(result => {
@@ -142,6 +152,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           const productsIndexTemplate = path.resolve(`./src/templates/list-page.js`)
           const products = result.data.allContentfulProduct.edges
           const brands = result.data.allContentfulProductBrand.edges
+          const environmentPages = result.data.allContentfulPage.edges
           _.each(locales, locale => {
             createPage({
               path: `/${locale}/${locale === "en" ? "products" : "productos"}`,
@@ -161,6 +172,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 locale: locale,
                 pageTitle: locale === "en" ? "Brands" : "Nuestras Marcas",
                 items: brands.filter(p => p.node.node_locale === locale),
+              },
+            })
+            createPage({
+              path: `/${locale}/${locale === "en" ? "environment" : "medio-ambiente"}`,
+              component: slash(productsIndexTemplate),
+              layout: locale,
+              context: {
+                locale: locale,
+                pageTitle: locale === "en" ? "Environment" : "Medio Ambiente",
+                items: environmentPages.filter(p => p.node.node_locale === locale),
               },
             })
           })
