@@ -3,6 +3,7 @@ import styled from "styled-components"
 import LanguageSwitcher from '../../components/Header/LanguageSwitcher'
 import SocialNetworks from '../../components/Header/SocialNetworks'
 import PhoneNumbers from '../../components/Header/PhoneNumbers'
+import Wrapper from '../../components/Layout/Wrapper'
 
 const Container = styled.div`
   background: #000;
@@ -11,8 +12,10 @@ const Container = styled.div`
 
 export default (props) => (
   <Container>
-    <LanguageSwitcher />
-    <SocialNetworks />
-    <PhoneNumbers />
+    <Wrapper>
+      <LanguageSwitcher />
+      <SocialNetworks />
+      <PhoneNumbers />
+    </Wrapper>
   </Container>
 )

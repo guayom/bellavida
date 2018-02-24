@@ -5,6 +5,7 @@ import Testimonial from '../components/Testimonials'
 import Features from '../components/Features'
 import Projects from '../components/Projects'
 import Helmet from 'react-helmet'
+import Wrapper from '../components/Layout/Wrapper'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -27,14 +28,15 @@ class HomeTemplate extends React.Component {
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
-        <h1>Home ({this.props.pathContext.locale})</h1>
         <Slider slides={slides} />
         <Testimonial items={testimonials} />
-        <Features items={homeFeatures} />
-        <h2>Description</h2>
-        {description}
-        <Projects items={projects} />
-        Location
+        <Wrapper>
+          <Features items={homeFeatures} />
+          <h2>Description</h2>
+          {description}
+          <Projects items={projects} />
+          Location
+        </Wrapper>
       </div>
     )
   }
