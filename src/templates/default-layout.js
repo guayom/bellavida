@@ -15,12 +15,14 @@ const MainContainer = styled.div`
 const defaultTheme = {
   skyColor: '#37d8e6',
   grisMedio: '#777',
+  mainColor: '#93c548',
+  mainColorVariation: '#78a634',
 };
 
 const TemplateWrapper = ({ data, children, layoutContext }) => (
   <ThemeProvider theme={defaultTheme}>
     <MainContainer>
-      <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale} phoneNumbers={data.allContentfulPhoneNumbers}/>
+      <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale} phoneNumbers={data.allContentfulPhoneNumbers} socialNetworks={data.allContentfulSocialNetwork}/>
       {children()}
     </MainContainer>
   </ThemeProvider>
@@ -58,6 +60,14 @@ export const pageQuery = graphql`
       edges {
         node {
           number
+        }
+      }
+    }
+    allContentfulSocialNetwork(filter: { node_locale: { eq: $locale } }) {
+      edges {
+        node {
+          title
+          url
         }
       }
     }

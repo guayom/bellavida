@@ -7,7 +7,7 @@ import Wrapper from '../../components/Layout/Wrapper'
 
 const Header = (props) => (
   <div>
-    <TopHeader phoneNumbers={props.phoneNumbers}/>
+    <TopHeader phoneNumbers={props.phoneNumbers} socialNetworks={props.socialNetworks}/>
     <Wrapper>
       <div>
         <h1 style={{ margin: 0 }}>

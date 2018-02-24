@@ -7,12 +7,10 @@ import Wrapper from '../../components/Layout/Wrapper'
 
 const OuterContainer = styled.div`
   background: #000;
-  color: ${props => props.theme.grisMedio};
   padding: 5px 0;
   font-size: 13px;
 
   a {
-    color: ${props => props.theme.grisMedio};
     text-decoration:none;
   }
 `
@@ -25,7 +23,7 @@ export default (props) => (
   <OuterContainer>
     <InnerContainer>
       <LanguageSwitcher />
-      <SocialNetworks />
+      <SocialNetworks socialNetworks={props.socialNetworks}/>
       <PhoneNumbers phoneNumber={props.phoneNumbers.edges[0].node.number}/>
     </InnerContainer>
   </OuterContainer>
