@@ -6,7 +6,7 @@ import PhoneNumbers from '../../components/Header/PhoneNumbers'
 import Wrapper from '../../components/Layout/Wrapper'
 
 const OuterContainer = styled.div`
-  background: #000;
+  background: ${props => props.theme.grayDarkest};
   padding: 5px 0;
   font-size: 13px;
 

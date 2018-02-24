@@ -17,7 +17,7 @@ const defaultTheme = {
   grayMedium: '#777',
   grayDarkest: '#1d1919',
   mainColor: '#93c548',
-  mainColorVariation: '#78a634',
+  mainColorVariation: '#6a922e',
 };
 
 const TemplateWrapper = ({ data, children, layoutContext }) => (
