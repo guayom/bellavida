@@ -16,6 +16,7 @@ const defaultTheme = {
   skyColor: '#37d8e6',
   grayMedium: '#777',
   grayDarkest: '#1d1919',
+  grayLight: '#eee',
   mainColor: '#93c548',
   mainColorVariation: '#6a922e',
 };
