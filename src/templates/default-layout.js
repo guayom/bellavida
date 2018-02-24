@@ -20,7 +20,7 @@ const defaultTheme = {
 const TemplateWrapper = ({ data, children, layoutContext }) => (
   <ThemeProvider theme={defaultTheme}>
     <MainContainer>
-      <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale}/>
+      <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale} phoneNumbers={data.allContentfulPhoneNumbers}/>
       {children()}
     </MainContainer>
   </ThemeProvider>
@@ -51,6 +51,13 @@ export const pageQuery = graphql`
           title
           slug
           node_locale
+        }
+      }
+    }
+    allContentfulPhoneNumbers {
+      edges {
+        node {
+          number
         }
       }
     }

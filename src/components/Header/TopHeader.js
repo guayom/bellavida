@@ -10,6 +10,11 @@ const OuterContainer = styled.div`
   color: ${props => props.theme.grisMedio};
   padding: 5px 0;
   font-size: 13px;
+
+  a {
+    color: ${props => props.theme.grisMedio};
+    text-decoration:none;
+  }
 `
 
 const InnerContainer = Wrapper.extend`
@@ -21,7 +26,7 @@ export default (props) => (
     <InnerContainer>
       <LanguageSwitcher />
       <SocialNetworks />
-      <PhoneNumbers />
+      <PhoneNumbers phoneNumber={props.phoneNumbers.edges[0].node.number}/>
     </InnerContainer>
   </OuterContainer>
 )
