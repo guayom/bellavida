@@ -3,7 +3,6 @@ import Link from 'gatsby-link'
 import styled from "styled-components"
 
 const MenuContainer = styled.div`
-  background: lightGrey;
   z-index: 10;
   margin-left:auto;
 `
@@ -42,6 +41,20 @@ const Item = styled.li`
 
   &:hover .SubmenuContainer {
     display: flex;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 700;
+    line-height: 20px;
+    font-size: 13px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    border-radius: 15px;
+    padding: 5px 13px;
+    border-color: transparent;
+    border-width: 1px;
+    border-style: solid;
   }
 `
 
@@ -99,12 +112,14 @@ const SubMenu = (props) => (
 
 const ListItem = (props) => (
   <Item key={props.item.id} hasChildren={props.item.children}>
-    <Link to={props.linkPrefix+props.item.slug}>{props.item.title}</Link>
+    <Link
+      to={props.item.title === "Home" ? "/" : props.linkPrefix+props.item.slug}
+      activeStyle={{ borderColor: '#eeeeee', color: "#93c548" }}>
+      {props.item.title}
+    </Link>
     {props.item.children ? <SubMenu items={props.item.children} locale={props.locale}/> : null}
   </Item>
 )
-
-
 
 class Menu extends React.Component {
   render(){
@@ -112,18 +127,6 @@ class Menu extends React.Component {
     const products = this.props.products.edges.map(p => p.node)
     const brands = this.props.brands.edges.map(p => p.node)
     const MenuItems = [
-      {
-        en: {
-          title: "Home",
-          slug: "",
-          id: "home",
-        },
-        es: {
-          title: "Inicio",
-          slug: "",
-          id: "inicio",
-        }
-      },
       {
         en: {
           title: "Products",

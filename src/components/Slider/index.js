@@ -6,7 +6,7 @@ class Slider extends React.Component {
       <li key={slide.node.id}>{slide.node.title}</li>
     );
     return(
-      <div>
+      <div style={{background: `gray`, padding: `40px`}}>
         <h2>Slides</h2>
         <ul>{slideItems}</ul>
       </div>

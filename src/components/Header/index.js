@@ -8,7 +8,7 @@ import LogoSrc from '../../images/logo.png'
 import styled from 'styled-components'
 
 const MenuContainer = Wrapper.extend`
-  padding: 10px 0;
+  padding: 20px 0;
   display: flex;
 `
 
@@ -28,7 +28,7 @@ const Header = (props) => (
               textDecoration: 'none',
             }}
           >
-            <img src={LogoSrc} alt="Bella Vida Costa Rica"/>
+            <Logo src={LogoSrc} alt="Bella Vida Costa Rica"/>
           </Link>
         </h1>
       </div>
