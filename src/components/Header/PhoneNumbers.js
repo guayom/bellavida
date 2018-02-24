@@ -3,7 +3,7 @@ import FaPhone from 'react-icons/lib/fa/phone'
 import styled from 'styled-components'
 
 const Link = styled.div`
-  color: ${props => props.theme.grisMedio};
+  color: ${props => props.theme.grayMedium};
 `
 
 export default ({phoneNumber}) => (

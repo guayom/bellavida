@@ -14,7 +14,8 @@ const MainContainer = styled.div`
 
 const defaultTheme = {
   skyColor: '#37d8e6',
-  grisMedio: '#777',
+  grayMedium: '#777',
+  grayDarkest: '#1d1919',
   mainColor: '#93c548',
   mainColorVariation: '#78a634',
 };

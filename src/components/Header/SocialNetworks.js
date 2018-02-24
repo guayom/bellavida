@@ -3,7 +3,7 @@ import FaFacebook from 'react-icons/lib/fa/facebook'
 import styled from 'styled-components'
 
 const Link = styled.a`
-  background: ${props => props.theme.grisMedio};
+  background: ${props => props.theme.grayMedium};
   border-radius: 2px;
   display: inline-block;
   width: 20px;
