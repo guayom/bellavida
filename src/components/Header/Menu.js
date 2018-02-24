@@ -5,6 +5,7 @@ import styled from "styled-components"
 const MenuContainer = styled.div`
   background: lightGrey;
   z-index: 10;
+  margin-left:auto;
 `
 
 const List = styled.ul`
