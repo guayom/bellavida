@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-
 import Header from '../components/Header'
 import '../layouts/index.css'
 import styled from "styled-components"
+import { ThemeProvider } from 'styled-components';
 
 const MainContainer = styled.div`
   background: #fff;
@@ -12,11 +12,17 @@ const MainContainer = styled.div`
   margin: 0 auto;
 `
 
+const dayTheme = {
+  skyColor: '#37d8e6',
+};
+
 const TemplateWrapper = ({ data, children, layoutContext }) => (
-  <MainContainer>
-    <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale}/>
-    {children()}
-  </MainContainer>
+  <ThemeProvider theme={dayTheme}>
+    <MainContainer>
+      <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale}/>
+      {children()}
+    </MainContainer>
+  </ThemeProvider>
 )
 
 TemplateWrapper.propTypes = {

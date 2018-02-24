@@ -6,7 +6,7 @@ import PhoneNumbers from '../../components/Header/PhoneNumbers'
 
 const Container = styled.div`
   background: #000;
-  color: #777;
+  color: ${props => props.theme.skyColor}
 `
 
 export default (props) => (
