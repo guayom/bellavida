@@ -12,12 +12,13 @@ const MainContainer = styled.div`
   margin: 0 auto;
 `
 
-const dayTheme = {
+const defaultTheme = {
   skyColor: '#37d8e6',
+  grisMedio: '#777',
 };
 
 const TemplateWrapper = ({ data, children, layoutContext }) => (
-  <ThemeProvider theme={dayTheme}>
+  <ThemeProvider theme={defaultTheme}>
     <MainContainer>
       <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale}/>
       {children()}

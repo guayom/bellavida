@@ -5,17 +5,23 @@ import SocialNetworks from '../../components/Header/SocialNetworks'
 import PhoneNumbers from '../../components/Header/PhoneNumbers'
 import Wrapper from '../../components/Layout/Wrapper'
 
-const Container = styled.div`
+const OuterContainer = styled.div`
   background: #000;
-  color: ${props => props.theme.skyColor}
+  color: ${props => props.theme.grisMedio};
+  padding: 5px 0;
+  font-size: 13px;
+`
+
+const InnerContainer = Wrapper.extend`
+  display: flex;
 `
 
 export default (props) => (
-  <Container>
-    <Wrapper>
+  <OuterContainer>
+    <InnerContainer>
       <LanguageSwitcher />
       <SocialNetworks />
       <PhoneNumbers />
-    </Wrapper>
-  </Container>
+    </InnerContainer>
+  </OuterContainer>
 )
