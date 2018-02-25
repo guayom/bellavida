@@ -8,8 +8,16 @@ import LogoSrc from '../../images/logo.png'
 import styled from 'styled-components'
 
 const MenuContainer = Wrapper.extend`
-  padding: 20px 0;
   display: flex;
+`
+
+const LogoContainer = styled.h1`
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+  margin: 0;
 `
 
 const Logo = styled.img`
@@ -20,8 +28,8 @@ const Header = (props) => (
   <div>
     <TopHeader phoneNumbers={props.phoneNumbers} socialNetworks={props.socialNetworks}/>
     <MenuContainer>
-      <div>
-        <h1 style={{ margin: 0 }}>
+      <div style={{flexGrow: 2}}>
+        <LogoContainer>
           <Link
             to="/"
             style={{
@@ -30,7 +38,7 @@ const Header = (props) => (
           >
             <Logo src={LogoSrc} alt="Bella Vida Costa Rica"/>
           </Link>
-        </h1>
+        </LogoContainer>
       </div>
       <Menu products={props.products} locale={props.locale} brands={props.brands}/>
       <Search />

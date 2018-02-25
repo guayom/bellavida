@@ -7,6 +7,8 @@ const Container = styled.div`
   width: 30px;
   overflow:visible;
   position:relative;
+  flex-grow: 2;
+  z-index: 10;
 `
 
 const Form = styled.form`
@@ -22,7 +24,7 @@ const Form = styled.form`
   position:relative;
   margin: 0;
   position:absolute;
-  top: 8px;
+  top: 30px;
   right: 0;
   transition: all 0.5s ease;
   z-index: 1;

@@ -5,20 +5,25 @@ import styled from "styled-components"
 const MenuContainer = styled.div`
   z-index: 10;
   margin-left:auto;
+  flex-grow: 6;
 `
 
 const List = styled.ul`
   list-style:none;
   margin: 0;
   padding: 0;
+  display: ${props => props.submenu ? 'block' : 'flex'};
+  height: 100%;
+  justify-content: ${props => props.submenu ? null : 'flex-end'};
 `
 
 const Item = styled.li`
-  display: inline-block;
+  display: ${props => props.submenu ? 'block' : 'inline-block'};
   position:relative;
   margin: 0;
-  padding: 10px;
+  padding: 30px 10px;
   padding-right: ${props => props.hasChildren ? '15px' : '0'};
+  height: ${props => props.submenu ? 'auto' : '100%'};
 
   &:after{
     display: ${props => props.hasChildren ? 'block' : 'none'};
@@ -62,22 +67,42 @@ const SubmenuContainer = styled.div`
   position:absolute;
   top: 100%;
   left: 0;
-  background: lightGrey;
-  padding: 20px;
+  background: ${props => props.theme.mainColor};
+  padding: 20px 0;
   display: none;
   justify-content: space-between;
 
+  h3 {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
   li {
     display:block;
+    padding: 0;
+    margin-bottom: 10px;
+
+    a {
+      color: #fff;
+      background: rgba(0,0,0,0.1);
+      margin: 0;
+      border-radius: 4px;
+      font-size: 11px;
+      display:block;
+
+      &:hover {
+        background: rgba(0,0,0,0.3);
+      }
+    }
   }
 `
 
 const SubmenuColumn = styled.div`
-  margin-right: 20px;
-  width: 180px;
-  &:last-of-type {
-    margin-right: 0;
-  }
+  width: auto;
+  min-width: 250px;
+  flex-grow: 1;
+  flex-basis: 0;
+  padding: 0 20px;
 `
 
 const SubMenuTitle = styled.h3`
@@ -86,12 +111,24 @@ const SubMenuTitle = styled.h3`
   margin: 0;
 `
 
+const Triangle = styled.div`
+  position:absolute;
+  top: 0;
+  left: 40px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid #fff;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: none;
+`
+
 function ItemsList(props) {
   const items = props.items;
   return (
-    <List>
+    <List submenu={props.submenu}>
       {items.map(function(item){
-        return (<ListItem item={item} key={item.id} linkPrefix={props.linkPrefix} locale={props.locale}/>)
+        return (<ListItem item={item} key={item.id} linkPrefix={props.linkPrefix} locale={props.locale} submenu={props.submenu}/>)
       })}
     </List>
   );
@@ -103,18 +140,24 @@ const SubMenu = (props) => (
       return(
         <SubmenuColumn key={submenu.id}>
           <SubMenuTitle>{submenu.title}</SubMenuTitle>
-          <ItemsList items={submenu.items} linkPrefix={"/"+props.locale+"/"+submenu.id+"/"}/>
+          <ItemsList items={submenu.items} linkPrefix={"/"+props.locale+"/"+submenu.id+"/"} submenu/>
         </SubmenuColumn>
       )
     })}
+    <Triangle />
   </SubmenuContainer>
 )
 
 const ListItem = (props) => (
-  <Item key={props.item.id} hasChildren={props.item.children}>
+  <Item
+    key={props.item.id}
+    hasChildren={props.item.children}
+    submenu={props.submenu}
+    >
     <Link
       to={props.item.title === "Home" ? "/" : props.linkPrefix+props.item.slug}
-      activeStyle={{ borderColor: '#eeeeee', color: "#93c548" }}>
+      activeStyle={{ borderColor: '#eeeeee', color: "#93c548" }}
+      >
       {props.item.title}
     </Link>
     {props.item.children ? <SubMenu items={props.item.children} locale={props.locale}/> : null}
