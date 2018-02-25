@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import Header from '../components/Header'
+import Footer from '../components/Footer'
 import '../layouts/index.css'
 import styled from "styled-components"
 import { ThemeProvider } from 'styled-components';
@@ -26,6 +27,7 @@ const TemplateWrapper = ({ data, children, layoutContext }) => (
     <MainContainer>
       <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale} phoneNumbers={data.allContentfulPhoneNumbers} socialNetworks={data.allContentfulSocialNetwork}/>
       {children()}
+      <Footer phoneNumbers={data.allContentfulPhoneNumbers} />
     </MainContainer>
   </ThemeProvider>
 )
@@ -58,7 +60,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulPhoneNumbers {
+    allContentfulPhoneNumbers(filter: { node_locale: { eq: $locale } }) {
       edges {
         node {
           number
