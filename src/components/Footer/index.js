@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import Wrapper from '../../components/Layout/Wrapper'
 import PhoneNumber from '../../components/General/PhoneNumber'
+import SocialNetworks from '../../components/Header/SocialNetworks'
+import LanguageSwitcher from '../../components/Header/LanguageSwitcher'
 import logo from '../../images/logo-blanco.png'
 import FaEnvelope from 'react-icons/lib/fa/envelope'
 
@@ -10,19 +12,19 @@ const Footer = styled.footer`
   padding: 60px 0;
   color: ${props => props.theme.grayMedium};
   font-size: 13px;
+  margin-top: 60px;
 
   a {
-    color: ${props => props.theme.grayMedium};
     text-decoration:none;
-
-     &:hover {
-       color: ${props => props.theme.mainColor};
-     }
   }
 `
 
 const FooterWrapper = Wrapper.extend`
   display: flex;
+  border-top: ${props => props.subfooter ? `solid 1px ${props.theme.grayMedium}` : 'none'};
+  margin-top: ${props => props.subfooter ? `40px` : '0'};
+  padding-top: ${props => props.subfooter ? `20px` : '0'};
+
 `
 
 const Column =  styled.div`
@@ -38,7 +40,7 @@ const Title = styled.h3`
   font-size: 13px;
 `
 
-export default ({phoneNumbers}) => (
+export default ({phoneNumbers, socialNetworks}) => (
   <Footer>
     <FooterWrapper>
       <Column first>
@@ -65,6 +67,10 @@ export default ({phoneNumbers}) => (
       <Column>
         <Title>Get Our Newsletter</Title>
       </Column>
+    </FooterWrapper>
+    <FooterWrapper subfooter>
+      <LanguageSwitcher />
+      <SocialNetworks socialNetworks={socialNetworks}/>
     </FooterWrapper>
   </Footer>
 )

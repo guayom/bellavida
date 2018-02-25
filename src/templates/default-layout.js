@@ -25,9 +25,18 @@ const defaultTheme = {
 const TemplateWrapper = ({ data, children, layoutContext }) => (
   <ThemeProvider theme={defaultTheme}>
     <MainContainer>
-      <Header products={data.allContentfulProduct} brands={data.allContentfulProductBrand} locale={layoutContext.locale} phoneNumbers={data.allContentfulPhoneNumbers} socialNetworks={data.allContentfulSocialNetwork}/>
+      <Header
+        products={data.allContentfulProduct}
+        brands={data.allContentfulProductBrand}
+        locale={layoutContext.locale}
+        phoneNumbers={data.allContentfulPhoneNumbers}
+        socialNetworks={data.allContentfulSocialNetwork}
+      />
       {children()}
-      <Footer phoneNumbers={data.allContentfulPhoneNumbers} />
+      <Footer
+        phoneNumbers={data.allContentfulPhoneNumbers}
+        socialNetworks={data.allContentfulSocialNetwork}
+      />
     </MainContainer>
   </ThemeProvider>
 )
