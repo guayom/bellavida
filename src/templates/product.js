@@ -3,6 +3,7 @@ import Link from "gatsby-link"
 import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
 import Helmet from 'react-helmet'
+import Wrapper from '../components/Layout/Wrapper'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -25,8 +26,10 @@ class ProductTemplate extends React.Component {
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
-        <h1>{product.title}</h1>
-        <p>{product.description.description}</p>
+        <Wrapper>
+          <h1>{product.title}</h1>
+          <p>{product.description.description}</p>
+        </Wrapper>
       </div>
     )
   }

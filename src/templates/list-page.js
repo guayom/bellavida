@@ -1,6 +1,7 @@
 import React from "react"
 import * as PropTypes from "prop-types"
 import Helmet from 'react-helmet'
+import Wrapper from '../components/Layout/Wrapper'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -21,12 +22,14 @@ class AllProductsPageTemplate extends React.Component {
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
-        <h1>All Products</h1>
-        <ul>
-          {items.map(page =>
-            <li><a href={path+"/"+page.node.slug}>{page.node.title}</a></li>
-          )}
-        </ul>
+        <Wrapper>
+          <h1>All Products</h1>
+          <ul>
+            {items.map(page =>
+              <li><a href={path+"/"+page.node.slug}>{page.node.title}</a></li>
+            )}
+          </ul>
+        </Wrapper>
       </div>
     )
   }

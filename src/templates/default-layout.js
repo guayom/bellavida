@@ -6,6 +6,7 @@ import Footer from '../components/Footer'
 import '../layouts/index.css'
 import styled from "styled-components"
 import { ThemeProvider } from 'styled-components';
+import Wrapper from '../components/Layout/Wrapper'
 
 const MainContainer = styled.div`
   background: #fff;
