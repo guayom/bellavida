@@ -59,7 +59,7 @@ class Slider extends React.Component {
     this.changeSlide = this.changeSlide.bind(this)
   }
 
-  changeSlide(visibleSlide){
+  async changeSlide(visibleSlide){
     this.setState({visibleSlide})
   }
 
@@ -73,12 +73,13 @@ class Slider extends React.Component {
         style={{
           position: `relative`,
           zIndex:1,
+          background: '#000'
         }}
         >
 
         <div
           style={{
-            zIndex:2,
+            zIndex:10,
             position: `absolute`,
             left: `80px`,
             bottom: `-50px`,
@@ -99,10 +100,26 @@ class Slider extends React.Component {
           {visibleSlide.title}
         </SlideDescription>
 
-        <Img
-          style={{ margin: 0 }}
-          resolutions={visibleSlideImage}
-        />
+        <div
+          style={{
+            paddingTop: `48.4%`,
+          }}
+          >
+          {this.props.slides.map((slide, index) =>
+            <Img
+              style={{
+                margin: 0,
+                position: `absolute`,
+                top: 0,
+                left: 0,
+                width: `100%`,
+                opacity: visibleSlideIndex === index ? 1 : 0,
+                transition: `opacity 0.8s ease`
+              }}
+              resolutions={slide.node.image.resolutions}
+            />
+          )}
+        </div>
 
       </div>
     )
