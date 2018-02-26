@@ -57,10 +57,23 @@ class Slider extends React.Component {
       visibleSlide: 0,
     }
     this.changeSlide = this.changeSlide.bind(this)
+    this.getNextSlide = this.getNextSlide.bind(this)
   }
 
-  async changeSlide(visibleSlide){
+  changeSlide(visibleSlide){
     this.setState({visibleSlide})
+  }
+
+  getNextSlide(){
+    if (this.state.visibleSlide === this.props.slides.length - 1){
+      this.setState({visibleSlide: 0})
+    } else if (this.state.visibleSlide < this.props.slides.length - 1) {
+      this.setState({visibleSlide: this.state.visibleSlide + 1})
+    }
+  }
+
+  componentDidMount(){
+    setInterval(() => {this.getNextSlide()}, 7000);
   }
 
   render() {
