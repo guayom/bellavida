@@ -10,7 +10,7 @@ import Wrapper from '../components/Layout/Wrapper'
 
 const MainContainer = styled.div`
   background: #fff;
-  max-width: 90%;
+  max-width: 1240px;
   margin: 0 auto;
 `
 

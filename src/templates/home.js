@@ -56,7 +56,7 @@ export const pageQuery = graphql`
           node_locale
           image {
             id
-            resolutions {
+            resolutions(width: 1240, height: 600) {
               base64
               aspectRatio
               width
