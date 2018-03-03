@@ -74,6 +74,7 @@ export const pageQuery = graphql`
       edges {
         node {
           number
+          id
         }
       }
     }
@@ -82,6 +83,7 @@ export const pageQuery = graphql`
         node {
           title
           url
+          id
         }
       }
     }

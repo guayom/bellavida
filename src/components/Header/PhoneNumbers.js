@@ -12,6 +12,8 @@ const Link = styled.div`
 
 export default ({phoneNumber}) => (
   <div style={{marginLeft: `auto`}}>
-    <Link href={`tel:${phoneNumber}`}><FaPhone /> {phoneNumber}</Link>
+    <Link href={`tel:${phoneNumber}`}>
+      <FaPhone /> {phoneNumber}
+    </Link>
   </div>
 )

@@ -47,7 +47,7 @@ export default ({phoneNumbers, socialNetworks}) => (
       <Column first>
         <img src={logo} alt="Bella Vida Costa Rica" />
         {phoneNumbers.edges.map((number, i) => (
-          <p><PhoneNumber phoneNumber={number.node.number} /></p>
+          <p key={number.node.id}><PhoneNumber phoneNumber={number.node.number} /></p>
         ))}
         <p>
           <FaEnvelope /> Link to contact form

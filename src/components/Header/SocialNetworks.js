@@ -30,11 +30,12 @@ export default ({socialNetworks}) => (
   <div>
     {socialNetworks.edges.map((n, i) => (
       <Link
+        key={n.node.id}
         href={n.node.url}
         title={n.node.title}
         rel="nofollow"
         target="_blank"
-        key={i}>
+        >
         {displayIcon(n.node.title)}
       </Link>
     ))}
