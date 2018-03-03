@@ -1,4 +1,11 @@
 import React from "react"
+import styled from 'styled-components'
+import TitleBar from  '../../components/General/TitleBar'
+
+const Container = styled.div`
+  flex: 2 0;
+  margin-right: 40px;
+`
 
 class Projects extends React.Component {
   render() {
@@ -8,10 +15,10 @@ class Projects extends React.Component {
       </li>
     );
     return(
-      <div>
-        <h2>Projects</h2>
+      <Container>
+        <TitleBar title="Recent projects" />
         <ul>{projects}</ul>
-      </div>
+      </Container>
     )
   }
 }

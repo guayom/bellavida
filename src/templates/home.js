@@ -5,6 +5,7 @@ import Testimonial from '../components/Testimonials'
 import Features from '../components/Features'
 import Projects from '../components/Projects'
 import HomeDescription from '../components/HomeDescription'
+import Location from '../components/Location'
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
 
@@ -34,8 +35,10 @@ class HomeTemplate extends React.Component {
         <Wrapper>
           <Features items={homeFeatures} />
           <HomeDescription description={description} />
-          <Projects items={projects} />
-          Location
+          <div style={{display: `flex`}}>
+            <Projects items={projects} />
+            <Location items={projects} />
+          </div>
         </Wrapper>
       </div>
     )
