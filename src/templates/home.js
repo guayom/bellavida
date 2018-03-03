@@ -4,6 +4,7 @@ import Slider from '../components/Slider'
 import Testimonial from '../components/Testimonials'
 import Features from '../components/Features'
 import Projects from '../components/Projects'
+import HomeDescription from '../components/HomeDescription'
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
 
@@ -32,8 +33,7 @@ class HomeTemplate extends React.Component {
         <Testimonial items={testimonials} />
         <Wrapper>
           <Features items={homeFeatures} />
-          <h2>Description</h2>
-          {description}
+          <HomeDescription description={description} />
           <Projects items={projects} />
           Location
         </Wrapper>
