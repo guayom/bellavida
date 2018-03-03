@@ -1,5 +1,6 @@
 import React from "react"
 import styled from 'styled-components'
+import Img from 'gatsby-image'
 
 const FeaturesList = styled.ul`
   display: block;
@@ -15,7 +16,8 @@ const FeatureItem = styled.li`
 `
 
 const ImageContainer = styled.div`
-  margin: 0 0 20px;
+  max-width: 150px;
+  margin: 0 auto 20px;
 `
 
 class Features extends React.Component {
@@ -23,7 +25,7 @@ class Features extends React.Component {
     const featureItems = this.props.items.map((feature, index) =>
       <FeatureItem key={feature.node.id}>
         <ImageContainer>
-          <img src={feature.node.image.resolutions.src} alt={feature.node.title}/>
+          <Img sizes={feature.node.image.sizes} alt={feature.node.title}/>
         </ImageContainer>
         <h3>{feature.node.title}</h3>
         <p>{feature.node.content.content}</p>

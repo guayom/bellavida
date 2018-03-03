@@ -94,13 +94,14 @@ export const pageQuery = graphql`
           }
           image {
             id
-            resolutions {
+            sizes(maxWidth: 150) {
               base64
               aspectRatio
-              width
-              height
               src
               srcSet
+              srcWebp
+              srcSetWebp
+              sizes
             }
           }
           node_locale
@@ -114,13 +115,14 @@ export const pageQuery = graphql`
           title
           images {
             id
-            resolutions {
+            sizes {
               base64
               aspectRatio
-              width
-              height
               src
               srcSet
+              srcWebp
+              srcSetWebp
+              sizes
             }
           }
           node_locale
