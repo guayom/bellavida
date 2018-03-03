@@ -113,6 +113,7 @@ export const pageQuery = graphql`
         node {
           id
           title
+          slug
           images {
             id
             sizes {
