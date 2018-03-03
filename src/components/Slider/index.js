@@ -120,6 +120,7 @@ class Slider extends React.Component {
           >
           {this.props.slides.map((slide, index) =>
             <Img
+              key={slide.node.id}
               style={{
                 margin: 0,
                 position: `absolute`,
