@@ -22,7 +22,7 @@ const InnerContainer = Wrapper.extend`
 export default (props) => (
   <OuterContainer>
     <InnerContainer>
-      <LanguageSwitcher translation={props.translation}/>
+      <LanguageSwitcher translation={props.translation} locale={props.locale}/>
       <SocialNetworks socialNetworks={props.socialNetworks}/>
       <PhoneNumbers phoneNumber={props.phoneNumbers.edges[0].node.number}/>
     </InnerContainer>

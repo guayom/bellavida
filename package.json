@@ -16,6 +16,7 @@
     "gatsby-transformer-remark": "latest",
     "gatsby-transformer-sharp": "^1.6.21",
     "lodash": "^4.16.4",
+    "react-flag-icon-css": "^1.0.23",
     "react-icons": "^2.2.7",
     "react-typography": "^0.15.0",
     "slash": "^1.0.0",

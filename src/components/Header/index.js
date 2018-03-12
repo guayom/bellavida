@@ -26,7 +26,12 @@ const Logo = styled.img`
 
 const Header = (props) => (
   <div>
-    <TopHeader phoneNumbers={props.phoneNumbers} socialNetworks={props.socialNetworks} translation={props.translation}/>
+    <TopHeader 
+      phoneNumbers={props.phoneNumbers}
+      socialNetworks={props.socialNetworks}
+      translation={props.translation}
+      locale={props.locale}
+    />
     <MenuContainer>
       <div style={{flexGrow: 2}}>
         <LogoContainer>

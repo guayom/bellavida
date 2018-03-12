@@ -41,7 +41,7 @@ const Title = styled.h3`
   font-size: 13px;
 `
 
-export default ({ phoneNumbers, socialNetworks, translation}) => (
+export default ({phoneNumbers, socialNetworks, translation}) => (
   <Footer>
     <FooterWrapper>
       <Column first>
