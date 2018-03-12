@@ -38,6 +38,7 @@ const TemplateWrapper = ({ data, children, layoutContext, location }) => (
       <Footer
         phoneNumbers={data.allContentfulPhoneNumbers}
         socialNetworks={data.allContentfulSocialNetwork}
+        translation={data.allSitePage.edges.filter(p => p.node.path === location.pathname).length > 0 ? data.allSitePage.edges.filter(p => p.node.path === location.pathname)[0].node.context.translation : "/"}
       />
     </MainContainer>
   </ThemeProvider>

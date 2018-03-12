@@ -41,7 +41,7 @@ const Title = styled.h3`
   font-size: 13px;
 `
 
-export default ({phoneNumbers, socialNetworks}) => (
+export default ({ phoneNumbers, socialNetworks, translation}) => (
   <Footer>
     <FooterWrapper>
       <Column first>
@@ -70,7 +70,7 @@ export default ({phoneNumbers, socialNetworks}) => (
       </Column>
     </FooterWrapper>
     <FooterWrapper subfooter>
-      <LanguageSwitcher />
+      <LanguageSwitcher translation={translation}/>
       <SocialNetworks socialNetworks={socialNetworks}/>
     </FooterWrapper>
   </Footer>
