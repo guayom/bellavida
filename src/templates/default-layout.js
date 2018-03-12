@@ -23,7 +23,7 @@ const defaultTheme = {
   mainColorVariation: '#6a922e',
 };
 
-const TemplateWrapper = ({ data, children, layoutContext }) => (
+const TemplateWrapper = ({ data, children, layoutContext, location }) => (
   <ThemeProvider theme={defaultTheme}>
     <MainContainer>
       <Header
@@ -32,6 +32,7 @@ const TemplateWrapper = ({ data, children, layoutContext }) => (
         locale={layoutContext.locale}
         phoneNumbers={data.allContentfulPhoneNumbers}
         socialNetworks={data.allContentfulSocialNetwork}
+        translation={data.allSitePage.edges.filter(p => p.node.path === location.pathname).length > 0 ? data.allSitePage.edges.filter(p => p.node.path === location.pathname)[0].node.context.translation : "/"}
       />
       {children()}
       <Footer
@@ -84,6 +85,18 @@ export const pageQuery = graphql`
           title
           url
           id
+        }
+      }
+    }
+    allSitePage {
+      edges {
+        node {
+          id
+          path
+          context {
+            id
+            translation
+          }
         }
       }
     }

@@ -1,15 +1,9 @@
 import React from "react"
-import * as PropTypes from "prop-types"
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
 
-const propTypes = {
-  data: PropTypes.object.isRequired,
-}
-
 class AllProductsPageTemplate extends React.Component {
   render() {
-    console.log(this.props)
     const items = this.props.pathContext.items
     const path = this.props.location.pathname
 
@@ -26,7 +20,7 @@ class AllProductsPageTemplate extends React.Component {
           <h1>All Products</h1>
           <ul>
             {items.map(page =>
-              <li><a href={path+"/"+page.node.slug}>{page.node.title}</a></li>
+              <li key={page.node.id}><a href={path+"/"+page.node.slug}>{page.node.title}</a></li>
             )}
           </ul>
         </Wrapper>
@@ -34,7 +28,5 @@ class AllProductsPageTemplate extends React.Component {
     )
   }
 }
-
-AllProductsPageTemplate.propTypes = propTypes
 
 export default AllProductsPageTemplate

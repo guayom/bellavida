@@ -25,7 +25,6 @@ class SimplePageTemplate extends React.Component {
           ]}
         />
         <Wrapper>
-          {this.props.pathContext.translation}
           <h1>{page.title}</h1>
           <p>{page.description.description}</p>
         </Wrapper>
