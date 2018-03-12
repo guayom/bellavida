@@ -3,6 +3,21 @@ const Promise = require(`bluebird`)
 const path = require(`path`)
 const slash = require(`slash`)
 
+function getTranslatedPage(array, id, locale){
+  let targetId = locale === "en" ? `${id}___es` : id.replace(/___es/, '')
+  let translatedPage = array.find(p => p.node.id === targetId).node
+  let translatedCategory = translatedPage.category === null || translatedPage.category === undefined ? "" : translatedPage.category.slug + "/"
+  let oppositeLocale = locale === "en" ? "es" : "en"
+
+  let result = {
+    category: translatedCategory,
+    slug: translatedPage.slug,
+    locale: oppositeLocale
+  }
+
+  return result
+}
+
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage, createLayout } = boundActionCreators
   const locales = ["en", "es"]
@@ -44,6 +59,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         _.each(result.data.allContentfulPage.edges, edge => {
 
           let category = edge.node.category === null ? "" : edge.node.category.slug + "/"
+          let translatedPage = getTranslatedPage(result.data.allContentfulPage.edges, edge.node.id, edge.node.node_locale)
+
           createPage({
             path: `/${edge.node.node_locale}/${category}${edge.node.slug}/`,
             component: slash(productTemplate),
@@ -51,6 +68,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             context: {
               id: edge.node.id,
               pageTitle: edge.node.title,
+              translation: `/${translatedPage.locale}/${translatedPage.category}${translatedPage.slug}/`,
             },
           })
         })
@@ -78,7 +96,9 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           }
           const brandTemplate = path.resolve(`./src/templates/brand.js`)
           _.each(result.data.allContentfulProductBrand.edges, edge => {
-            const section =  edge.node.node_locale === "en" ? "brands" : "marcas"
+            const section = edge.node.node_locale === "en" ? "brands" : "marcas"
+            const translatedSection = edge.node.node_locale === "en" ? "marcas" : "brands"
+            let translatedPage = getTranslatedPage(result.data.allContentfulProductBrand.edges, edge.node.id, edge.node.node_locale)
             createPage({
               path: `/${[edge.node.node_locale, section, edge.node.slug].join("/")}/`,
               component: slash(brandTemplate),
@@ -86,7 +106,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               context: {
                 locale:  edge.node.node_locale,
                 pageTitle: "Bella Vida Costa Rica",
-                id: edge.node.id
+                id: edge.node.id,
+                translation: `/${[translatedPage.locale, translatedSection, translatedPage.slug].join("/")}/`,
               },
             })
           })
@@ -103,7 +124,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             layout: locale,
             context: {
               locale: locale,
-              pageTitle: "Bella Vida Costa Rica"
+              pageTitle: "Bella Vida Costa Rica",
+              translation: `/${locale === "en" ? locale + "/" : ""}`,
             },
           })
         })
@@ -168,6 +190,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           const brands = result.data.allContentfulProductBrand.edges
           const environmentPages = result.data.allContentfulPage.edges
           const projects = result.data.allContentfulProject.edges
+
           _.each(locales, locale => {
             createPage({
               path: `/${locale}/${locale === "en" ? "products" : "productos"}`,
@@ -177,6 +200,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 locale: locale,
                 pageTitle: locale === "en" ? "Products" : "Productos",
                 items: products.filter(p => p.node.node_locale === locale),
+                translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "productos" : "products"}`,
               },
             })
             createPage({
@@ -187,6 +211,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 locale: locale,
                 pageTitle: locale === "en" ? "Brands" : "Nuestras Marcas",
                 items: brands.filter(p => p.node.node_locale === locale),
+                translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "marcas" : "brands"}`,
               },
             })
             createPage({
@@ -197,6 +222,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 locale: locale,
                 pageTitle: locale === "en" ? "Environment" : "Medio Ambiente",
                 items: environmentPages.filter(p => p.node.node_locale === locale),
+                translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "medio-ambiente" : "environment"}`
               },
             })
             createPage({
@@ -207,9 +233,11 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 locale: locale,
                 pageTitle: locale === "en" ? "Projects" : "Proyectos",
                 items: projects.filter(p => p.node.node_locale === locale),
+                translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "proyectos" : "projects"}`
               },
             })
             _.each(result.data.allContentfulProject.edges, edge => {
+              let translatedProjectPage = getTranslatedPage(result.data.allContentfulProject.edges, edge.node.id, edge.node.node_locale)
               createPage({
                 path: `/${edge.node.node_locale}/${edge.node.node_locale === "en" ? "projects" : "proyectos"}/${edge.node.slug}/`,
                 component: slash(singlePageTemplate),
@@ -217,7 +245,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 context: {
                   id: edge.node.id,
                   pageTitle: edge.node.title,
-                  pageContent: edge.node
+                  pageContent: edge.node,
+                  translation: `/${translatedProjectPage.locale}/${translatedProjectPage.locale === "en" ? "projects" : "proyectos"}/${translatedProjectPage.slug}/`,
                 },
               })
             })
@@ -247,6 +276,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           }
           const productTemplate = path.resolve(`./src/templates/product.js`)
           _.each(result.data.allContentfulProduct.edges, edge => {
+            let translatedProductPage = getTranslatedPage(result.data.allContentfulProduct.edges, edge.node.id, edge.node.node_locale)
             createPage({
               path: `/${edge.node.node_locale}/${edge.node.node_locale === "en" ? "products" : "productos"}/${edge.node.slug}/`,
               component: slash(productTemplate),
@@ -254,6 +284,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               context: {
                 id: edge.node.id,
                 pageTitle: edge.node.title,
+                translation: `/${translatedProductPage.locale}/${translatedProductPage.locale === "en" ? "products" : "productos"}/${translatedProductPage.slug}/`,
               },
             })
           })

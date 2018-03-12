@@ -1,7 +1,7 @@
 import React from "react"
 import * as PropTypes from "prop-types"
 import Slider from '../components/Slider'
-import Testimonial from '../components/Testimonials'
+import Testimonials from '../components/Testimonials'
 import Features from '../components/Features'
 import Projects from '../components/Projects'
 import HomeDescription from '../components/HomeDescription'
@@ -31,7 +31,7 @@ class HomeTemplate extends React.Component {
           ]}
         />
         <Slider slides={slides} />
-        <Testimonial items={testimonials} />
+        <Testimonials items={testimonials} />
         <Wrapper>
           <Features items={homeFeatures} />
           <HomeDescription description={description} />

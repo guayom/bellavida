@@ -27,6 +27,7 @@ class ProductTemplate extends React.Component {
           ]}
         />
         <Wrapper>
+          {this.props.pathContext.translation}
           <h1>{product.title}</h1>
           <p>{product.description.description}</p>
         </Wrapper>
