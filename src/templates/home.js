@@ -89,6 +89,8 @@ export const pageQuery = graphql`
         node {
           id
           title
+          buttonLink
+          buttonText
           content {
             content
           }

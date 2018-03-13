@@ -1,18 +1,23 @@
 import React from "react"
 import styled from 'styled-components'
 import Img from 'gatsby-image'
+import Cta from '../../components/General/CtaLink'
 
 const FeaturesList = styled.ul`
   display: block;
   padding: 0 0 60px;
-  margin: 0;
   display: flex;
+  margin-top: 0;
+  margin-right: -40px;
+  marin-bottom: 40px;
+  margin-left: -40px;
 `
 
 const FeatureItem = styled.li`
   display: block;
   flex: 1 0;
   text-align: center;
+  margin: 0 40px;
 `
 
 const ImageContainer = styled.div`
@@ -29,6 +34,7 @@ class Features extends React.Component {
         </ImageContainer>
         <h3>{feature.node.title}</h3>
         <p>{feature.node.content.content}</p>
+        <Cta to={feature.node.buttonLink} text={feature.node.buttonText}/>
       </FeatureItem>
     );
     return(
