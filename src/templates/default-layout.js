@@ -7,6 +7,7 @@ import '../layouts/index.css'
 import styled from "styled-components"
 import { ThemeProvider } from 'styled-components';
 import Wrapper from '../components/Layout/Wrapper'
+import BrandsBar from '../components/Brands/Home'
 
 const MainContainer = styled.div`
   background: #fff;
@@ -35,6 +36,7 @@ const TemplateWrapper = ({ data, children, layoutContext, location }) => (
         translation={data.allSitePage.edges.filter(p => p.node.path === location.pathname).length > 0 ? data.allSitePage.edges.filter(p => p.node.path === location.pathname)[0].node.context.translation : "/"}
       />
       {children()}
+      <BrandsBar brands={data.allContentfulProductBrand.edges} />
       <Footer
         phoneNumbers={data.allContentfulPhoneNumbers}
         socialNetworks={data.allContentfulSocialNetwork}
@@ -63,13 +65,23 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulProductBrand(filter: { node_locale: { eq: $locale } }){
+    allContentfulProductBrand(filter: { node_locale: { eq: $locale } }) {
       edges {
         node {
           id
           title
-          slug
-          node_locale
+          website
+          logo {
+            sizes {
+              base64
+              aspectRatio
+              src
+              srcSet
+              srcWebp
+              srcSetWebp
+              sizes
+            }
+          }
         }
       }
     }

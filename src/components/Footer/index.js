@@ -12,7 +12,7 @@ const Footer = styled.footer`
   padding: 60px 0;
   color: ${props => props.theme.grayMedium};
   font-size: 13px;
-  margin-top: 60px;
+  margin-top: 0;
   margin-bottom: 40px;
 
   a {
