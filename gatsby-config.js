@@ -30,6 +30,12 @@ module.exports = {
         }
       }
     },
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [`Montserrat`]
+      }
+    },
     'gatsby-plugin-react-helmet',
     `gatsby-transformer-remark`,
     `gatsby-plugin-styled-components`,

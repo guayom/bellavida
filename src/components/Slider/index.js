@@ -40,13 +40,15 @@ const SlideDescription = styled.div`
   width: 550px;
   bottom: 80px;
   right: 80px;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.5);
   color: #fff;
-  font-size: 30px;
+  font-size: 40px;
   z-index: 4;
   text-align:right;
   padding: 30px;
   box-sizing:border-box;
+  font-weight: 100;
+  font-family: 'Montserrat', sans-serif;
 `
 
 class Slider extends React.Component {
