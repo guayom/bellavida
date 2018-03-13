@@ -42,17 +42,29 @@ const Title = styled.h3`
   font-size: 13px;
 `
 
-const Menu = ({items, suffix}) => (
+const Menu = ({items, prefix}) => (
   <ul>
     {items.map(item => (
       <li key={item.node.id}>
-        <Link to={`/${suffix}/${item.node.slug}`}>
+        <Link to={`${prefix}${item.node.slug}`}>
           {item.node.title}
         </Link>
       </li>
     ))}
   </ul>
 )
+
+// This could be done in contentful
+const QuickAcessLinks = [
+  { en: { node: { id: 1, slug: "/", title: "Home" } }, es: { node: { id: 1, slug: "/es/", title: "Inicio" } }},
+  { en: { node: { id: 2, slug: "/en/products/", title: "Products" } }, es: { node: { id: 2, slug: "/es/productos/", title: "Productos" } }},
+  { en: { node: { id: 3, slug: "/en/company/", title: "Company" } }, es: { node: { id: 3, slug: "/es/acerca-de-nosotros/", title: "Compañía" } }},
+  { en: { node: { id: 4, slug: "/en/service-center/", title: "Service center" } }, es: { node: { id: 4, slug: "/es/centro-de-servicio/", title: "Centro de servicio" } }},
+  { en: { node: { id: 5, slug: "/en/environment/", title: "Environment" } }, es: { node: { id: 5, slug: "/es/medio-ambiente/", title: "Medio ambiente" } }},
+  { en: { node: { id: 6, slug: "/en/projects/", title: "Projects" } }, es: { node: { id: 6, slug: "/es/proyectos/", title: "Proyectos" } }},
+  { en: { node: { id: 7, slug: "/en/contact-us/", title: "Contact us" } }, es: { node: { id: 7, slug: "/es/contacto/", title: "Contacto" } }},
+  { en: { node: { id: 8, slug: "/en/sitemap/", title: "Sitemap" } }, es: { node: { id: 8, slug: "/es/mapa-de-sitio/", title: "Mapa de sitio" } }},
+]
 
 export default ({ phoneNumbers, socialNetworks, translation, locale, brands, products}) => (
   <Footer>
@@ -71,14 +83,15 @@ export default ({ phoneNumbers, socialNetworks, translation, locale, brands, pro
       </Column>
       <Column>
         <Title>Quick Access</Title>
+        <Menu items={QuickAcessLinks.map(i => i[locale])} prefix="" />
       </Column>
       <Column>
         <Title>Our Products</Title>
-        <Menu items={products} suffix={`${locale}/${locale === "en" ? "products" : "productos"}`} />
+        <Menu items={products} prefix={`/${locale}/${locale === "en" ? "products" : "productos"}/`} />
       </Column>
       <Column>
         <Title>Our Brands</Title>
-        <Menu items={brands} suffix={`${locale}/${locale === "en" ? "brands" : "marcas"}`} />
+        <Menu items={brands} prefix={`/${locale}/${locale === "en" ? "brands" : "marcas"}/`} />
       </Column>
       <Column>
         <Title>Get Our Newsletter</Title>
