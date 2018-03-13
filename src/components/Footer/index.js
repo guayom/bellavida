@@ -22,7 +22,7 @@ const Footer = styled.footer`
 
 const FooterWrapper = Wrapper.extend`
   display: flex;
-  border-top: ${props => props.subfooter ? `solid 1px ${props.theme.grayMedium}` : 'none'};
+  border-top: ${props => props.subfooter ? `solid 1px rgba(255,255,255,0.05)` : 'none'};
   margin-top: ${props => props.subfooter ? `40px` : '0'};
   padding-top: ${props => props.subfooter ? `20px` : '0'};
 
@@ -31,7 +31,7 @@ const FooterWrapper = Wrapper.extend`
 const Column =  styled.div`
   flex-grow: ${props => props.first ? '2' : '1'};
   flex-basis: 0;
-  border-right: ${props => props.first ? `1px solid ${props.theme.grayMedium}` : 'none'};
+  border-right: ${props => props.first ? `1px solid rgba(255,255,255,0.05)` : 'none'};
   padding-left: ${props => props.first ? '0' : '40px'};
   padding-right: 40px;
 `
