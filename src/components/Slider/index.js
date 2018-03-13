@@ -58,6 +58,7 @@ class Slider extends React.Component {
     }
     this.changeSlide = this.changeSlide.bind(this)
     this.getNextSlide = this.getNextSlide.bind(this)
+    this.timer = this.timer.bind(this)
   }
 
   changeSlide(visibleSlide){
@@ -72,8 +73,15 @@ class Slider extends React.Component {
     }
   }
 
-  componentDidMount(){
-    setInterval(() => {this.getNextSlide()}, 7000);
+  timer() {
+    this.getNextSlide()
+  }
+
+  componentDidMount() {
+    this.intervalId = setInterval(this.timer, 5000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
 
   render() {

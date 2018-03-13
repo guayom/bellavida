@@ -26,6 +26,7 @@ class Testimonials extends React.Component {
     }
     this.setSliderPosition = this.setSliderPosition.bind(this)
     this.getNextSlideIndex =this.getNextSlideIndex.bind(this)
+    this.timer = this.timer.bind(this)
   }
 
   getNextSlideIndex(change){
@@ -52,8 +53,15 @@ class Testimonials extends React.Component {
     this.setState({visibleSlide, sliderPosition})
   }
 
-  componentDidMount(){
-    setInterval(() => {this.setSliderPosition(1)}, 7000);
+  timer() {
+    this.setSliderPosition(1)
+  }
+
+  componentDidMount() {
+    this.intervalId = setInterval(this.timer, 5000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.intervalId);
   }
 
   render() {
