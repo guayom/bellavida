@@ -54,7 +54,7 @@ const Menu = ({items, suffix}) => (
   </ul>
 )
 
-export default ({phoneNumbers, socialNetworks, translation, locale, brands}) => (
+export default ({ phoneNumbers, socialNetworks, translation, locale, brands, products}) => (
   <Footer>
     <FooterWrapper>
       <Column first>
@@ -74,6 +74,7 @@ export default ({phoneNumbers, socialNetworks, translation, locale, brands}) => 
       </Column>
       <Column>
         <Title>Our Products</Title>
+        <Menu items={products} suffix={`${locale}/${locale === "en" ? "products" : "productos"}`} />
       </Column>
       <Column>
         <Title>Our Brands</Title>
