@@ -19,7 +19,7 @@ class HomeTemplate extends React.Component {
     const testimonials = this.props.data.allContentfulTestimonial.edges
     const homeFeatures = this.props.data.allContentfulHomeFeature.edges
     const projects = this.props.data.allContentfulProject.edges
-    const description = this.props.data.allContentfulPage.edges[0].node.content.content
+    const description = this.props.data.allContentfulPage.edges[0].node.content.childMarkdownRemark.html
 
     return (
       <div>
@@ -136,7 +136,9 @@ export const pageQuery = graphql`
       edges {
         node{
           content{
-            content
+            childMarkdownRemark {
+              html
+            }
           }
         }
       }

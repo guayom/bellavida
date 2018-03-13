@@ -13,9 +13,7 @@ export default ({description}) => (
         >
             Bella Vida Costa Rica
         </h2>
-        <p>
-            {description}
-        </p>
+        <div dangerouslySetInnerHTML={{ __html: description }} />.
     </div>
 )
 

@@ -623,3 +623,11 @@ pre tt:after {
     font-size: 100%;
   }
 }
+a {
+  color: #93c548;
+  text-decoration: none;
+}
+a:hover, a:focus {
+  color: #6a922e;
+  text-decoration: underline;
+}
