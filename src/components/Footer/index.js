@@ -6,6 +6,7 @@ import SocialNetworks from '../../components/Header/SocialNetworks'
 import LanguageSwitcher from '../../components/Header/LanguageSwitcher'
 import logo from '../../images/logo-blanco.png'
 import FaEnvelope from 'react-icons/lib/fa/envelope'
+import Link from 'gatsby-link'
 
 const Footer = styled.footer`
   background: ${props => props.theme.grayDarkest};
@@ -41,7 +42,19 @@ const Title = styled.h3`
   font-size: 13px;
 `
 
-export default ({phoneNumbers, socialNetworks, translation}) => (
+const Menu = ({items, suffix}) => (
+  <ul>
+    {items.map(item => (
+      <li key={item.node.id}>
+        <Link to={`/${suffix}/${item.node.slug}`}>
+          {item.node.title}
+        </Link>
+      </li>
+    ))}
+  </ul>
+)
+
+export default ({phoneNumbers, socialNetworks, translation, locale, brands}) => (
   <Footer>
     <FooterWrapper>
       <Column first>
@@ -64,6 +77,7 @@ export default ({phoneNumbers, socialNetworks, translation}) => (
       </Column>
       <Column>
         <Title>Our Brands</Title>
+        <Menu items={brands} suffix={`${locale}/${locale === "en" ? "brands" : "marcas"}`} />
       </Column>
       <Column>
         <Title>Get Our Newsletter</Title>
