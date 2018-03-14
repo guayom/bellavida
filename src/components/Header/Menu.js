@@ -16,13 +16,18 @@ const MenuContainer = styled.div`
   background: #fff;
   width: 100%;
   overflow: hidden;
+  padding: 0 20px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  flex-basis: 0;
 
   ${breakpoint('tablet') `
     position: static;
     margin-left:auto;
-    flex-grow: 3;
+    flex-grow: 7;
     display: block;
     width: auto;
+    box-shadow: none;
+    max-height: none;
   `}
 `
 
@@ -31,6 +36,7 @@ const List = styled.ul`
   margin: 0;
   padding: 0;
   display: block;
+
   ${breakpoint('tablet') `
     display: ${props => props.submenu ? 'block' : 'flex'};
     height: 100%;
@@ -40,48 +46,57 @@ const List = styled.ul`
 
 const Item = styled.li`
   display: block;
+  border-bottom: solid 1px #eeeeee;
+  padding: 10px 0;
+  margin: 0;
+
+  &:last-of-type {
+    border-bottom: 0;
+    margin-bottom: 10px;
+  }
 
   ${breakpoint('tablet') `
     display: ${props => props.submenu ? 'block' : 'inline-block'};
     position:relative;
-    margin: 0;
-    padding: 30px 10px;
+    padding: 25px 10px;
     padding-right: ${props => props.hasChildren ? '15px' : '0'};
-    height: ${props => props.submenu ? 'auto' : '100%'};
+    height: ${props => props.submenu ? 'auto' : 'auto'};
+    border-bottom: none;
+
+    &:after{
+      display: ${props => props.hasChildren ? 'block' : 'none'};
+      position:absolute;
+      right: 0;
+      top: 50%;
+      margin-top: -8px;
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 4px 0 4px 5px;
+      border-color: transparent transparent transparent black;
+      transition: all .1s ease;
+    }
+
+    &:hover:after {
+      transform: rotate(90deg);
+    }
+
+    &:hover .SubmenuContainer {
+      display: flex;
+    }
   `}
-
-  &:after{
-    display: ${props => props.hasChildren ? 'block' : 'none'};
-    position:absolute;
-    right: 0;
-    top: 50%;
-    margin-top: -2px;
-    content: "";
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 4px 0 4px 5px;
-    border-color: transparent transparent transparent black;
-    transition: all .1s ease;
-  }
-
-  &:hover:after {
-    transform: rotate(90deg);
-  }
-
-  &:hover .SubmenuContainer {
-    display: flex;
-  }
 
   a {
     color: #333;
     text-decoration: none;
     font-weight: 700;
     line-height: 20px;
+    height: 20px;
     font-size: 13px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     border-radius: 15px;
-    padding: 5px 13px;
+    padding: 0 13px;
     border-color: transparent;
     border-width: 1px;
     border-style: solid;

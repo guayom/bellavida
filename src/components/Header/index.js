@@ -27,7 +27,7 @@ const LogoContainer = styled.h1`
   height: 100%;
   text-decoration: none;
   margin: 0;
-  flex-grow: 3;
+  flex-grow: 2;
   flex-basis: 0;
   padding: 0 0 0 20px;
 
