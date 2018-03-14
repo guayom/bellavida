@@ -7,7 +7,7 @@ import Wrapper from '../../components/Layout/Wrapper'
 
 const OuterContainer = styled.div`
   background: ${props => props.theme.grayDarkest};
-  padding: 5px 0;
+  padding: 8px 0;
   font-size: 13px;
 
   a {
