@@ -12,6 +12,8 @@ import FaBars from 'react-icons/lib/fa/bars'
 const MenuBar = styled.div`
   display: flex;
   padding: 10px 0;
+  position: relative;
+  margin: 0 -20px;
 
   ${breakpoint('tablet') `
     padding: 0;
@@ -27,6 +29,7 @@ const LogoContainer = styled.h1`
   margin: 0;
   flex-grow: 3;
   flex-basis: 0;
+  padding: 0 0 0 20px;
 
   ${breakpoint('tablet') `
     flex-grow: 3;
@@ -42,6 +45,7 @@ const ToggleMenuButtonContainer = styled.div`
   display: block;
   flex: 1 0;
   text-align: right;
+  padding-right: 20px;
   ${breakpoint('tablet') `
     display: none;
   `}
@@ -59,37 +63,55 @@ const ToggleMenuButton = styled.button`
     outline: none;
   }
 `
+class Header extends React.Component {
+  constructor(props){
+    super(props);
 
-const Header = (props) => (
-  <div>
-    <TopHeader 
-      phoneNumbers={props.phoneNumbers}
-      socialNetworks={props.socialNetworks}
-      translation={props.translation}
-      locale={props.locale}
-    />
-    <Wrapper>
-      <MenuBar>
-        <LogoContainer>
-          <Link
-            to="/"
-            style={{
-              textDecoration: 'none',
-            }}
-          >
-            <Logo src={LogoSrc} alt="Bella Vida Costa Rica"/>
-          </Link>
-        </LogoContainer>
-        <Menu products={props.products} locale={props.locale} brands={props.brands}/>
-        <Search />
-        <ToggleMenuButtonContainer>
-          <ToggleMenuButton>
-            <FaBars />
-          </ToggleMenuButton>
-        </ToggleMenuButtonContainer>
-      </MenuBar>
-    </Wrapper>
-  </div>
-)
+    this.state = {
+      expanded: false
+    }
+    this.toggleMenu = this.toggleMenu.bind(this)
+  }
+
+  toggleMenu(){
+    this.setState({expanded: !this.state.expanded})
+  }
+
+  render(){
+    const phoneNumbers = this.props.phoneNumbers
+    const socialNetworks = this.props.socialNetworks
+    const translation = this.props.translation
+    const locale = this.props.locale
+    const products = this.props.products
+    const brands = this.props.brands
+    const expanded = this.state.expanded
+    return(
+      <div>
+        <TopHeader
+          phoneNumbers={phoneNumbers}
+          socialNetworks={socialNetworks}
+          translation={translation}
+          locale={locale}
+        />
+        <Wrapper>
+          <MenuBar>
+            <LogoContainer>
+              <Link to="/" style={{textDecoration: 'none',}}>
+                <Logo src={LogoSrc} alt="Bella Vida Costa Rica" />
+              </Link>
+            </LogoContainer>
+            <Menu products={products} locale={locale} brands={brands} expanded={expanded}/>
+            <Search />
+            <ToggleMenuButtonContainer>
+              <ToggleMenuButton onClick={e => this.toggleMenu()}>
+                <FaBars />
+              </ToggleMenuButton>
+            </ToggleMenuButtonContainer>
+          </MenuBar>
+        </Wrapper>
+      </div>
+    )
+  }
+}
 
 export default Header

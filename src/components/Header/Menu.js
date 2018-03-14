@@ -5,12 +5,24 @@ import breakpoint from 'styled-components-breakpoint'
 
 const MenuContainer = styled.div`
   z-index: 10;
-  display: none;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: auto;
+  max-height: ${props => props.expanded ? `100vh` : 0};
+  transition: max-height 0.5s;
+  background: #fff;
+  width: 100%;
+  overflow: hidden;
 
   ${breakpoint('tablet') `
+    position: static;
     margin-left:auto;
     flex-grow: 3;
     display: block;
+    width: auto;
   `}
 `
 
@@ -18,18 +30,25 @@ const List = styled.ul`
   list-style:none;
   margin: 0;
   padding: 0;
-  display: ${props => props.submenu ? 'block' : 'flex'};
-  height: 100%;
-  justify-content: ${props => props.submenu ? null : 'flex-end'};
+  display: block;
+  ${breakpoint('tablet') `
+    display: ${props => props.submenu ? 'block' : 'flex'};
+    height: 100%;
+    justify-content: ${props => props.submenu ? null : 'flex-end'};
+  `}
 `
 
 const Item = styled.li`
-  display: ${props => props.submenu ? 'block' : 'inline-block'};
-  position:relative;
-  margin: 0;
-  padding: 30px 10px;
-  padding-right: ${props => props.hasChildren ? '15px' : '0'};
-  height: ${props => props.submenu ? 'auto' : '100%'};
+  display: block;
+
+  ${breakpoint('tablet') `
+    display: ${props => props.submenu ? 'block' : 'inline-block'};
+    position:relative;
+    margin: 0;
+    padding: 30px 10px;
+    padding-right: ${props => props.hasChildren ? '15px' : '0'};
+    height: ${props => props.submenu ? 'auto' : '100%'};
+  `}
 
   &:after{
     display: ${props => props.hasChildren ? 'block' : 'none'};
@@ -175,6 +194,7 @@ class Menu extends React.Component {
     const locale = this.props.locale
     const products = this.props.products.edges.map(p => p.node)
     const brands = this.props.brands.edges.map(p => p.node)
+    const expanded = this.props.expanded
     const MenuItems = [
       {
         en: {
@@ -260,7 +280,7 @@ class Menu extends React.Component {
     const pages = MenuItems.map(p => p[locale])
 
     return (
-      <MenuContainer>
+      <MenuContainer expanded={expanded}>
         <ItemsList items={pages} locale={locale} linkPrefix={"/"+locale+"/"} />
       </MenuContainer>
     )
