@@ -1,11 +1,17 @@
 import React from 'react'
 import Link from 'gatsby-link'
 import styled from "styled-components"
+import breakpoint from 'styled-components-breakpoint'
 
 const MenuContainer = styled.div`
   z-index: 10;
-  margin-left:auto;
-  flex-grow: 6;
+  display: none;
+
+  ${breakpoint('tablet') `
+    margin-left:auto;
+    flex-grow: 3;
+    display: block;
+  `}
 `
 
 const List = styled.ul`

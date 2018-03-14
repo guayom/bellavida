@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import FaSearch from 'react-icons/lib/fa/search'
+import breakpoint from 'styled-components-breakpoint'
 
 const Container = styled.div`
   margin-left: auto;
@@ -9,10 +10,18 @@ const Container = styled.div`
   position:relative;
   flex-grow: 2;
   z-index: 10;
+  flex-basis: 0;
+  text-align: right;
+  padding-top: 5px;
+
+  ${breakpoint('tablet') `
+    flex-grow: 1;
+    padding-top: 0;
+  `}
 `
 
 const Form = styled.form`
-  display: block;
+  display: inline-block;
   border: solid 1px #eee;
   border-radius: 15px;
   border-color: ${props => props.active ? props.theme.mainColor : props.theme.grayLight};
@@ -23,11 +32,15 @@ const Form = styled.form`
   background-color: white;
   position:relative;
   margin: 0;
-  position:absolute;
-  top: 30px;
-  right: 0;
   transition: all 0.5s ease;
   z-index: 1;
+
+  ${breakpoint('tablet') `
+    display: block;
+    position:absolute;
+    top: 30px;
+    right: 0;
+  `}
 `
 
 const SearchInput = styled.input`

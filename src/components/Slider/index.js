@@ -1,6 +1,18 @@
 import React from 'react'
 import Img from "gatsby-image"
 import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
+
+const ButtonsContainer = styled.div`
+  z-index: 10;
+  
+
+  ${breakpoint('tablet') `
+    position: absolute;
+    left: 80px;
+    bottom: -50px;
+  `}
+`
 
 const Button = styled.button`
   display: block;
@@ -100,14 +112,7 @@ class Slider extends React.Component {
         }}
         >
 
-        <div
-          style={{
-            zIndex:10,
-            position: `absolute`,
-            left: `80px`,
-            bottom: `-50px`,
-          }}
-          >
+        <ButtonsContainer>
           {this.props.slides.map((slide, index) =>
             <Button
               key={slide.node.id}
@@ -117,7 +122,7 @@ class Slider extends React.Component {
               {slide.node.title}
             </Button>
           )}
-        </div>
+        </ButtonsContainer>
 
         <SlideDescription>
           {visibleSlide.title}
