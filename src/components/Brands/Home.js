@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
 import Wrapper from '../../components/Layout/Wrapper'
 import Img from 'gatsby-image'
 
@@ -12,12 +13,16 @@ const Container =  styled.div`
 
 const GridWrapper = Wrapper.extend`
   display: grid;
-  grid-template-columns: 1fr 1fr 2fr 2fr .5fr;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 60px;
   align-content: center;
   align-items: center;
   justify-content: center;
   text-align: center;
+
+  ${breakpoint('tablet')`
+    grid-template-columns: 1fr 1fr 2fr 2fr .5fr;
+  `}
 `
 
 export default ({brands}) => (

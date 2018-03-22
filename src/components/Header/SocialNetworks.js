@@ -27,7 +27,7 @@ function displayIcon(title){
 }
 
 export default ({socialNetworks}) => (
-  <div>
+  <div style={{display: `inline-block`}}>
     {socialNetworks.edges.map((n, i) => (
       <Link
         key={n.node.id}

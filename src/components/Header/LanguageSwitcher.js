@@ -10,7 +10,7 @@ function getCode(locale){
 }
 
 const LanguageSwitcher = (props) => (
-  <div>
+  <div style={{ display: `inline-block` }}>
     <Link 
       to={props.translation}
       style={{

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
 import Wrapper from '../../components/Layout/Wrapper'
 import PhoneNumber from '../../components/General/PhoneNumber'
 import SocialNetworks from '../../components/Header/SocialNetworks'
@@ -14,32 +15,46 @@ const Footer = styled.footer`
   color: ${props => props.theme.grayMedium};
   font-size: 13px;
   margin-top: 0;
-  margin-bottom: 40px;
 
   a {
     text-decoration:none;
   }
+
+  ${breakpoint('tablet')`
+    margin-bottom: 40px;
+  `}
 `
 
 const FooterWrapper = Wrapper.extend`
-  display: flex;
-  border-top: ${props => props.subfooter ? `solid 1px rgba(255,255,255,0.05)` : 'none'};
-  margin-top: ${props => props.subfooter ? `40px` : '0'};
-  padding-top: ${props => props.subfooter ? `20px` : '0'};
 
+  ${breakpoint('tablet') `
+    display: flex;
+    border-top: ${props => props.subfooter ? `solid 1px rgba(255,255,255,0.05)` : 'none'};
+    margin-top: ${props => props.subfooter ? `40px` : '0'};
+    padding-top: ${props => props.subfooter ? `20px` : '0'};
+  `}
 `
 
 const Column =  styled.div`
-  flex-grow: ${props => props.first ? '1.5' : '1'};
-  flex-basis: 0;
-  border-right: ${props => props.first ? `1px solid rgba(255,255,255,0.05)` : 'none'};
-  padding-left: ${props => props.first ? '0' : '40px'};
-  padding-right: ${props => props.first ? '40px' : '0'};
+  margin-bottom: 30px;
+  ${breakpoint('tablet')`
+    flex-grow: ${props => props.first ? '1.5' : '1'};
+    flex-basis: 0;
+    border-right: ${props => props.first ? `1px solid rgba(255,255,255,0.05)` : 'none'};
+    padding-left: ${props => props.first ? '0' : '40px'};
+    padding-right: ${props => props.first ? '40px' : '0'};
+    margin-bottom: 0;
+  `}
 `
 
 const Title = styled.h3`
   color: #fff;
   font-size: 13px;
+  margin-bottom: 10px;
+
+  ${breakpoint('tablet')`
+    margin-bottom: 20px;
+  `}
 `
 
 const Input = styled.input`
