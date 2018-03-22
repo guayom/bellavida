@@ -154,7 +154,9 @@ export default ({ phoneNumbers, socialNetworks, translation, locale, brands, pro
           <p key={number.node.id}><PhoneNumber phoneNumber={number.node.number} /></p>
         ))}
         <p>
-          <FaEnvelope /> Link to contact form
+          <Link to={locale === "en" ? "/en/contact-us" : "/es/contactenos"}>
+            <FaEnvelope /> {locale === 'en' ? "Contact Us" : "Contáctenos"}
+          </Link>
         </p>
         <p>
           Copyright © {(new Date()).getFullYear()} Bella Vida Costa Rica. All Rights Reserved.
