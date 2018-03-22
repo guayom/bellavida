@@ -186,6 +186,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           }
           const listPageTemplate = path.resolve(`./src/templates/list-page.js`)
           const singlePageTemplate = path.resolve(`./src/templates/single.js`)
+          const contactPageTemplate = path.resolve(`./src/templates/contact.js`)
           const products = result.data.allContentfulProduct.edges
           const brands = result.data.allContentfulProductBrand.edges
           const environmentPages = result.data.allContentfulPage.edges
@@ -234,6 +235,16 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 pageTitle: locale === "en" ? "Projects" : "Proyectos",
                 items: projects.filter(p => p.node.node_locale === locale),
                 translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "proyectos" : "projects"}`,
+              },
+            })
+            createPage({
+              path: `/${locale}/${locale === "en" ? "contact-us" : "contactenos"}`,
+              component: slash(contactPageTemplate),
+              layout: locale,
+              context: {
+                locale: locale,
+                pageTitle: locale === "en" ? "Contact Us" : "Contáctenos",
+                translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "contactenos" : "contact-us"}`,
               },
             })
             _.each(result.data.allContentfulProject.edges, edge => {
