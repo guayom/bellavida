@@ -13,10 +13,11 @@ const MenuBar = styled.div`
   display: flex;
   padding: 10px 0;
   position: relative;
-  margin: 0 -20px;
+  margin: 0;
 
   ${breakpoint('tablet') `
     padding: 0;
+    margin: 0 -20px;
   `}
 `
 
@@ -29,11 +30,10 @@ const LogoContainer = styled.h1`
   margin: 0;
   flex-grow: 2;
   flex-basis: 0;
-  padding: 0 0 0 20px;
 
   ${breakpoint('tablet') `
     flex-grow: 3;
-    padding: 15px 0;
+    padding: 15px 0 0 20px;
   `}
 `
 
