@@ -1,6 +1,7 @@
 import React from "react"
 import Wrapper from '../../components/Layout/Wrapper'
 import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
 import FaAngleRight from 'react-icons/lib/fa/angle-right'
 import FaAngleLeft from 'react-icons/lib/fa/angle-left'
 
@@ -8,12 +9,43 @@ const TestimonialsWrapper = Wrapper.extend`
   margin-bottom: 40px;
 `
 
+const InternalContainer = styled.div`
+  padding: 20px 0;
+  border-bottom: 1px solid #eeeeee;
+
+  ${breakpoint('tablet')`
+    padding: 30px 80px 40px 300px;
+  `}
+`
+
+const ButtonsContainer = styled.div`
+  margin-top: 10px;
+
+  ${breakpoint('tablet')`
+    position: absolute;
+    left: 100%;
+    bottom: 0;
+    min-width: 70px;
+  `}
+`
+
 const Button = styled.button`
   color: #000;
   font-size: 12px;
   padding: 4px;
   line-height: 12px;
-  margin-left: 10px;
+  margin-right: 10px;
+  border: solid 1px #d1d1d1;
+  background: #eee;
+
+  ${breakpoint('tablet')`
+    margin-left: 10px;
+    margin-right: 0;
+  `}
+
+  &:focus {
+    outline: none;
+  }
 `
 
 class Testimonials extends React.Component {
@@ -83,12 +115,7 @@ class Testimonials extends React.Component {
     );
     return(
       <TestimonialsWrapper>
-        <div
-          style={{
-            padding: `30px 80px 40px 300px`,
-            borderBottom: `1px solid #eeeeee`
-          }}
-          >
+        <InternalContainer>
           <h2>How our customers feel about us</h2>
           <div
             style={{
@@ -115,20 +142,12 @@ class Testimonials extends React.Component {
                     {testimonialItems}
                 </ul>
             </div>
-            <div
-              style={{
-                position: `absolute`,
-                left: `100%`,
-                bottom: 0,
-                marginTop: `10px`,
-                minWidth: `70px`,
-              }}
-              >
+            <ButtonsContainer>
               <Button onClick={e =>this.setSliderPosition(-1)}><FaAngleLeft /></Button>
               <Button onClick={e =>this.setSliderPosition(1)}><FaAngleRight /></Button>
-            </div>
+            </ButtonsContainer>
           </div>
-        </div>
+        </InternalContainer>
       </TestimonialsWrapper>
     )
   }
