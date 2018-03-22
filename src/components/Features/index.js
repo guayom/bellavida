@@ -1,23 +1,36 @@
 import React from "react"
 import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
 import Img from 'gatsby-image'
 import Cta from '../../components/General/CtaLink'
 
 const FeaturesList = styled.ul`
   display: block;
   padding: 0 0 60px;
-  display: flex;
-  margin-top: 0;
-  margin-right: -40px;
-  marin-bottom: 40px;
-  margin-left: -40px;
+  margin: 0;
+
+  ${breakpoint('tablet')`
+    display: flex;
+    margin-top: 0;
+    margin-right: -40px;
+    marin-bottom: 40px;
+    margin-left: -40px;
+  `}
 `
 
 const FeatureItem = styled.li`
   display: block;
   flex: 1 0;
   text-align: center;
-  margin: 0 40px;
+  margin: 0 0 60px;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  ${breakpoint('tablet') `
+    margin: 0 40px;
+  `}
 `
 
 const ImageContainer = styled.div`

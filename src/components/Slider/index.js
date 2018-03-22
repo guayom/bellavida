@@ -12,6 +12,7 @@ const Container = styled.div`
 
   ${breakpoint('tablet') `
     height: auto;
+    overflow: visible;
   `}
 `
 
