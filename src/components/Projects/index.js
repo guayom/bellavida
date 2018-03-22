@@ -1,13 +1,18 @@
 import React from "react"
 import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
 import TitleBar from  '../../components/General/TitleBar'
 import Img from 'gatsby-image'
 import CtaLink from '../../components/General/CtaLink'
 import Link from 'gatsby-link'
 
 const Container = styled.div`
-  flex: 2 0;
-  margin-right: 40px;
+  flex: 1 0;
+
+  ${breakpoint('tablet')`
+    flex: 2 0;
+    margin-right: 40px;
+  `}
 `
 
 const ProjectContainer = styled.li`

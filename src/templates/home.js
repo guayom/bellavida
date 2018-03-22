@@ -8,10 +8,20 @@ import HomeDescription from '../components/HomeDescription'
 import Location from '../components/Location'
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
+import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
 }
+
+const HomeGrid = styled.div`
+  display: block;
+
+  ${breakpoint('tablet')`
+    display: flex;
+  `}
+`
 
 class HomeTemplate extends React.Component {
   render() {
@@ -35,10 +45,10 @@ class HomeTemplate extends React.Component {
         <Wrapper>
           <Features items={homeFeatures} />
           <HomeDescription description={description} />
-          <div style={{display: `flex`}}>
+          <HomeGrid>
             <Projects items={projects} />
             <Location items={projects} />
-          </div>
+          </HomeGrid>
         </Wrapper>
       </div>
     )
