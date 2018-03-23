@@ -47,7 +47,7 @@ class Features extends React.Component {
         </ImageContainer>
         <h3>{feature.node.title}</h3>
         <p>{feature.node.content.content}</p>
-        <Cta to={feature.node.buttonLink} text={feature.node.buttonText}/>
+        <Cta to={feature.node.buttonLink.replace(/https:\/\/www\.bellavidacostarica\.com/i, '')} text={feature.node.buttonText}/>
       </FeatureItem>
     );
     return(
