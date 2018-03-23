@@ -26,7 +26,7 @@ class SimplePageTemplate extends React.Component {
         />
         <Wrapper>
           <h1>{page.title}</h1>
-          <p>{page.content.content}</p>
+          <div dangerouslySetInnerHTML={{ __html: page.content.childMarkdownRemark.html }} />
         </Wrapper>
       </div>
     )
@@ -41,8 +41,10 @@ export const pageQuery = graphql`
   query pageQuery($id: String!) {
     contentfulPage(id: { eq: $id }) {
       title
-      content{
-        content
+      content {
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }
