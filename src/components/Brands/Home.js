@@ -9,31 +9,40 @@ const Container =  styled.div`
   color: #fff;
   margin: 2rem 0 0;
   padding: 2rem 0;
+
+  ${breakpoint('tablet') `
+    padding: 2rem;
+  `}
 `
 
 const GridWrapper = Wrapper.extend`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 60px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-column-gap: 30px;
   align-content: center;
   align-items: center;
   justify-content: center;
   text-align: center;
 
   ${breakpoint('tablet')`
-    grid-template-columns: 1fr 1fr 2fr 2fr .5fr;
+    grid-template-columns: repeat(16, 1fr);
+    grid-column-gap: 60px;
   `}
+`
+
+const Brand = styled.div`
+  grid-column: span ${props => props.size};
 `
 
 export default ({brands}) => (
   <Container>
     <GridWrapper quantity={brands.length}>
       {brands.map(brand => (
-        <div key={brand.node.id}>
+        <Brand key={brand.node.id} size={brand.node.size}>
           <a href={brand.node.website} target="_blank" rel="noopener noreferrer">
             <Img sizes={brand.node.logo.sizes} alt={brand.node.title} />
           </a>
-        </div>
+        </Brand>
       ))}
     </GridWrapper>
   </Container>

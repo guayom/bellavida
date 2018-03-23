@@ -4252,7 +4252,7 @@ google-maps-infobox@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/google-maps-infobox/-/google-maps-infobox-2.0.0.tgz#1ea6de93c0cdf4138c2d586331835c83dcc59dc2"
 
-googlemaps@^3.0.0:
+googlemaps@^1.12.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/googlemaps/-/googlemaps-1.12.0.tgz#25d82a834fb2c989e72c7917b5daf27639f2cffb"
   dependencies:
@@ -6047,7 +6047,7 @@ marker-clusterer-plus@^2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/marker-clusterer-plus/-/marker-clusterer-plus-2.1.4.tgz#f8eff74d599dab3b7d0e3fed5264ea0e704f5d67"
 
-markerclustererplus@^2.1.29:
+markerclustererplus@^2.1.4:
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/markerclustererplus/-/markerclustererplus-2.1.4.tgz#901225180dd5d5fc0827753a18eee35afcf9c4f7"
 
