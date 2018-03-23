@@ -168,7 +168,7 @@ function ItemsList(props) {
   return (
     <List submenu={props.submenu}>
       {items.map(function(item){
-        return (<ListItem item={item} key={item.id} linkPrefix={props.linkPrefix} locale={props.locale} submenu={props.submenu}/>)
+        return (<ListItem item={item} key={item.id} linkPrefix={props.linkPrefix} locale={props.locale} submenu={props.submenu} handleClick={props.handleClick}/>)
       })}
     </List>
   );
@@ -180,7 +180,7 @@ const SubMenu = (props) => (
       return(
         <SubmenuColumn key={submenu.id}>
           <SubMenuTitle>{submenu.title}</SubMenuTitle>
-          <ItemsList items={submenu.items} linkPrefix={"/"+props.locale+"/"+submenu.id+"/"} submenu/>
+          <ItemsList items={submenu.items} linkPrefix={"/" + props.locale + "/" + submenu.id + "/"} handleClick={props.handleClick} submenu/>
         </SubmenuColumn>
       )
     })}
@@ -197,10 +197,11 @@ const ListItem = (props) => (
     <Link
       to={props.item.title === "Home" ? "/" : props.linkPrefix+props.item.slug}
       activeStyle={{ borderColor: '#eeeeee', color: "#93c548" }}
+      onClick={props.handleClick}
       >
       {props.item.title}
     </Link>
-    {props.item.children ? <SubMenu items={props.item.children} locale={props.locale}/> : null}
+    {props.item.children ? <SubMenu items={props.item.children} locale={props.locale} handleClick={props.handleClick}/> : null}
   </Item>
 )
 
@@ -296,7 +297,7 @@ class Menu extends React.Component {
 
     return (
       <MenuContainer expanded={expanded}>
-        <ItemsList items={pages} locale={locale} linkPrefix={"/"+locale+"/"} />
+        <ItemsList items={pages} locale={locale} linkPrefix={"/" + locale + "/"} handleClick={this.props.handleClick}/>
       </MenuContainer>
     )
   }

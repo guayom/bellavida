@@ -71,10 +71,15 @@ class Header extends React.Component {
       expanded: false
     }
     this.toggleMenu = this.toggleMenu.bind(this)
+    this.collapseMenu = this.collapseMenu.bind(this)
   }
 
   toggleMenu(){
     this.setState({expanded: !this.state.expanded})
+  }
+
+  collapseMenu(){
+    this.setState({ expanded: false })
   }
 
   render(){
@@ -100,7 +105,7 @@ class Header extends React.Component {
                 <Logo src={LogoSrc} alt="Bella Vida Costa Rica" />
               </Link>
             </LogoContainer>
-            <Menu products={products} locale={locale} brands={brands} expanded={expanded}/>
+            <Menu products={products} locale={locale} brands={brands} expanded={expanded} handleClick={e => collapseMenu(e)}/>
             <Search />
             <ToggleMenuButtonContainer>
               <ToggleMenuButton onClick={e => this.toggleMenu()}>
