@@ -7,7 +7,7 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   background: #000;
-  height: 85vh;
+  height: 80vh;
   overflow: hidden;
 
   ${breakpoint('tablet') `
