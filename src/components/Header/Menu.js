@@ -28,6 +28,7 @@ const MenuContainer = styled.div`
     width: auto;
     box-shadow: none;
     max-height: none;
+    overflow: visible;
   `}
 `
 
@@ -112,6 +113,12 @@ const SubmenuContainer = styled.div`
   display: none;
   justify-content: space-between;
 
+  ${breakpoint('tablet') `
+    -webkit-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.17);
+    -moz-box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.17);
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.17);
+  `}
+
   h3 {
     color: #fff;
     margin-bottom: 10px;
@@ -129,6 +136,11 @@ const SubmenuContainer = styled.div`
       border-radius: 4px;
       font-size: 11px;
       display:block;
+
+      ${breakpoint('tablet')`
+        padding: 5px 10px;
+        height: auto;
+      `}
 
       &:hover {
         background: rgba(0,0,0,0.3);
