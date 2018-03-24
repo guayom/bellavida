@@ -23,6 +23,7 @@
     "react-flag-icon-css": "^1.0.23",
     "react-google-maps": "^9.4.5",
     "react-icons": "^2.2.7",
+    "react-image-gallery": "^0.8.7",
     "react-typography": "^0.15.0",
     "slash": "^1.0.0",
     "styled-components": "^3.1.6",

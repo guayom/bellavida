@@ -206,7 +206,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     slug
                     node_locale
                     images {
-                      sizes(maxWidth: 400, maxHeight: 150) {
+                      sizes {
                         base64
                         aspectRatio
                         src
