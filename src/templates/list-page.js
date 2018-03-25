@@ -25,6 +25,8 @@ class AllProductsPageTemplate extends React.Component {
     const path = this.props.location.pathname
     const title = this.props.pathContext.pageTitle
 
+    console.log(path)
+
     return (
       <div>
         <Helmet

@@ -26,6 +26,7 @@ const ImageContainer = styled.div`
 const ItemImage = ({title, slug, image, path}) => (
   <Container>
     <Link to={path + "/" + slug}>
+      {console.log(slug)}
       <ImageContainer>
         <Img sizes={image} alt={title} />
       </ImageContainer>

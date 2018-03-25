@@ -2,6 +2,7 @@ import React from "react"
 import * as PropTypes from "prop-types"
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
+import InternalHero from '../components/General/InternalHero'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -24,9 +25,9 @@ class SimplePageTemplate extends React.Component {
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
+        <InternalHero title={page.title} image={page.image} brand/>
         <Wrapper>
-          <h1>{page.title}</h1>
-          <p>{page.description.description}</p>
+          <div dangerouslySetInnerHTML={{ __html: page.description.childMarkdownRemark.html }} />
         </Wrapper>
       </div>
     )
@@ -41,8 +42,29 @@ export const pageQuery = graphql`
   query brandQuery($id: String!) {
     contentfulProductBrand(id: { eq: $id }) {
       title
+      image {
+        responsiveResolution(width: 1300) {
+          base64
+          aspectRatio
+          width
+          height
+          src
+          srcSet
+        }
+        sizes {
+          base64
+          aspectRatio
+          src
+          srcSet
+          srcWebp
+          srcSetWebp
+          sizes
+        }
+      }
       description{
-        description
+        childMarkdownRemark {
+          html
+        }
       }
     }
   }

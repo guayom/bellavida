@@ -10,6 +10,7 @@ const Container = styled.div`
   position: relative;
 
   &:after {
+    display: ${props => props.brand ? "none" : "block"};
     content: "";
     width: 100%;
     height: 100%;
@@ -45,19 +46,29 @@ const TitleContainer = styled.h1`
   }
 `
 
-function ShowHero(image) {
+function ShowHero(image, title, brand) {
   if (image) {
-    return <Img sizes={image.responsiveResolution} />
+    return <Img sizes={image.responsiveResolution} alt="title" title="title" />
   } else {
     return null
   }
 }
 
-export default ({title, image}) => (
-  <Container>
-    {ShowHero(image)}
-    <TitleContainer>
-      <h1>{title}</h1>
-    </TitleContainer>
+function ShowTitle(title, brand) {
+  if (!brand) {
+    return (
+      <TitleContainer>
+        <h1>{title}</h1>
+      </TitleContainer>
+    )
+  } else {
+    return null
+  }
+}
+
+export default ({title, image, brand}) => (
+  <Container brand={brand}>
+    {ShowHero(image, title)}
+    {ShowTitle(title, brand)}
   </Container>
 )

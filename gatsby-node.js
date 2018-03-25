@@ -100,7 +100,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             const translatedSection = edge.node.node_locale === "en" ? "marcas" : "brands"
             let translatedPage = getTranslatedPage(result.data.allContentfulProductBrand.edges, edge.node.id, edge.node.node_locale)
             createPage({
-              path: `/${[edge.node.node_locale, section, edge.node.slug].join("/")}`,
+              path: `/${edge.node.node_locale}/${section}/${edge.node.slug}`,
               component: slash(brandTemplate),
               layout: edge.node.node_locale,
               context: {
