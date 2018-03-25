@@ -2,6 +2,7 @@ import React from "react"
 import * as PropTypes from "prop-types"
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
+import InternalHero from '../components/General/InternalHero'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -24,8 +25,8 @@ class SimplePageTemplate extends React.Component {
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
+        <InternalHero title={page.title} image={page.image} />
         <Wrapper>
-          <h1>{page.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: page.content.childMarkdownRemark.html }} />
         </Wrapper>
       </div>
@@ -44,6 +45,25 @@ export const pageQuery = graphql`
       content {
         childMarkdownRemark {
           html
+        }
+      }
+      image {
+        responsiveResolution(width: 1240, height:300) {
+          base64
+          aspectRatio
+          width
+          height
+          src
+          srcSet
+        }
+        sizes {
+          base64
+          aspectRatio
+          src
+          srcSet
+          srcWebp
+          srcSetWebp
+          sizes
         }
       }
     }
