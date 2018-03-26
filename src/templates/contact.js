@@ -8,6 +8,12 @@ const propTypes = {
   data: PropTypes.object.isRequired,
 }
 
+const Form = styled.form`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 30px;
+`
+
 const Label = styled.label`
   display: block;
 `
@@ -17,6 +23,7 @@ const Input = styled.input`
   padding: 5px;
   margin-bottom: 20px;
   display: block;
+  width: 100%;
 `
 
 const Textarea = styled.textarea`
@@ -24,10 +31,17 @@ const Textarea = styled.textarea`
   padding: 5px;
   margin-bottom: 20px;
   display: block;
+  width: 100%;
 `
+
+const Full = styled.div`
+  grid-column: span 2;
+`
+
 class SinglePageTemplate extends React.Component {
   render() {
     const page = this.props.pathContext
+    const locale = this.props.locale
     return (
       <div>
         <Helmet
@@ -39,23 +53,48 @@ class SinglePageTemplate extends React.Component {
         />
         <Wrapper>
           <h1>{page.pageTitle}</h1>
-          <form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" action={page.locale === "en" ? "/en/thank-you" : "/es/gracias"}>
+          <p>
+            {locale === "en" ? "Every field is mandatory" : "Todos los campos son requeridos"}
+          </p>
+          <Form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" action={page.locale === "en" ? "/en/thank-you" : "/es/gracias"}>
             <p style={{display: `none`}}>
               <input type="hidden" name="form-name" value="contact" />
               <input name="bot-field" />
             </p>
 
-            <Label for="name">{page.locale === "en" ? "Name" : "Nombre"}</Label>
-            <Input type="text" name="name" id="name" />
+            <div>
+              <Label for="name">{page.locale === "en" ? "Name" : "Nombre"}</Label>
+              <Input type="text" name="name" id="name" />
+            </div>
 
-            <Label for="email">Email</Label>
-            <Input type="email" name="email" id="email" />
+            <div>
+              <Label for="email">Email</Label>
+              <Input type="email" name="email" id="email" />
+            </div>
 
-            <Label for="message">{page.locale === "en" ? "Message" : "Mensaje"}</Label>
-            <Textarea id="message" name="message"></Textarea>
+            <Full>
+              <Label for="message">{page.locale === "en" ? "Message" : "Mensaje"}</Label>
+              <Textarea id="message" name="message"></Textarea>
+            </Full>
 
-            <button type="submit">{page.locale === "en" ? "Send" : "Enviar"}</button>
-          </form>
+            <div>
+              <button 
+                style={{
+                  display: `inline-block`,
+                  padding: '8px 20px',
+                  background: '#93c548',
+                  fontSize: '14px',
+                  lineHeight: '14px',
+                  color: '#fff',
+                  textDecoration: `none`,
+                  borderRadius: `4px`,
+                  border: 0,
+                }}
+                type="submit">
+                  {page.locale === "en" ? "Send" : "Enviar"}
+                </button>
+            </div>
+          </Form>
         </Wrapper>
       </div>
     )
