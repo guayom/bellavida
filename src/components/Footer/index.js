@@ -105,30 +105,35 @@ const Button = styled.button`
   }
 `
 
+const ListItem = styled.li`
+  margin: 0;
+  padding: 0;
+
+  a {
+    font-size: 11px;
+    color: #595959;
+    padding: 4px 0;
+    display: block;
+
+    &:hover {
+      color: ${props => props.theme.mainColor};
+    }
+  }
+`
+
 const Menu = ({items, prefix}) => (
   <ul style={{listStyle: `none`, padding: 0, margin: 0}}>
     {items.map(item => (
-      <li 
-        key={item.node.id}
-        style={{
-          margin: 0,
-          padding: 0,
-        }}>
+      <ListItem key={item.node.id}>
         <Link 
           to={`${prefix}${item.node.slug}`}
-          style={{
-            fontSize: `11px`,
-            color: `#595959`,
-            padding: `4px 0`,
-            display: `block`,
-          }}
           activeStyle={{
             color: '#93c548'
           }}
           >
           {item.node.title}
         </Link>
-      </li>
+      </ListItem>
     ))}
   </ul>
 )
