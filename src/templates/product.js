@@ -4,6 +4,7 @@ import * as PropTypes from "prop-types"
 import Img from "gatsby-image"
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
+import InternalHero from '../components/General/InternalHero'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
@@ -26,9 +27,9 @@ class ProductTemplate extends React.Component {
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
+        <InternalHero title={product.title} image={product.image} />
         <Wrapper>
-          <h1>{product.title}</h1>
-          <p>{product.description.description}</p>
+          <div dangerouslySetInnerHTML={{ __html: product.description.childMarkdownRemark.html }} />
         </Wrapper>
       </div>
     )
@@ -44,7 +45,28 @@ export const pageQuery = graphql`
     contentfulProduct(id: { eq: $id }) {
       title
       description{
-        description
+        childMarkdownRemark {
+          html
+        }
+      }
+      image {
+        responsiveResolution(width: 1240, height:300) {
+          base64
+          aspectRatio
+          width
+          height
+          src
+          srcSet
+        }
+        sizes {
+          base64
+          aspectRatio
+          src
+          srcSet
+          srcWebp
+          srcSetWebp
+          sizes
+        }
       }
     }
   }
