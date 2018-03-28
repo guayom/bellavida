@@ -105,33 +105,46 @@ const Button = styled.button`
   }
 `
 
+const ListItem = styled.li`
+  margin: 0;
+  padding: 0;
+
+  a {
+    font-size: 11px;
+    color: #595959;
+    padding: 4px 0;
+    display: block;
+
+    &:hover {
+      color: ${props => props.theme.mainColor};
+    }
+  }
+`
+
 const Menu = ({items, prefix}) => (
   <ul style={{listStyle: `none`, padding: 0, margin: 0}}>
     {items.map(item => (
-      <li 
-        key={item.node.id}
-        style={{
-          margin: 0,
-          padding: 0,
-        }}>
+      <ListItem key={item.node.id}>
         <Link 
           to={`${prefix}${item.node.slug}`}
-          style={{
-            fontSize: `11px`,
-            color: `#595959`,
-            padding: `4px 0`,
-            display: `block`,
-          }}
           activeStyle={{
             color: '#93c548'
           }}
           >
           {item.node.title}
         </Link>
-      </li>
+      </ListItem>
     ))}
   </ul>
 )
+
+function Localize(locale, en, es) {
+  if(locale === "en"){
+    return en
+  } else {
+    return es
+  }
+}
 
 // This could be done in contentful
 const QuickAcessLinks = [
@@ -159,23 +172,23 @@ export default ({ phoneNumbers, socialNetworks, translation, locale, brands, pro
           </Link>
         </p>
         <p>
-          Copyright © {(new Date()).getFullYear()} Bella Vida Costa Rica. All Rights Reserved.
+          Copyright © {(new Date()).getFullYear()} Bella Vida Costa Rica. {Localize(locale, "All Rights Reserved", "Todos los derechos reservados")}.
         </p>
       </Column>
       <Column>
-        <Title>Quick Access</Title>
+        <Title>{Localize(locale, "Quick Access", "Acceso rápido")}</Title>
         <Menu items={QuickAcessLinks.map(i => i[locale])} prefix="" />
       </Column>
       <Column>
-        <Title>Our Products</Title>
+        <Title>{Localize(locale, "Our products" , "Acceso rápido")}</Title>
         <Menu items={products} prefix={`/${locale}/${locale === "en" ? "products" : "productos"}/`} />
       </Column>
       <Column>
-        <Title>Our Brands</Title>
+        <Title>{Localize(locale, "Our Brands", "Nuestras marcas")}</Title>
         <Menu items={brands} prefix={`/${locale}/${locale === "en" ? "brands" : "marcas"}/`} />
       </Column>
       <Column>
-        <Title>Get Our Newsletter</Title>
+        <Title>{Localize(locale, "Get our newsletter", "Subscrébete")}</Title>
         <form name="subscribe" method="post" data-netlify="true" data-netlify-honeypot="text">
           <p style={{display: `none`}}>
             <input type="hidden" name="form-name" value="subscribe" />
@@ -183,7 +196,7 @@ export default ({ phoneNumbers, socialNetworks, translation, locale, brands, pro
           </p>
           <Input type="text" name="name" placeholder="Name"/>
           <Input type="email" name="email" placeholder="Email"/>
-          <Button type="submit">Subscribe</Button>
+          <Button type="submit">{Localize(locale, "Subscribe", "Subscribirme")}</Button>
         </form>
       </Column>
     </FooterWrapper>

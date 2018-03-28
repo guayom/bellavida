@@ -31,7 +31,6 @@ class SinglePageTemplate extends React.Component {
         <Wrapper>
           <h1>{project.title}</h1>
           <ImageGallery items={images} />
-          {console.log(project.content.content)}
           {showDescription(project.content.content, project.content.childMarkdownRemark.html)}
         </Wrapper>
       </div>
@@ -62,7 +61,6 @@ export const projectQuery = graphql`
         }
       }
       content {
-        content
         childMarkdownRemark {
           html
         }
