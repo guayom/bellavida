@@ -58,7 +58,7 @@ function ShowTitle(title, brand) {
   if (!brand) {
     return (
       <TitleContainer>
-        <h1>{title}</h1>
+        {title}
       </TitleContainer>
     )
   } else {
