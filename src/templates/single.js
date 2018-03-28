@@ -27,10 +27,6 @@ class SinglePageTemplate extends React.Component {
       <div>
         <Helmet
           title={project.title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
         />
         <Wrapper>
           <h1>{project.title}</h1>

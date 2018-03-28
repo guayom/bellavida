@@ -31,10 +31,6 @@ class AllProductsPageTemplate extends React.Component {
       <div>
         <Helmet
           title={title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
         />
         <Wrapper>
           <h1>{title}</h1>

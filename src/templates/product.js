@@ -21,11 +21,7 @@ class ProductTemplate extends React.Component {
     return (
       <div>
         <Helmet
-          title={this.props.pathContext.pageTitle}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
+          title={product.title}
         />
         <InternalHero title={product.title} image={product.image} />
         <Wrapper>

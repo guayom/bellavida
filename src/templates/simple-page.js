@@ -19,11 +19,7 @@ class SimplePageTemplate extends React.Component {
     return (
       <div>
         <Helmet
-          title={this.props.pathContext.pageTitle}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
+          title={product.title}
         />
         <InternalHero title={page.title} image={page.image} />
         <Wrapper>

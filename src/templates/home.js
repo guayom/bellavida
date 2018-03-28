@@ -33,12 +33,8 @@ class HomeTemplate extends React.Component {
 
     return (
       <div>
-        <Helmet
+        <Helmet 
           title={this.props.pathContext.pageTitle}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
         />
         <Slider slides={slides} />
         <Testimonials items={testimonials} />
