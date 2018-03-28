@@ -19,7 +19,7 @@ class SimplePageTemplate extends React.Component {
     return (
       <div>
         <Helmet
-          title={product.title}
+          title={page.title}
         />
         <InternalHero title={page.title} image={page.image} />
         <Wrapper>

@@ -55,7 +55,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
         if (result.errors) {
           reject(result.errors)
         }
-        const productTemplate = path.resolve(`./src/templates/simple-page.js`)
+        const simplePageTemplate = path.resolve(`./src/templates/simple-page.js`)
         _.each(result.data.allContentfulPage.edges, edge => {
 
           let category = edge.node.category === null ? "" : edge.node.category.slug + "/"
@@ -63,7 +63,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
 
           createPage({
             path: `/${edge.node.node_locale}/${category}${edge.node.slug}`,
-            component: slash(productTemplate),
+            component: slash(simplePageTemplate),
             layout: edge.node.node_locale,
             context: {
               id: edge.node.id,
