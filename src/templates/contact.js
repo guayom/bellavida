@@ -2,13 +2,51 @@ import React from "react"
 import * as PropTypes from "prop-types"
 import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
+import SidebarSection from '../components/Sidebar/Section'
+import PhoneNumber from '../components/General/PhoneNumber'
 import styled from 'styled-components'
+import breakpoint from 'styled-components-breakpoint'
+import FaFacebookOfficial from 'react-icons/lib/fa/facebook-official'
 
 const propTypes = {
   data: PropTypes.object.isRequired,
 }
 
+const Grid = Wrapper.extend`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-column-gap: 40px;
+  grid-template-areas: 
+    "title"
+    "description"
+    "main"
+    "sidebar"
+  ;
+
+  ${breakpoint('tablet')`
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: 
+      "sidebar title"
+      "sidebar description"
+      "sidebar main"
+    ;
+  `}
+`
+
+const Title = styled.h1`
+  grid-area: title;
+`
+
+const Description = styled.p`
+  grid-area: description;
+`
+
+const Sidebar = styled.div`
+  grid-area: sidebar;
+`
+
 const Form = styled.form`
+  grid-area: main;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 30px;
@@ -47,11 +85,26 @@ class SinglePageTemplate extends React.Component {
         <Helmet
           title={page.pageTitle}
         />
-        <Wrapper>
-          <h1>{page.pageTitle}</h1>
-          <p>
+        <Grid>
+          <Title>{page.pageTitle}</Title>
+          <Description>
             {locale === "en" ? "Every field is mandatory" : "Todos los campos son requeridos"}
-          </p>
+          </Description>
+          <Sidebar>
+            <SidebarSection title="Contact Information">
+              <h4>Phone numbers:</h4>
+              {this.props.data.allContentfulPhoneNumbers.edges.map((number, i) => (
+                <p key={number.node.id}><PhoneNumber phoneNumber={number.node.number} /></p>
+              ))}
+              <h4>Social networks</h4>
+              <a href="https://www.facebook.com/BellaVidaCostaRicaWindowsDoors" target="_blank" rel="noopener noreferrer">
+                <FaFacebookOfficial /> Facebook
+              </a>
+            </SidebarSection>
+            <SidebarSection title="Visit our showrooms">
+              Place here content for showrooms
+            </SidebarSection>
+          </Sidebar>
           <Form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" action={page.locale === "en" ? "/en/thank-you" : "/es/gracias"}>
             <p style={{display: `none`}}>
               <input type="hidden" name="form-name" value="contact" />
@@ -91,7 +144,7 @@ class SinglePageTemplate extends React.Component {
                 </button>
             </div>
           </Form>
-        </Wrapper>
+        </Grid>
       </div>
     )
   }
@@ -100,3 +153,25 @@ class SinglePageTemplate extends React.Component {
 SinglePageTemplate.propTypes = propTypes
 
 export default SinglePageTemplate
+
+export const contactQuery = graphql`
+  query contactQuery($locale: String!) {
+    allContentfulPhoneNumbers(filter: { node_locale: { eq: $locale } }) {
+      edges {
+        node {
+          number
+          id
+        }
+      }
+    }
+    allContentfulSocialNetwork(filter: { node_locale: { eq: $locale } }) {
+      edges {
+        node {
+          title
+          url
+          id
+        }
+      }
+    }
+  }
+`
