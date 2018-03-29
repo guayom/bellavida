@@ -143,14 +143,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     slug
                     node_locale
                     image {
-                      sizes(maxWidth: 400, maxHeight: 150) {
+                      responsiveResolution(width: 400, height: 150) {
                         base64
                         aspectRatio
+                        width
+                        height
                         src
                         srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
                       }
                     }
                   }
@@ -164,14 +163,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     slug
                     node_locale
                     image {
-                      sizes(maxWidth: 400, maxHeight: 150) {
+                      responsiveResolution(width: 400, height: 150) {
                         base64
                         aspectRatio
+                        width
+                        height
                         src
                         srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
                       }
                     }
                   }
@@ -185,14 +183,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     slug
                     node_locale
                     image {
-                      sizes(maxWidth: 400, maxHeight: 150) {
+                      responsiveResolution(width: 400, height: 150) {
                         base64
                         aspectRatio
+                        width
+                        height
                         src
                         srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
                       }
                     }
                   }
@@ -206,14 +203,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     slug
                     node_locale
                     images {
-                      sizes {
+                      responsiveResolution(width: 400, height: 150) {
                         base64
                         aspectRatio
+                        width
+                        height
                         src
                         srcSet
-                        srcWebp
-                        srcSetWebp
-                        sizes
                       }
                     }
                     content{
@@ -244,7 +240,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               context: {
                 locale: locale,
                 pageTitle: locale === "en" ? "Products" : "Productos",
-                items: products.filter(p => p.node.node_locale === locale).map(p => ({id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.sizes })),
+                items: products.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.responsiveResolution })),
                 translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "productos" : "products"}`,
               },
             })
@@ -255,7 +251,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               context: {
                 locale: locale,
                 pageTitle: locale === "en" ? "Brands" : "Nuestras Marcas",
-                items: brands.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.sizes })),
+                items: brands.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.responsiveResolution })),
                 translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "marcas" : "brands"}`,
               },
             })
@@ -266,7 +262,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               context: {
                 locale: locale,
                 pageTitle: locale === "en" ? "Environment" : "Medio Ambiente",
-                items: environmentPages.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.sizes })),
+                items: environmentPages.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.responsiveResolution })),
                 translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "medio-ambiente" : "environment"}`,
               },
             })
@@ -277,7 +273,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               context: {
                 locale: locale,
                 pageTitle: locale === "en" ? "Our Projects" : "Nuestros Proyectos",
-                items: projects.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.images[0].sizes })),
+                items: projects.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.images[0].responsiveResolution })),
                 translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "proyectos" : "projects"}`,
               },
             })

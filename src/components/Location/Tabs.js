@@ -22,8 +22,8 @@ class Tabs extends React.Component {
     const locations = this.props.locations
     return(
       <div>
-        {locations.map(location => (
-          <div style={{marginBottom: `20px`}}>
+        {locations.map((location, i) => (
+          <div key={i} style={{marginBottom: `20px`}}>
             <strong>{location.node.title}</strong>
             <div dangerouslySetInnerHTML={{__html: location.node.address.childMarkdownRemark.html}} />
             <Cta 

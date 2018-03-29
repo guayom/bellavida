@@ -106,7 +106,6 @@ class SinglePageTemplate extends React.Component {
               </a>
             </SidebarSection>
             <SidebarSection title={locale === "en" ? "Visit our showrooms" : "Visítenos"}>
-              {console.log(this.props.data.allContentfulShowRoom.edges)}
               <LocationTabs locations={this.props.data.allContentfulShowRoom.edges}/>
             </SidebarSection>
           </Sidebar>
