@@ -44,6 +44,9 @@ const Description = styled.p`
 
 const Sidebar = styled.div`
   grid-area: sidebar;
+  ${breakpoint('tablet')`
+    grid-row: 1 / span 6;
+  `}
 `
 
 const Form = styled.form`
