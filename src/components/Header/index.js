@@ -10,13 +10,13 @@ import breakpoint from 'styled-components-breakpoint'
 import FaBars from 'react-icons/lib/fa/bars'
 
 const MenuBar = styled.div`
-  display: flex;
+  display: grid;
   position: relative;
   margin: 0;
   padding: 20px 0;
+  grid-row-gap: 10px;
 
   ${breakpoint('tablet') `
-    display: grid;
     grid-template-columns: 3fr 15fr 30px;
     grid-auto-rows: 80px;
     padding: 0;
@@ -40,9 +40,10 @@ const Logo = styled.img`
 
 const ToggleMenuButtonContainer = styled.div`
   display: block;
-  flex: 1 0;
   text-align: right;
-  padding-right: 20px;
+  grid-column: 2;
+  grid-row: 1;
+
   ${breakpoint('tablet') `
     display: none;
   `}
