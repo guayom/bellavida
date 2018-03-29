@@ -4,6 +4,7 @@ import Helmet from 'react-helmet'
 import Wrapper from '../components/Layout/Wrapper'
 import SidebarSection from '../components/Sidebar/Section'
 import PhoneNumber from '../components/General/PhoneNumber'
+import LocationTabs from '../components/Location/Tabs'
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
 import FaFacebookOfficial from 'react-icons/lib/fa/facebook-official'
@@ -102,7 +103,8 @@ class SinglePageTemplate extends React.Component {
               </a>
             </SidebarSection>
             <SidebarSection title="Visit our showrooms">
-              Place here content for showrooms
+              {console.log(this.props.data.allContentfulShowRoom.edges)}
+              <LocationTabs locations={this.props.data.allContentfulShowRoom.edges}/>
             </SidebarSection>
           </Sidebar>
           <Form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" action={page.locale === "en" ? "/en/thank-you" : "/es/gracias"}>
@@ -170,6 +172,22 @@ export const contactQuery = graphql`
           title
           url
           id
+        }
+      }
+    }
+    allContentfulShowRoom(filter: { node_locale: { eq: $locale } }) {
+      edges {
+        node {
+          title
+          address {
+            childMarkdownRemark {
+              html
+            }
+          }
+          location {
+            lon
+            lat
+          }
         }
       }
     }
