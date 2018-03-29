@@ -92,17 +92,17 @@ class SinglePageTemplate extends React.Component {
             {locale === "en" ? "Every field is mandatory" : "Todos los campos son requeridos"}
           </Description>
           <Sidebar>
-            <SidebarSection title="Contact Information">
-              <h4>Phone numbers:</h4>
+            <SidebarSection title={locale === "en" ? "Contact information" : "Información de contacto"}>
+              <h4>{locale === "en" ? "Phone numbers" : "Teléfonos"}:</h4>
               {this.props.data.allContentfulPhoneNumbers.edges.map((number, i) => (
                 <p key={number.node.id}><PhoneNumber phoneNumber={number.node.number} /></p>
               ))}
-              <h4>Social networks</h4>
+              <h4>{locale === "en" ? "Social Networks" : "Redes Sociales"}:</h4>
               <a href="https://www.facebook.com/BellaVidaCostaRicaWindowsDoors" target="_blank" rel="noopener noreferrer">
                 <FaFacebookOfficial /> Facebook
               </a>
             </SidebarSection>
-            <SidebarSection title="Visit our showrooms">
+            <SidebarSection title={locale === "en" ? "Visit our showrooms" : "Visítenos"}>
               {console.log(this.props.data.allContentfulShowRoom.edges)}
               <LocationTabs locations={this.props.data.allContentfulShowRoom.edges}/>
             </SidebarSection>
