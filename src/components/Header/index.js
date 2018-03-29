@@ -11,29 +11,26 @@ import FaBars from 'react-icons/lib/fa/bars'
 
 const MenuBar = styled.div`
   display: flex;
-  padding: 10px 0;
   position: relative;
   margin: 0;
+  padding: 20px 0;
 
   ${breakpoint('tablet') `
+    display: grid;
+    grid-template-columns: 3fr 15fr 30px;
+    grid-auto-rows: 80px;
     padding: 0;
-    margin: 0 -20px;
   `}
 `
 
 const LogoContainer = styled.h1`
-  display: flex;
   justify-content: left;
   align-items: center;
-  height: 100%;
   text-decoration: none;
   margin: 0;
-  flex-grow: 2;
-  flex-basis: 0;
 
   ${breakpoint('tablet') `
-    flex-grow: 3;
-    padding: 15px 0 0 20px;
+    align-self: center;
   `}
 `
 

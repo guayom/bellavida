@@ -22,13 +22,14 @@ const MenuContainer = styled.div`
 
   ${breakpoint('tablet') `
     position: static;
-    margin-left:auto;
-    flex-grow: 7;
-    display: block;
-    width: auto;
     box-shadow: none;
     max-height: none;
     overflow: visible;
+    padding: 0;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: auto;
   `}
 `
 
@@ -39,9 +40,11 @@ const List = styled.ul`
   display: block;
 
   ${breakpoint('tablet') `
-    display: ${props => props.submenu ? 'block' : 'flex'};
+    display: ${props => props.submenu ? 'block' : 'grid'};
+    grid-auto-columns: max-content;
+    grid-auto-flow: column;
+    justify-content: end;
     height: 100%;
-    justify-content: ${props => props.submenu ? null : 'flex-end'};
   `}
 `
 
@@ -54,22 +57,25 @@ const Item = styled.li`
   &:last-of-type {
     border-bottom: 0;
     margin-bottom: 10px;
+    ${breakpoint('tablet') `
+      margin: 0;
+    `}
   }
 
   ${breakpoint('tablet') `
-    display: ${props => props.submenu ? 'block' : 'inline-block'};
+    display: block;
     position:relative;
-    padding: 25px 10px;
-    padding-right: ${props => props.hasChildren ? '15px' : '0'};
+    padding: 28px 0;
     height: ${props => props.submenu ? 'auto' : 'auto'};
     border-bottom: none;
+    align-self: center;
 
     &:after{
       display: ${props => props.hasChildren ? 'block' : 'none'};
       position:absolute;
-      right: 0;
+      right: 8px;
       top: 50%;
-      margin-top: -8px;
+      margin-top: -3px;
       content: "";
       width: 0;
       height: 0;
@@ -97,16 +103,17 @@ const Item = styled.li`
     font-size: 13px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     border-radius: 15px;
-    padding: 0 13px;
+    padding: 3px 13px;
     border-color: transparent;
     border-width: 1px;
     border-style: solid;
+    ${props => props.hasChildren && 'padding-right: 20px;'}
   }
 `
 
 const SubmenuContainer = styled.div`
   position:absolute;
-  top: 100%;
+  top: calc(100% + 1px);
   left: 0;
   background: ${props => props.theme.mainColor};
   padding: 20px 0;

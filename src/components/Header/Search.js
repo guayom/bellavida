@@ -15,8 +15,13 @@ const Container = styled.div`
   padding-top: 5px;
 
   ${breakpoint('tablet') `
-    flex-grow: 1;
+    align-self: center;
     padding-top: 0;
+    width: auto;
+    text-align: right;
+    margin: 0;
+    position: relative;
+    height: 30px;
   `}
 `
 
@@ -37,8 +42,8 @@ const Form = styled.form`
 
   ${breakpoint('tablet') `
     display: block;
-    position:absolute;
-    top: 30px;
+    position: absolute;
+    top: 0;
     right: 0;
   `}
 `
