@@ -125,7 +125,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             context: {
               locale: locale,
               pageTitle: "Bella Vida Costa Rica",
-              translation: `/${locale === "en" ? locale + "/" : ""}`,
+              translation: locale === "en" ? "/es/" : "/",
             },
           })
         })
