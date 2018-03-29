@@ -30,6 +30,15 @@ const GridWrapper = Wrapper.extend`
   `}
 `
 
+const Link = styled.a`
+  display: block;
+  padding: 10px;
+  border-radius: 5px;
+  &:hover {
+    background: ${props => props.theme.mainColorVariation};
+  }
+`
+
 const Brand = styled.div`
   grid-column: span ${props => props.size};
 `
@@ -39,9 +48,9 @@ export default ({brands}) => (
     <GridWrapper quantity={brands.length}>
       {brands.map(brand => (
         <Brand key={brand.node.id} size={brand.node.size}>
-          <a href={brand.node.website} target="_blank" rel="noopener noreferrer">
+          <Link href={brand.node.website} target="_blank" rel="noopener noreferrer">
             <Img sizes={brand.node.logo.sizes} alt={brand.node.title} />
-          </a>
+          </Link>
         </Brand>
       ))}
     </GridWrapper>
