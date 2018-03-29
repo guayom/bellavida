@@ -8,6 +8,7 @@
     "gatsby": "latest",
     "gatsby-image": "^1.0.39",
     "gatsby-link": "latest",
+    "gatsby-plugin-algolia": "^0.0.3",
     "gatsby-plugin-favicon": "^2.1.1",
     "gatsby-plugin-google-analytics": "^1.0.25",
     "gatsby-plugin-google-fonts": "0.0.3",

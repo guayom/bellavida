@@ -1,5 +1,28 @@
 require('dotenv').config()
 
+const query = `{
+  allContentfulProduct {
+    edges {
+      node {
+        objectID: id
+        slug
+        node_locale
+        title
+        description {
+          description
+        }
+      }
+    }
+  }
+}`;
+
+const queries = [
+  {
+    query,
+    transformer: ({ data }) => data.allSitePage.edges.map(({ node }) => node),
+  },
+];
+
 module.exports = {
   siteMetadata: {
     title: 'Gatsby Default Starter',
@@ -46,6 +69,16 @@ module.exports = {
       options: {
         trackingId: "UA-69239129-1",
         head: true,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-algolia`,
+      options: {
+        appId: process.env.ALGOLIA_API_KEY,
+        apiKey: process.env.ALGOLIA_ADMIN_API_KEY,
+        indexName: 'main',
+        queries,
+        chunkSize: 10000, // default: 1000
       },
     },
   ],
