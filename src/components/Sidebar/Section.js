@@ -15,6 +15,10 @@ const Container = styled.div`
   a:hover {
     text-decoration: none;
   }
+
+  p {
+    margin: 0 0 5px;
+  }
 `
 
 const Title = styled.h3`
