@@ -197,7 +197,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               }
               allContentfulProject {
                 edges {
-                  node {
+                  node {                    
                     id
                     title
                     slug
@@ -211,9 +211,20 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                         src
                         srcSet
                       }
+                      sizes {
+                        base64
+                        aspectRatio
+                        src
+                        srcSet
+                        srcWebp
+                        srcSetWebp
+                        sizes
+                      }
                     }
-                    content{
-                      content
+                    content {
+                      childMarkdownRemark {
+                        html
+                      }
                     }
                   }
                 }

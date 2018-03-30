@@ -21,7 +21,7 @@ function showDescription(description, html){
 
 class SinglePageTemplate extends React.Component {
   render() {
-    const project = this.props.data.contentfulProject
+    const project = this.props.pathContext.pageContent
     const images = project.images.map(i => ({ original: i.sizes.src, thumbnail: i.sizes.src }))
     return (
       <div>
@@ -41,30 +41,3 @@ class SinglePageTemplate extends React.Component {
 SinglePageTemplate.propTypes = propTypes
 
 export default SinglePageTemplate
-
-export const projectQuery = graphql`
-  query projectQuery($id: String!) {
-    contentfulProject(id: { eq: $id }) {
-      id
-      title
-      slug
-      node_locale
-      images {
-        sizes {
-          base64
-          aspectRatio
-          src
-          srcSet
-          srcWebp
-          srcSetWebp
-          sizes
-        }
-      }
-      content {
-        childMarkdownRemark {
-          html
-        }
-      }
-    }
-  }
-`
