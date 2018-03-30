@@ -218,6 +218,32 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                   }
                 }
               }
+              allContentfulPhoneNumbers {
+                edges {
+                  node {
+                    number
+                    id
+                    node_locale
+                  }
+                }
+              }
+              allContentfulShowRoom {
+                edges {
+                  node {
+                    title
+                    node_locale
+                    address {
+                      childMarkdownRemark {
+                        html
+                      }
+                    }
+                    location {
+                      lon
+                      lat
+                    }
+                  }
+                }
+              }
             }
           `
         ).then(result => {
@@ -284,6 +310,8 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               context: {
                 locale: locale,
                 pageTitle: locale === "en" ? "Contact Us" : "Contáctenos",
+                showRooms: result.data.allContentfulShowRoom.edges.filter(x => x.node.node_locale === locale),
+                phoneNumbers: result.data.allContentfulPhoneNumbers.edges.filter(x => x.node.node_locale === locale),
                 translation: `/${locales.filter(l => l != locale)[0]}/${locale === "en" ? "contactenos" : "contact-us"}`,
               },
             })
