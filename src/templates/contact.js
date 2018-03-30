@@ -83,7 +83,10 @@ const Full = styled.div`
 class SinglePageTemplate extends React.Component {
   render() {
     const page = this.props.pathContext
+    const phoneNumbers = page.phoneNumbers
+    const showRooms = page.showRooms
     const locale = this.props.locale
+
     return (
       <div>
         <Helmet
@@ -97,7 +100,7 @@ class SinglePageTemplate extends React.Component {
           <Sidebar>
             <SidebarSection title={locale === "en" ? "Contact information" : "Información de contacto"}>
               <h4>{locale === "en" ? "Phone numbers" : "Teléfonos"}:</h4>
-              {this.props.data.allContentfulPhoneNumbers.edges.map((number, i) => (
+              {phoneNumbers.map((number, i) => (
                 <p key={number.node.id}><PhoneNumber phoneNumber={number.node.number} /></p>
               ))}
               <h4>{locale === "en" ? "Social Networks" : "Redes Sociales"}:</h4>
@@ -106,7 +109,7 @@ class SinglePageTemplate extends React.Component {
               </a>
             </SidebarSection>
             <SidebarSection title={locale === "en" ? "Visit our showrooms" : "Visítenos"}>
-              <LocationTabs locations={this.props.data.allContentfulShowRoom.edges}/>
+              <LocationTabs locations={showRooms}/>
             </SidebarSection>
           </Sidebar>
           <Form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" action={page.locale === "en" ? "/en/thank-you" : "/es/gracias"}>
@@ -154,44 +157,4 @@ class SinglePageTemplate extends React.Component {
   }
 }
 
-SinglePageTemplate.propTypes = propTypes
-
 export default SinglePageTemplate
-
-export const contactQuery = graphql`
-  query contactQuery($locale: String!) {
-    allContentfulPhoneNumbers(filter: { node_locale: { eq: $locale } }) {
-      edges {
-        node {
-          number
-          id
-        }
-      }
-    }
-    allContentfulSocialNetwork(filter: { node_locale: { eq: $locale } }) {
-      edges {
-        node {
-          title
-          url
-          id
-        }
-      }
-    }
-    allContentfulShowRoom(filter: { node_locale: { eq: $locale } }) {
-      edges {
-        node {
-          title
-          address {
-            childMarkdownRemark {
-              html
-            }
-          }
-          location {
-            lon
-            lat
-          }
-        }
-      }
-    }
-  }
-`
