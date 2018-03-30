@@ -1,15 +1,14 @@
 require('dotenv').config()
 
 const query = `{
-  allContentfulProduct {
+  allSitePage {
     edges {
       node {
-        objectID: id
-        slug
-        node_locale
-        title
-        description {
-          description
+        component
+        path
+        context {
+          id
+          pageTitle
         }
       }
     }
@@ -19,7 +18,8 @@ const query = `{
 const queries = [
   {
     query,
-    transformer: ({ data }) => data.allSitePage.edges.map(({ node }) => node),
+    //transformer: ({ data }) => data.allSitePage.edges.map(({ node }) => (node)),
+    transformer: ({ data }) => data.allSitePage.edges.filter(({ node }) => node.context != null && node.context.id != null ).map(({ node }) => ({ ...node, objectID: node.context.id })),
   },
 ];
 
@@ -74,7 +74,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-algolia`,
       options: {
-        appId: process.env.ALGOLIA_API_KEY,
+        appId: process.env.ALGOLIA_APPID,
         apiKey: process.env.ALGOLIA_ADMIN_API_KEY,
         indexName: 'main',
         queries,

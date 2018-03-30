@@ -123,6 +123,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
             component: slash(homeTemplate),
             layout: locale,
             context: {
+              id: `home-${locale}`,
               locale: locale,
               pageTitle: "Bella Vida Costa Rica",
               translation: locale === "en" ? "/es/" : "/",
@@ -275,6 +276,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               component: slash(listPageTemplate),
               layout: locale,
               context: {
+                id: `products-${locale}`,
                 locale: locale,
                 pageTitle: locale === "en" ? "Products" : "Productos",
                 items: products.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.responsiveResolution })),
@@ -286,6 +288,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               component: slash(listPageTemplate),
               layout: locale,
               context: {
+                id: `brands-${locale}`,
                 locale: locale,
                 pageTitle: locale === "en" ? "Brands" : "Nuestras Marcas",
                 items: brands.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.responsiveResolution })),
@@ -297,6 +300,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               component: slash(listPageTemplate),
               layout: locale,
               context: {
+                id: `environmnent-${locale}`,
                 locale: locale,
                 pageTitle: locale === "en" ? "Environment" : "Medio Ambiente",
                 items: environmentPages.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.image.responsiveResolution })),
@@ -308,6 +312,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               component: slash(listPageTemplate),
               layout: locale,
               context: {
+                id: `projects-${locale}`,
                 locale: locale,
                 pageTitle: locale === "en" ? "Our Projects" : "Nuestros Proyectos",
                 items: projects.filter(p => p.node.node_locale === locale).map(p => ({ id: p.node.id, title: p.node.title, slug: p.node.slug, image: p.node.images[0].responsiveResolution })),
@@ -319,6 +324,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
               component: slash(contactPageTemplate),
               layout: locale,
               context: {
+                id: `contact-${locale}`,
                 locale: locale,
                 pageTitle: locale === "en" ? "Contact Us" : "Contáctenos",
                 showRooms: result.data.allContentfulShowRoom.edges.filter(x => x.node.node_locale === locale),
