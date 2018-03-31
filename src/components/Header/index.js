@@ -5,6 +5,7 @@ import Menu from '../../components/Header/Menu'
 import Search from '../../components/Header/Search'
 import Wrapper from '../../components/Layout/Wrapper'
 import LogoSrc from '../../images/logo.png'
+import SearchButton from '../../components/Header/SearchButton'
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
 import FaBars from 'react-icons/lib/fa/bars'
@@ -66,10 +67,12 @@ class Header extends React.Component {
     super(props);
 
     this.state = {
-      expanded: false
+      expanded: false,
+      displaySearch: false,
     }
     this.toggleMenu = this.toggleMenu.bind(this)
     this.collapseMenu = this.collapseMenu.bind(this)
+    this.displaySearch = this.displaySearch.bind(this)
   }
 
   toggleMenu(){
@@ -78,6 +81,10 @@ class Header extends React.Component {
 
   collapseMenu(){
     this.setState({ expanded: false })
+  }
+
+  displaySearch(){
+    this.setState({displaySearch: !this.state.displaySearch})
   }
 
   render(){
@@ -99,12 +106,13 @@ class Header extends React.Component {
         <Wrapper>
           <MenuBar>
             <LogoContainer>
-              <Link to="/" style={{textDecoration: 'none',}}>
+              <Link to="/" style={{textDecoration: 'none'}}>
                 <Logo src={LogoSrc} alt="Bella Vida Costa Rica" />
               </Link>
             </LogoContainer>
             <Menu products={products} locale={locale} brands={brands} expanded={expanded} handleClick={e => collapseMenu(e)}/>
-            <Search />
+            <SearchButton displaySearch={e => this.displaySearch(e)} />
+            <Search displaySearch={this.state.displaySearch}/>
             <ToggleMenuButtonContainer>
               <ToggleMenuButton onClick={e => this.toggleMenu()}>
                 <FaBars />

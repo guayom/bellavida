@@ -43,6 +43,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                 id
                 slug
                 node_locale
+                title
                 category {
                   slug
                 }
@@ -361,6 +362,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
                     id
                     slug
                     node_locale
+                    title
                   }
                 }
               }

@@ -1,85 +1,108 @@
 import React from 'react'
 import styled from 'styled-components'
-import FaSearch from 'react-icons/lib/fa/search'
 import breakpoint from 'styled-components-breakpoint'
+import { InstantSearch, Hits, SearchBox, connectSearchBox } from 'react-instantsearch/dom'
+import 'instantsearch.css/themes/reset.css'
+import Link from 'gatsby-link'
 
 const Container = styled.div`
   position:relative;
   z-index: 10;
   text-align: left;
   grid-row: 2;
-  grid-column 1 / span 2;
+  grid-column: 1 / span 2;
 
   ${breakpoint('tablet') `
-    align-self: center;
-    text-align: right;
-    height: 30px;
-    grid-row: 1 / span 1;
-    grid-column: 3 / span 1;
+    grid-column: 1 / span 3;
+    grid-row: 2;
+    display: ${props => props.displaySearch ? "block" : 'none'};
   `}
-`
 
-const Form = styled.form`
-  display: block;
-  border: solid 1px #eee;
-  border-radius: 15px;
-  border-color: ${props => props.active ? props.theme.mainColor : props.theme.grayLight};
-  box-shadow: ${props => props.active ? '1px 1px 3px 0px rgba(158,158,158,1)' : 'none'};
-  height: 30px;
-  overflow: hidden;
-  background-color: white;
-  position:relative;
-  margin: 0;
-  transition: all 0.5s ease;
-  z-index: 1;
-
-  ${breakpoint('tablet') `
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: ${props => props.active ? '150px' : '30px'};
-  `}
-`
-
-const SearchInput = styled.input`
-  width: 100%;
-  border: none;
-  z-index: 2;
-  margin: 0;
-  background: transparent;
-  color: ${props => props.theme.grayMedium};
-  font-size: 12px;
-  transition: all 0.5s ease;
-  padding: 5px 8px;
-
-  &:focus {
-    outline: none;
+  .ais-InstantSearch__root {
+    position: relative;
   }
 
-  ${breakpoint('tablet') `
-    position:absolute;
-    top: 4px;
-    left: 5px;
-    width: 120px;
-    opacity: ${props => props.active ? '1' : '0'};
-    height: 20px;
-    padding: 0;
-  `}
+  .ais-Hits {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.95);
+    padding: 10px;
+    border: solid 1px #ddd;
+    display: ${props => props.active ? "block" : "none"};
+  }
+
+  .ais-SearchBox {
+    border: solid 1px #eee;
+    border-radius: 15px;
+    border-color: ${props => props.active ? props.theme.mainColor : props.theme.grayLight};
+    box-shadow: ${props => props.active ? '1px 1px 3px 0px rgba(158,158,158,1)' : 'none'};
+    overflow: hidden;
+  }
+
+  .ais-Hits-item {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+    border-bottom: 1px solid #ddd;
+    padding: 5px 0;
+
+    &:last-of-type {
+      border: none;
+    }
+  }
+
+  .ais-SearchBox-form {
+    margin: 0;
+    display: grid;
+    grid-template-columns: auto 30px 30px;
+  }
+
+  .ais-SearchBox-input {
+    width: 100%;
+    border: 0;
+    padding: 5px 5px 5px 15px;
+    grid-column: 1;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .ais-SearchBox-reset {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .ais-SearchBox-submit {
+    grid-column: 3;
+    &:focus {
+      outline: none;
+    }
+  }
 `
 
-const SearchIconContainer = styled.div`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 30px;
-  height: 30px;
-  font-size: 14px;
-  line-height: 25px;
-  text-align:center;
-  z-index: 0;
-  color: ${props => props.active ? props.theme.mainColor : props.theme.grayDarkest};
-  transition: all 0.5s ease;
-`
+function Result({ hit }) {
+  return (
+    <Link to={hit.path}>{hit.context.pageTitle}</Link>
+  );
+}
+
+function AlgoliaSearch() {
+  return (
+    <div className="container">
+      <SearchBox />
+    </div>
+  );
+}
+
+const MySearchBox = ({ currentRefinement, refine }) =>
+  <input
+    type="text"
+    value={currentRefinement}
+    onChange={e => refine(e.target.value)}
+  />;
 
 class Search extends React.Component{
   constructor(props){
@@ -88,7 +111,7 @@ class Search extends React.Component{
     this.state = {
       active: false
     }
-    this.handleClicks = this.handleClicks.bind(this);
+    this.onSearchStateChange = this.onSearchStateChange.bind(this)
   }
 
   componentDidMount() {
@@ -99,24 +122,29 @@ class Search extends React.Component{
     document.removeEventListener('mousedown', this.handleClicks);
   }
 
-  handleClicks(e) {
-    if (this.state.active && e != 'insideSearchFormClick') {
-      this.setState({active: false})
-    } else if (this.state.active === false && e === 'insideSearchFormClick'){
+  onSearchStateChange(e){
+    if(e.query != "" && e.query != null) {
       this.setState({active: true})
+    } else {
+      this.setState({ active: false })
     }
+    console.log(this.state.active)
   }
 
   render(){
     var active = this.state.active
     return (
-      <Container>
-        <Form active={active} onClick={e => this.handleClicks('insideSearchFormClick')}>
-          <SearchIconContainer active={active}>
-            <FaSearch />
-          </SearchIconContainer>
-          <SearchInput type="text" name="query" active={active}/>
-        </Form>
+      <Container active={active} displaySearch={this.props.displaySearch}>
+        <InstantSearch
+          appId="18NBZT4GQG"
+          apiKey="5674c23a94fd448f3f22b66de5599a7c"
+          indexName="main"
+          searchState={this.state.searchState}
+          onSearchStateChange={e => this.onSearchStateChange(e)}
+        >
+          <AlgoliaSearch />
+          <Hits hitComponent={Result} />
+        </InstantSearch>
       </Container>
     )
   }
