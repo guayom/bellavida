@@ -4,6 +4,7 @@ import breakpoint from 'styled-components-breakpoint'
 import { InstantSearch, Hits, SearchBox, connectSearchBox } from 'react-instantsearch/dom'
 import 'instantsearch.css/themes/reset.css'
 import Link from 'gatsby-link'
+import AlgoliaLogo from '../../images/search-by-algolia.svg'
 
 const Container = styled.div`
   position:relative;
@@ -28,9 +29,14 @@ const Container = styled.div`
     left: 0;
     right: 0;
     background: rgba(255,255,255,0.95);
-    padding: 10px;
+    padding: 10px 10px 20px;
     border: solid 1px #ddd;
     display: ${props => props.active ? "block" : "none"};
+
+    background-image: url(${AlgoliaLogo});
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: bottom 10px right 10px;
   }
 
   .ais-SearchBox {
@@ -80,6 +86,18 @@ const Container = styled.div`
     &:focus {
       outline: none;
     }
+  }
+`
+
+const AlgoliaLogoContainer = styled.div`
+  width: 100px;
+  text-align: right;
+  float: right;
+  padding: 5px 15px 0 0;
+
+  img {
+    display: inline;
+    margin: 0;
   }
 `
 
