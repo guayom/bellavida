@@ -8,7 +8,7 @@ import AlgoliaLogo from '../../images/search-by-algolia.svg'
 
 const Container = styled.div`
   position:relative;
-  z-index: 1;
+  z-index: 10;
   text-align: left;
   grid-row: 2;
   grid-column: 1 / span 2;
