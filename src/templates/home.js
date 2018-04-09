@@ -46,6 +46,7 @@ class HomeTemplate extends React.Component {
             <Location items={projects} />
           </HomeGrid>
         </Wrapper>
+        {console.log('Desafiante')}
       </div>
     )
   }
