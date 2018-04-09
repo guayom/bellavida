@@ -33,6 +33,7 @@ class HomeTemplate extends React.Component {
 
     return (
       <div>
+        {console.log('Desafiante test')}
         <Helmet 
           title={this.props.pathContext.pageTitle}
         />
@@ -46,7 +47,6 @@ class HomeTemplate extends React.Component {
             <Location items={projects} />
           </HomeGrid>
         </Wrapper>
-        {console.log('Desafiante')}
       </div>
     )
   }
