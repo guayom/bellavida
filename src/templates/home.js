@@ -116,7 +116,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    allContentfulProject(filter: { node_locale: { eq: $locale } }) {
+    allContentfulProject(
+        filter: { node_locale: { eq: $locale } },
+        limit: 3
+      ) {
       edges {
         node {
           id
