@@ -28,7 +28,7 @@ class HomeTemplate extends React.Component {
     const slides = this.props.data.allContentfulHomeSlide.edges
     const testimonials = this.props.data.allContentfulTestimonial.edges
     const homeFeatures = this.props.data.allContentfulHomeFeature.edges
-    const projects = this.props.data.allContentfulProject.edges
+    const projects = this.props.data.allContentfulProject.edges.sort((a,b) =>{ return new Date(b.node.createdAt) - new Date(a.node.createdAt)})
     const description = this.props.data.allContentfulPage.edges[0].node.content.childMarkdownRemark.html
 
     return (
@@ -123,8 +123,10 @@ export const pageQuery = graphql`
       edges {
         node {
           id
+          createdAt
           title
           slug
+          node_locale
           images {
             id
             sizes {
@@ -137,7 +139,6 @@ export const pageQuery = graphql`
               sizes
             }
           }
-          node_locale
         }
       }
     }
