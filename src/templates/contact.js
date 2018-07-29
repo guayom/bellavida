@@ -112,10 +112,10 @@ class SinglePageTemplate extends React.Component {
               <LocationTabs locations={showRooms}/>
             </SidebarSection>
           </Sidebar>
-          <Form name="contact" method="post" data-netlify="true" data-netlify-honeypot="bot-field" action={page.locale === "en" ? "/en/thank-you" : "/es/gracias"}>
+          <Form name="contact" method="post" data-netlify="true" data-netlify-honeypot="subject" action={page.locale === "en" ? "/en/thank-you" : "/es/gracias"}>
             <p style={{display: `none`}}>
               <input type="hidden" name="form-name" value="contact" />
-              <input name="bot-field" />
+              <input name="subject" />
             </p>
 
             <div>
