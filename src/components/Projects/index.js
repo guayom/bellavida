@@ -40,7 +40,7 @@ class Projects extends React.Component {
         </ImageContainer>
         <ContentContainer>
           <h3>{project.node.title}</h3>
-          <CtaLink to={`/en/projects${project.node.slug}`} text="More info" size="small"/>
+          <CtaLink to={`/en/projects/${project.node.slug}`} text="More info" size="small"/>
         </ContentContainer>
       </ProjectContainer>
     );
