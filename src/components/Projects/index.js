@@ -34,7 +34,7 @@ class Projects extends React.Component {
     const projects = this.props.items.map((project, index) =>
       <ProjectContainer key={project.node.id}>
         <ImageContainer>
-          <Link to={`/en/projects${project.node.slug}`}>
+          <Link to={`/en/projects/${project.node.slug}`}>
             <Img sizes={project.node.images[0].sizes} />
           </Link>
         </ImageContainer>
