@@ -27,7 +27,7 @@ const ItemImage = ({title, slug, image, path}) => (
   <Container>
     <Link to={path + "/" + slug}>
       <ImageContainer>
-        <Img sizes={image} alt={title} />
+        <Img fluid={image} alt={title} />
       </ImageContainer>
       <Title>{title}</Title>
     </Link>

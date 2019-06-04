@@ -35,7 +35,7 @@ class Projects extends React.Component {
       <ProjectContainer key={project.node.id}>
         <ImageContainer>
           <Link to={`/en/projects/${project.node.slug}`}>
-            <Img sizes={project.node.images[0].sizes} />
+            <Img fluid={project.node.images[0].fluid} />
           </Link>
         </ImageContainer>
         <ContentContainer>

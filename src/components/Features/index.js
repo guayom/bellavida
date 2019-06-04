@@ -43,7 +43,7 @@ class Features extends React.Component {
     const featureItems = this.props.items.map((feature, index) =>
       <FeatureItem key={feature.node.id}>
         <ImageContainer>
-          <Img sizes={feature.node.image.sizes} alt={feature.node.title}/>
+          <Img fluid={feature.node.image.fluid} alt={feature.node.title}/>
         </ImageContainer>
         <h3>{feature.node.title}</h3>
         <p>{feature.node.content.content}</p>

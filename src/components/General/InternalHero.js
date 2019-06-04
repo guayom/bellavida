@@ -48,7 +48,7 @@ const TitleContainer = styled.h1`
 
 function ShowHero(image, title, brand) {
   if (image) {
-    return <Img sizes={image.responsiveResolution} alt="title" title="title" />
+    return <Img fluid={image.fluid} alt="title" title="title" />
   } else {
     return null
   }

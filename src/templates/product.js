@@ -1,69 +1,59 @@
-import React from "react"
-import Link from "gatsby-link"
-import * as PropTypes from "prop-types"
-import Img from "gatsby-image"
-import Helmet from 'react-helmet'
-import Wrapper from '../components/Layout/Wrapper'
-import InternalHero from '../components/General/InternalHero'
+import React from "react";
+import Link from "gatsby-link";
+import * as PropTypes from "prop-types";
+import Img from "gatsby-image";
+import Helmet from "react-helmet";
+import Wrapper from "../components/Layout/Wrapper";
+import InternalHero from "../components/General/InternalHero";
+import Layout from "../components/layout";
+import { graphql } from "gatsby";
 
 const propTypes = {
-  data: PropTypes.object.isRequired,
-}
+  data: PropTypes.object.isRequired
+};
 
 class ProductTemplate extends React.Component {
   render() {
-    const product = this.props.data.contentfulProduct
+    const product = this.props.data.contentfulProduct;
     const {
       title: { title },
       id,
-      description,
-    } = product
+      description
+    } = product;
     return (
-      <div>
-        <Helmet
-          title={product.title}
-        />
+      <Layout>
+        <Helmet title={product.title} />
         <InternalHero title={product.title} image={product.image} />
         <Wrapper>
-          <div dangerouslySetInnerHTML={{ __html: product.description.childMarkdownRemark.html }} />
+          <div
+            dangerouslySetInnerHTML={{
+              __html: product.description.childMarkdownRemark.html
+            }}
+          />
         </Wrapper>
-      </div>
-    )
+      </Layout>
+    );
   }
 }
 
-ProductTemplate.propTypes = propTypes
+ProductTemplate.propTypes = propTypes;
 
-export default ProductTemplate
+export default ProductTemplate;
 
 export const pageQuery = graphql`
   query productQuery($id: String!) {
     contentfulProduct(id: { eq: $id }) {
       title
-      description{
+      description {
         childMarkdownRemark {
           html
         }
       }
       image {
-        responsiveResolution(width: 1240, height:300) {
-          base64
-          aspectRatio
-          width
-          height
-          src
-          srcSet
-        }
-        sizes {
-          base64
-          aspectRatio
-          src
-          srcSet
-          srcWebp
-          srcSetWebp
-          sizes
+        fluid {
+          ...GatsbyContentfulFluid
         }
       }
     }
   }
-`
+`;

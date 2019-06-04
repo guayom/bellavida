@@ -49,7 +49,7 @@ export default ({brands}) => (
       {brands.map(brand => (
         <Brand key={brand.node.id} size={brand.node.size}>
           <Link href={brand.node.website} target="_blank" rel="noopener noreferrer">
-            <Img sizes={brand.node.logo.sizes} alt={brand.node.title} />
+            <Img fluid={brand.node.logo.fluid} alt={brand.node.title} />
           </Link>
         </Brand>
       ))}

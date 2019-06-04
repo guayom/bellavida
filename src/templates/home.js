@@ -1,41 +1,44 @@
-import React from "react"
-import * as PropTypes from "prop-types"
-import Slider from '../components/Slider'
-import Testimonials from '../components/Testimonials'
-import Features from '../components/Features'
-import Projects from '../components/Projects'
-import HomeDescription from '../components/HomeDescription'
-import Location from '../components/Location'
-import Helmet from 'react-helmet'
-import Wrapper from '../components/Layout/Wrapper'
-import styled from 'styled-components'
-import breakpoint from 'styled-components-breakpoint'
+import React from "react";
+import * as PropTypes from "prop-types";
+import Slider from "../components/Slider";
+import Testimonials from "../components/Testimonials";
+import Features from "../components/Features";
+import Projects from "../components/Projects";
+import HomeDescription from "../components/HomeDescription";
+import Location from "../components/Location";
+import Helmet from "react-helmet";
+import Wrapper from "../components/Layout/Wrapper";
+import styled from "styled-components";
+import breakpoint from "styled-components-breakpoint";
+import Layout from "../components/layout";
+import { graphql } from "gatsby";
 
 const propTypes = {
-  data: PropTypes.object.isRequired,
-}
+  data: PropTypes.object.isRequired
+};
 
 const HomeGrid = styled.div`
   display: block;
 
-  ${breakpoint('tablet')`
+  ${breakpoint("tablet")`
     display: flex;
   `}
-`
+`;
 
 class HomeTemplate extends React.Component {
   render() {
-    const slides = this.props.data.allContentfulHomeSlide.edges
-    const testimonials = this.props.data.allContentfulTestimonial.edges
-    const homeFeatures = this.props.data.allContentfulHomeFeature.edges
-    const projects = this.props.data.allContentfulProject.edges.sort((a,b) =>{ return new Date(b.node.createdAt) - new Date(a.node.createdAt)})
-    const description = this.props.data.allContentfulPage.edges[0].node.content.childMarkdownRemark.html
+    const slides = this.props.data.allContentfulHomeSlide.edges;
+    const testimonials = this.props.data.allContentfulTestimonial.edges;
+    const homeFeatures = this.props.data.allContentfulHomeFeature.edges;
+    const projects = this.props.data.allContentfulProject.edges.sort((a, b) => {
+      return new Date(b.node.createdAt) - new Date(a.node.createdAt);
+    });
+    const description = this.props.data.allContentfulPage.edges[0].node.content
+      .childMarkdownRemark.html;
 
     return (
-      <div>
-        <Helmet 
-          title={this.props.pathContext.pageTitle}
-        />
+      <Layout>
+        <Helmet title={this.props.pageContext.pageTitle} />
         <Slider slides={slides} />
         <Testimonials items={testimonials} />
         <Wrapper>
@@ -46,14 +49,14 @@ class HomeTemplate extends React.Component {
             <Location items={projects} />
           </HomeGrid>
         </Wrapper>
-      </div>
-    )
+      </Layout>
+    );
   }
 }
 
-HomeTemplate.propTypes = propTypes
+HomeTemplate.propTypes = propTypes;
 
-export default HomeTemplate
+export default HomeTemplate;
 
 export const pageQuery = graphql`
   query homeQuery($locale: String!) {
@@ -102,24 +105,15 @@ export const pageQuery = graphql`
           }
           image {
             id
-            sizes(maxWidth: 150) {
-              base64
-              aspectRatio
-              src
-              srcSet
-              srcWebp
-              srcSetWebp
-              sizes
+            fluid(maxWidth: 150) {
+              ...GatsbyContentfulFluid
             }
           }
           node_locale
         }
       }
     }
-    allContentfulProject(
-        filter: { node_locale: { eq: $locale } },
-        limit: 3
-      ) {
+    allContentfulProject(filter: { node_locale: { eq: $locale } }, limit: 3) {
       edges {
         node {
           id
@@ -129,23 +123,22 @@ export const pageQuery = graphql`
           node_locale
           images {
             id
-            sizes {
-              base64
-              aspectRatio
-              src
-              srcSet
-              srcWebp
-              srcSetWebp
-              sizes
+            fluid {
+              ...GatsbyContentfulFluid
             }
           }
         }
       }
     }
-    allContentfulPage(filter:{contentful_id: {eq:"57hWtglQuseQIYGCSUmg40"} node_locale: {eq: $locale}}) {
+    allContentfulPage(
+      filter: {
+        contentful_id: { eq: "57hWtglQuseQIYGCSUmg40" }
+        node_locale: { eq: $locale }
+      }
+    ) {
       edges {
-        node{
-          content{
+        node {
+          content {
             childMarkdownRemark {
               html
             }
@@ -154,4 +147,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
