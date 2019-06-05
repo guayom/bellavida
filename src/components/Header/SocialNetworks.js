@@ -1,5 +1,5 @@
 import React from 'react'
-import FaFacebook from 'react-icons/lib/fa/facebook'
+import { FaFacebookF } from "react-icons/fa"
 import styled from 'styled-components'
 
 const Link = styled.a`
@@ -11,6 +11,9 @@ const Link = styled.a`
   text-align: center;
   color: ${props => props.theme.mainColor};
   line-height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     color: ${props => props.theme.mainColorVariation};
@@ -20,7 +23,7 @@ const Link = styled.a`
 
 function displayIcon(title){
   if (title === "Facebook") {
-    return <FaFacebook />
+    return <FaFacebookF />
   } else {
     return null
   }

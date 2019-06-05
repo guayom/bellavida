@@ -7,7 +7,7 @@ import PhoneNumber from "../components/General/PhoneNumber";
 import LocationTabs from "../components/Location/Tabs";
 import styled from "styled-components";
 import breakpoint from "styled-components-breakpoint";
-import FaFacebookOfficial from "react-icons/lib/fa/facebook-official";
+import {FaFacebookOfficial} from "react-icons/fa";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
 
@@ -15,7 +15,7 @@ const propTypes = {
   data: PropTypes.object.isRequired
 };
 
-const Grid = Wrapper.extend`
+const Grid = styled(Wrapper)`
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 40px;

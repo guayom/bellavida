@@ -6,7 +6,7 @@ import PhoneNumber from '../../components/General/PhoneNumber'
 import SocialNetworks from '../../components/Header/SocialNetworks'
 import LanguageSwitcher from '../../components/Header/LanguageSwitcher'
 import logo from '../../images/logo-blanco.png'
-import FaEnvelope from 'react-icons/lib/fa/envelope'
+import {FaEnvelope} from 'react-icons/fa'
 import Link from 'gatsby-link'
 
 const Footer = styled.footer`
@@ -25,7 +25,7 @@ const Footer = styled.footer`
   `}
 `
 
-const FooterWrapper = Wrapper.extend`
+const FooterWrapper = styled(Wrapper)`
 
   ${breakpoint('tablet') `
     display: flex;

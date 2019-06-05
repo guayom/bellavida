@@ -15,7 +15,7 @@ const Container =  styled.div`
   `}
 `
 
-const GridWrapper = Wrapper.extend`
+const GridWrapper = styled(Wrapper)`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-column-gap: 30px;

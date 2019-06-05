@@ -8,7 +8,7 @@ import LogoSrc from '../../images/logo.png'
 import SearchButton from '../../components/Header/SearchButton'
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
-import FaBars from 'react-icons/lib/fa/bars'
+import {FaBars} from 'react-icons/fa'
 
 const MenuBar = styled.div`
   display: grid;
@@ -110,7 +110,7 @@ class Header extends React.Component {
                 <Logo src={LogoSrc} alt="Bella Vida Costa Rica" />
               </Link>
             </LogoContainer>
-            <Menu products={products} locale={locale} brands={brands} expanded={expanded} handleClick={e => collapseMenu(e)}/>
+            <Menu products={products} locale={locale} brands={brands} expanded={expanded} handleClick={e => this.collapseMenu(e)}/>
             <SearchButton displaySearch={e => this.displaySearch(e)} />
             <Search displaySearch={this.state.displaySearch}/>
             <ToggleMenuButtonContainer>

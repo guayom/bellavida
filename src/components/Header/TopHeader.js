@@ -15,7 +15,7 @@ const OuterContainer = styled.div`
   }
 `
 
-const InnerContainer = Wrapper.extend`
+const InnerContainer = styled(Wrapper)`
   display: flex;
 `
 

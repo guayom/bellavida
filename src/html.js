@@ -1,5 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
+import background from "./images/bg-body.gif"
 
 export default function HTML(props) {
   return (
@@ -13,7 +14,10 @@ export default function HTML(props) {
         />
         {props.headComponents}
       </head>
-      <body {...props.bodyAttributes}>
+      <body
+        {...props.bodyAttributes}
+        style={{ backgroundImage: `url(${background})` }}
+      >
         {props.preBodyComponents}
         <noscript key="noscript" id="gatsby-noscript">
           This app works best with JavaScript enabled.

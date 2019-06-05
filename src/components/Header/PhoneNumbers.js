@@ -1,5 +1,5 @@
 import React from 'react'
-import FaPhone from 'react-icons/lib/fa/phone'
+import {FaPhone} from 'react-icons/fa'
 import styled from 'styled-components'
 
 const Link = styled.div`

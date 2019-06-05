@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
-import { InstantSearch, Hits, SearchBox, connectSearchBox } from 'react-instantsearch/dom'
+import { InstantSearch, Hits, SearchBox } from 'react-instantsearch/dom'
 import 'instantsearch.css/themes/reset.css'
 import Link from 'gatsby-link'
 import AlgoliaLogo from '../../images/search-by-algolia.svg'
@@ -89,18 +89,6 @@ const Container = styled.div`
   }
 `
 
-const AlgoliaLogoContainer = styled.div`
-  width: 100px;
-  text-align: right;
-  float: right;
-  padding: 5px 15px 0 0;
-
-  img {
-    display: inline;
-    margin: 0;
-  }
-`
-
 function Result({ hit }) {
   return (
     <Link to={hit.path}>{hit.context.pageTitle}</Link>
@@ -114,13 +102,6 @@ function AlgoliaSearch() {
     </div>
   );
 }
-
-const MySearchBox = ({ currentRefinement, refine }) =>
-  <input
-    type="text"
-    value={currentRefinement}
-    onChange={e => refine(e.target.value)}
-  />;
 
 class Search extends React.Component{
   constructor(props){
@@ -141,12 +122,11 @@ class Search extends React.Component{
   }
 
   onSearchStateChange(e){
-    if(e.query != "" && e.query != null) {
+    if(e.query !== "" && e.query != null) {
       this.setState({active: true})
     } else {
       this.setState({ active: false })
     }
-    console.log(this.state.active)
   }
 
   render(){

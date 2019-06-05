@@ -1,12 +1,12 @@
-import React from 'react'
-import FaSearch from 'react-icons/lib/fa/search'
-import styled from 'styled-components'
-import breakpoint from 'styled-components-breakpoint'
+import React from "react"
+import { FaSearch } from "react-icons/fa"
+import styled from "styled-components"
+import breakpoint from "styled-components-breakpoint"
 
 const Container = styled.div`
   display: none;
 
-  ${breakpoint('tablet')`
+  ${breakpoint("tablet")`
     display: block;
     align-self: center;
     justify-self: right;
@@ -19,18 +19,8 @@ const Container = styled.div`
   `}
 `
 
-class SearchButton extends React.Component {
-  constructor(props){
-    super(props);
-  }
-
-  render(){
-    return(
-      <Container onClick={e => this.props.displaySearch()}>
-        <FaSearch />
-      </Container>
-    )
-  }
-}
-
-export default SearchButton
+export default ({ displaySearch }) => (
+  <Container onClick={e => displaySearch()}>
+    <FaSearch />
+  </Container>
+)
