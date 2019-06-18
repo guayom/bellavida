@@ -10,28 +10,25 @@ const propTypes = {
   data: PropTypes.object.isRequired
 };
 
-class SimplePageTemplate extends React.Component {
-  render() {
-    const page = this.props.data.contentfulProductBrand;
-    const {
-      title: { title },
-      id,
-      description
-    } = page;
-    return (
-      <Layout>
-        <Helmet title={page.title} />
-        <InternalHero title={page.title} image={page.image} brand />
-        <Wrapper>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: page.description.childMarkdownRemark.html
-            }}
-          />
-        </Wrapper>
-      </Layout>
-    );
-  }
+const SimplePageTemplate = ({
+  data: { contentfulProductBrand: {
+    title, image, description
+  } },
+  pageContext,
+}) => {
+  return (
+    <Layout {...pageContext}>
+      <Helmet title={title} />
+      <InternalHero title={title} image={image} brand />
+      <Wrapper>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: description.childMarkdownRemark.html,
+          }}
+        />
+      </Wrapper>
+    </Layout>
+  )
 }
 
 SimplePageTemplate.propTypes = propTypes;
@@ -45,6 +42,9 @@ export const pageQuery = graphql`
       image {
         fluid {
           ...GatsbyContentfulFluid
+        }
+        fixed {
+          ...GatsbyContentfulFixed
         }
       }
       description {

@@ -46,9 +46,10 @@ const TitleContainer = styled.h1`
   }
 `
 
-function ShowHero(image, title, brand) {
+function ShowHero(image, title) {
+  console.log({image})
   if (image) {
-    return <Img fixed={image.fixed} alt="title" title="title" />
+    return <Img fluid={image.fluid} alt={title} title={title} />
   } else {
     return null
   }
