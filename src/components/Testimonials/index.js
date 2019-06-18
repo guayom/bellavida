@@ -2,8 +2,7 @@ import React from "react"
 import Wrapper from '../../components/Layout/Wrapper'
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
-import FaAngleRight from 'react-icons/lib/fa/angle-right'
-import FaAngleLeft from 'react-icons/lib/fa/angle-left'
+import {FaAngleRight, FaAngleLeft} from 'react-icons/fa'
 
 const TestimonialsWrapper = styled(Wrapper)`
   margin-bottom: 40px;

@@ -3,7 +3,7 @@ import * as PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import Wrapper from "../components/Layout/Wrapper";
 import SidebarSection from "../components/Sidebar/Section";
-import PhoneNumber from "../components/General/PhoneNumber";
+import PhoneNumbers from "../components/General/PhoneNumbers";
 import LocationTabs from "../components/Location/Tabs";
 import styled from "styled-components";
 import breakpoint from "styled-components-breakpoint";
@@ -107,11 +107,7 @@ class SinglePageTemplate extends React.Component {
               }
             >
               <h4>{locale === "en" ? "Phone numbers" : "Teléfonos"}:</h4>
-              {phoneNumbers.map((number, i) => (
-                <p key={number.node.id}>
-                  <PhoneNumber phoneNumber={number.node.number} />
-                </p>
-              ))}
+              <PhoneNumbers />
               <h4>{locale === "en" ? "Social Networks" : "Redes Sociales"}:</h4>
               <a
                 href="https://www.facebook.com/BellaVidaCostaRicaWindowsDoors"

@@ -22,7 +22,7 @@ const defaultTheme = {
   mainColorVariation: "#6a922e",
 }
 
-const TemplateWrapper = ({ children, data, locale, translation }) => (
+const TemplateWrapper = ({ children, locale, translation }) => (
   <ThemeProvider theme={defaultTheme}>
     <MainContainer>
       <Helmet
@@ -40,25 +40,12 @@ const TemplateWrapper = ({ children, data, locale, translation }) => (
           },
         ]}
       />
-      <Header
-        products={data.allContentfulProduct}
-        brands={data.allContentfulProductBrand}
-        locale={locale}
-        phoneNumbers={data.allContentfulPhoneNumbers}
-        socialNetworks={data.allContentfulSocialNetwork}
-        translation={translation}
-      />
+      <Header locale={locale} translation={translation} />
       {children}
-      <BrandsBar brands={data.allContentfulProductBrand.edges} />
+      <BrandsBar locale={locale} />
       <Footer
-        phoneNumbers={data.allContentfulPhoneNumbers}
-        socialNetworks={data.allContentfulSocialNetwork}
         translation={translation}
         locale={locale}
-        brands={data.allContentfulProductBrand.edges.sort(
-          (a, b) => a.node.order - b.node.order
-        )}
-        products={data.allContentfulProduct.edges}
       />
     </MainContainer>
   </ThemeProvider>

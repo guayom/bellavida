@@ -2,7 +2,7 @@ import React from 'react'
 import styled from "styled-components"
 import LanguageSwitcher from '../../components/Header/LanguageSwitcher'
 import SocialNetworks from '../../components/Header/SocialNetworks'
-import PhoneNumbers from '../../components/Header/PhoneNumbers'
+import PhoneNumbers from '../../components/General/PhoneNumbers'
 import Wrapper from '../../components/Layout/Wrapper'
 
 const OuterContainer = styled.div`
@@ -22,9 +22,9 @@ const InnerContainer = styled(Wrapper)`
 export default (props) => (
   <OuterContainer>
     <InnerContainer>
-      <LanguageSwitcher translation={props.translation} locale={props.locale}/>
-      <SocialNetworks socialNetworks={props.socialNetworks}/>
-      <PhoneNumbers phoneNumber={props.phoneNumbers.edges[0].node.number}/>
+      <LanguageSwitcher {...props}/>
+      <SocialNetworks {...props}/>
+      <PhoneNumbers header/>
     </InnerContainer>
   </OuterContainer>
 )

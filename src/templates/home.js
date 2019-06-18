@@ -25,33 +25,31 @@ const HomeGrid = styled.div`
   `}
 `;
 
-class HomeTemplate extends React.Component {
-  render() {
-    const slides = this.props.data.allContentfulHomeSlide.edges;
-    const testimonials = this.props.data.allContentfulTestimonial.edges;
-    const homeFeatures = this.props.data.allContentfulHomeFeature.edges;
-    const projects = this.props.data.allContentfulProject.edges.sort((a, b) => {
-      return new Date(b.node.createdAt) - new Date(a.node.createdAt);
-    });
-    const description = this.props.data.allContentfulPage.edges[0].node.content
-      .childMarkdownRemark.html;
+const HomeTemplate = ({data, pageContext}) => {
+  const slides = data.allContentfulHomeSlide.edges;
+  const testimonials = data.allContentfulTestimonial.edges;
+  const homeFeatures = data.allContentfulHomeFeature.edges;
+  const projects = data.allContentfulProject.edges.sort((a, b) => {
+    return new Date(b.node.createdAt) - new Date(a.node.createdAt);
+  });
+  const description = data.allContentfulPage.edges[0].node.content
+    .childMarkdownRemark.html;
 
-    return (
-      <Layout>
-        <Helmet title={this.props.pageContext.pageTitle} />
-        <Slider slides={slides} />
-        <Testimonials items={testimonials} />
-        <Wrapper>
-          <Features items={homeFeatures} />
-          <HomeDescription description={description} />
-          <HomeGrid>
-            <Projects items={projects} />
-            <Location items={projects} />
-          </HomeGrid>
-        </Wrapper>
-      </Layout>
-    );
-  }
+  return (
+    <Layout {...pageContext}>
+      <Helmet title={pageContext.pageTitle} />
+      <Slider slides={slides} />
+      <Testimonials items={testimonials} />
+      <Wrapper>
+        <Features items={homeFeatures} />
+        <HomeDescription description={description} />
+        <HomeGrid>
+          <Projects items={projects} />
+          <Location items={projects} />
+        </HomeGrid>
+      </Wrapper>
+    </Layout>
+  )
 }
 
 HomeTemplate.propTypes = propTypes;

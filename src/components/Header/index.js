@@ -88,29 +88,23 @@ class Header extends React.Component {
   }
 
   render(){
-    const phoneNumbers = this.props.phoneNumbers
-    const socialNetworks = this.props.socialNetworks
     const translation = this.props.translation
     const locale = this.props.locale
-    const products = this.props.products
-    const brands = this.props.brands
     const expanded = this.state.expanded
     return(
       <div>
         <TopHeader
-          phoneNumbers={phoneNumbers}
-          socialNetworks={socialNetworks}
           translation={translation}
           locale={locale}
         />
         <Wrapper>
           <MenuBar>
             <LogoContainer>
-              <Link to="/" style={{textDecoration: 'none'}}>
+              <Link to={locale === "en" ? "/":"/es/"} style={{textDecoration: 'none'}}>
                 <Logo src={LogoSrc} alt="Bella Vida Costa Rica" />
               </Link>
             </LogoContainer>
-            <Menu products={products} locale={locale} brands={brands} expanded={expanded} handleClick={e => this.collapseMenu(e)}/>
+            <Menu locale={locale} expanded={expanded} handleClick={e => this.collapseMenu(e)}/>
             <SearchButton displaySearch={e => this.displaySearch(e)} />
             <Search displaySearch={this.state.displaySearch}/>
             <ToggleMenuButtonContainer>

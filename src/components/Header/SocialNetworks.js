@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaFacebookF } from "react-icons/fa"
 import styled from 'styled-components'
+import { StaticQuery, graphql } from "gatsby"
 
 const Link = styled.a`
   background: ${props => props.theme.grayMedium};
@@ -29,18 +30,38 @@ function displayIcon(title){
   }
 }
 
-export default ({socialNetworks}) => (
-  <div style={{display: `inline-block`}}>
-    {socialNetworks.edges.map((n, i) => (
-      <Link
-        key={n.node.id}
-        href={n.node.url}
-        title={n.node.title}
-        rel="nofollow"
-        target="_blank"
-        >
-        {displayIcon(n.node.title)}
-      </Link>
-    ))}
-  </div>
+export default () => (
+  <StaticQuery
+    query={graphql`
+      query MyQuery {
+        allContentfulSocialNetwork {
+          edges {
+            node {
+              id
+              title
+              url
+              node_locale
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <div style={{ display: `inline-block` }}>
+        {data.allContentfulSocialNetwork.edges.filter(network => network.node.node_locale === "en").map(
+          ({ node: { id, url, title } }) => (
+            <Link
+              key={id}
+              href={url}
+              title={title}
+              rel="nofollow"
+              target="_blank"
+            >
+              {displayIcon(title)}
+            </Link>
+          )
+        )}
+      </div>
+    )}
+  />
 )

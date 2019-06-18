@@ -1,4 +1,5 @@
 import React from 'react'
+import { StaticQuery, graphql } from "gatsby"
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
 import Wrapper from '../../components/Layout/Wrapper'
@@ -43,16 +44,51 @@ const Brand = styled.div`
   grid-column: span ${props => props.size};
 `
 
-export default ({brands}) => (
-  <Container>
-    <GridWrapper quantity={brands.length}>
-      {brands.map(brand => (
-        <Brand key={brand.node.id} size={brand.node.size}>
-          <Link href={brand.node.website} target="_blank" rel="noopener noreferrer">
-            <Img fluid={brand.node.logo.fluid} alt={brand.node.title} />
-          </Link>
-        </Brand>
-      ))}
-    </GridWrapper>
-  </Container>
+export default ({locale}) => (
+  <StaticQuery
+    query={graphql`
+      query BrandsQuery {
+        brands: allContentfulProductBrand {
+          edges {
+            node {
+              id
+              title
+              slug
+              order
+              node_locale
+              size
+              website
+              logo {
+                fluid {
+                  ...GatsbyContentfulFluid
+                }
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={data => {
+      const brands = data.brands.edges.filter(
+        brand => brand.node.node_locale === locale
+      )
+      return (
+        <Container>
+          <GridWrapper quantity={brands.length}>
+            {brands
+              .map(brand => (
+                <Brand key={brand.node.id} size={brand.node.size}>
+                  <Link
+                    href={brand.node.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Img fluid={brand.node.logo.fluid} alt={brand.node.title} />
+                  </Link>
+                </Brand>
+              ))}
+          </GridWrapper>
+        </Container>
+      )}}
+  />
 )

@@ -9,10 +9,10 @@ function getCode(locale){
   return locale === "en" ? "cr" : "us"
 }
 
-const LanguageSwitcher = (props) => (
+const LanguageSwitcher = ({locale, translation}) => (
   <div style={{ display: `inline-block` }}>
     <Link 
-      to={props.translation}
+      to={translation}
       style={{
         background: `#777`,
         borderRadius: `2px`,
@@ -23,7 +23,7 @@ const LanguageSwitcher = (props) => (
         marginRight: `10px`
       }}
     >
-      <FlagIcon code={getCode(props.locale)} />
+      <FlagIcon code={getCode(locale)} />
     </Link>
   </div>
 )

@@ -2,12 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 import breakpoint from 'styled-components-breakpoint'
 import Wrapper from '../../components/Layout/Wrapper'
-import PhoneNumber from '../../components/General/PhoneNumber'
+import PhoneNumbers from '../../components/General/PhoneNumbers'
 import SocialNetworks from '../../components/Header/SocialNetworks'
 import LanguageSwitcher from '../../components/Header/LanguageSwitcher'
 import logo from '../../images/logo-blanco.png'
 import {FaEnvelope} from 'react-icons/fa'
 import Link from 'gatsby-link'
+import { StaticQuery, graphql } from "gatsby"
 
 const Footer = styled.footer`
   background: ${props => props.theme.grayDarkest};
@@ -158,51 +159,100 @@ const QuickAcessLinks = [
   { en: { node: { id: 8, slug: "/en/sitemap/", title: "Sitemap" } }, es: { node: { id: 8, slug: "/es/mapa-de-sitio/", title: "Mapa de sitio" } }},
 ]
 
-export default ({ phoneNumbers, socialNetworks, translation, locale, brands, products}) => (
-  <Footer>
-    <FooterWrapper>
-      <Column first>
-        <img src={logo} alt="Bella Vida Costa Rica" />
-        {phoneNumbers.edges.map((number, i) => (
-          <p key={number.node.id}><PhoneNumber phoneNumber={number.node.number} /></p>
-        ))}
-        <p>
-          <Link to={locale === "en" ? "/en/contact-us" : "/es/contactenos"}>
-            <FaEnvelope /> {locale === 'en' ? "Contact Us" : "Contáctenos"}
-          </Link>
-        </p>
-        <p>
-          Copyright © {(new Date()).getFullYear()} Bella Vida Costa Rica. {Localize(locale, "All Rights Reserved", "Todos los derechos reservados")}.
-        </p>
-      </Column>
-      <Column>
-        <Title>{Localize(locale, "Quick Access", "Acceso rápido")}</Title>
-        <Menu items={QuickAcessLinks.map(i => i[locale])} prefix="" />
-      </Column>
-      <Column>
-        <Title>{Localize(locale, "Our products" , "Acceso rápido")}</Title>
-        <Menu items={products} prefix={`/${locale}/${locale === "en" ? "products" : "productos"}/`} />
-      </Column>
-      <Column>
-        <Title>{Localize(locale, "Our Brands", "Nuestras marcas")}</Title>
-        <Menu items={brands} prefix={`/${locale}/${locale === "en" ? "brands" : "marcas"}/`} />
-      </Column>
-      <Column>
-        <Title>{Localize(locale, "Get our newsletter", "Subscrébete")}</Title>
-        <form name="subscribe" method="post" data-netlify="true" data-netlify-honeypot="text">
-          <p style={{display: `none`}}>
-            <input type="hidden" name="form-name" value="subscribe" />
-            <input name="text"/>
-          </p>
-          <Input type="text" name="name" placeholder="Name"/>
-          <Input type="email" name="email" placeholder="Email"/>
-          <Button type="submit">{Localize(locale, "Subscribe", "Subscribirme")}</Button>
-        </form>
-      </Column>
-    </FooterWrapper>
-    <FooterWrapper subfooter>
-      <LanguageSwitcher translation={translation}/>
-      <SocialNetworks socialNetworks={socialNetworks}/>
-    </FooterWrapper>
-  </Footer>
+export default ({ translation, locale }) => (
+  <StaticQuery
+    query={graphql`
+      query FooterQuery {
+        brands: allContentfulProductBrand {
+          edges {
+            node {
+              id
+              title
+              node_locale
+              slug
+            }
+          }
+        }
+        products: allContentfulProduct {
+          edges {
+            node {
+              id
+              title
+              slug
+              node_locale
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Footer>
+        <FooterWrapper>
+          <Column first>
+            <img src={logo} alt="Bella Vida Costa Rica" />
+            <PhoneNumbers />
+            <p>
+              <Link to={locale === "en" ? "/en/contact-us" : "/es/contactenos"}>
+                <FaEnvelope /> {locale === "en" ? "Contact Us" : "Contáctenos"}
+              </Link>
+            </p>
+            <p>
+              Copyright © {new Date().getFullYear()} Bella Vida Costa Rica.{" "}
+              {Localize(
+                locale,
+                "All Rights Reserved",
+                "Todos los derechos reservados"
+              )}
+              .
+            </p>
+          </Column>
+          <Column>
+            <Title>{Localize(locale, "Quick Access", "Acceso rápido")}</Title>
+            <Menu items={QuickAcessLinks.map(i => i[locale])} prefix="" />
+          </Column>
+          <Column>
+            <Title>{Localize(locale, "Our products", "Acceso rápido")}</Title>
+            <Menu
+              items={data.products.edges.filter(node => node.node.node_locale === locale)}
+              prefix={`/${locale}/${
+                locale === "en" ? "products" : "productos"
+              }/`}
+            />
+          </Column>
+          <Column>
+            <Title>{Localize(locale, "Our Brands", "Nuestras marcas")}</Title>
+            <Menu
+              items={data.brands.edges.filter(node => node.node.node_locale === locale)}
+              prefix={`/${locale}/${locale === "en" ? "brands" : "marcas"}/`}
+            />
+          </Column>
+          <Column>
+            <Title>
+              {Localize(locale, "Get our newsletter", "Subscrébete")}
+            </Title>
+            <form
+              name="subscribe"
+              method="post"
+              data-netlify="true"
+              data-netlify-honeypot="text"
+            >
+              <p style={{ display: `none` }}>
+                <input type="hidden" name="form-name" value="subscribe" />
+                <input name="text" />
+              </p>
+              <Input type="text" name="name" placeholder="Name" />
+              <Input type="email" name="email" placeholder="Email" />
+              <Button type="submit">
+                {Localize(locale, "Subscribe", "Subscribirme")}
+              </Button>
+            </form>
+          </Column>
+        </FooterWrapper>
+        <FooterWrapper subfooter>
+          <LanguageSwitcher translation={translation} />
+          <SocialNetworks />
+        </FooterWrapper>
+      </Footer>
+    )}
+  />
 )
