@@ -1,17 +1,23 @@
-import React from 'react'
+import React from "react"
 import { StaticQuery, graphql } from "gatsby"
-import styled from 'styled-components'
-import breakpoint from 'styled-components-breakpoint'
-import Wrapper from '../../components/Layout/Wrapper'
-import Img from 'gatsby-image'
+import styled from "styled-components"
+import breakpoint from "styled-components-breakpoint"
+import Wrapper from "../../components/Layout/Wrapper"
+import Img from "gatsby-image"
 
-const Container =  styled.div`
+const Title = styled.div`
+  text-align: center;
+  font-size: 2em;
   background: ${props => props.theme.mainColor};
-  color: #fff;
+  padding: 40px 20px;
   margin: 2rem 0 0;
+  color: #fff;
+`
+
+const Container = styled.div`
   padding: 2rem 0;
 
-  ${breakpoint('tablet') `
+  ${breakpoint("tablet")`
     padding: 2rem;
   `}
 `
@@ -25,7 +31,7 @@ const GridWrapper = styled(Wrapper)`
   justify-content: center;
   text-align: center;
 
-  ${breakpoint('tablet')`
+  ${breakpoint("tablet")`
     grid-template-columns: repeat(16, 1fr);
     grid-column-gap: 60px;
   `}
@@ -35,8 +41,10 @@ const Link = styled.a`
   display: block;
   padding: 10px;
   border-radius: 5px;
+  transition: transform .5s ease;
+
   &:hover {
-    background: ${props => props.theme.mainColorVariation};
+    transform: translateY(-2px);
   }
 `
 
@@ -44,7 +52,7 @@ const Brand = styled.div`
   grid-column: span ${props => props.size};
 `
 
-export default ({locale}) => (
+export default ({ locale }) => (
   <StaticQuery
     query={graphql`
       query BrandsQuery {
@@ -73,11 +81,16 @@ export default ({locale}) => (
         brand => brand.node.node_locale === locale
       )
       return (
-        <Container>
-          <GridWrapper quantity={brands.length}>
-            {brands
-              .map(brand => (
-                <Brand key={brand.node.id} size={brand.node.size}>
+        <>
+          <Title>{locale === "en" ? "Our brands" : "Nuestras marcas"}</Title>
+          <Container>
+            <GridWrapper quantity={brands.length}>
+              {brands.map(brand => (
+                <Brand
+                  key={brand.node.id}
+                  size={brand.node.size}
+                  className="brandLink"
+                >
                   <Link
                     href={brand.node.website}
                     target="_blank"
@@ -87,8 +100,10 @@ export default ({locale}) => (
                   </Link>
                 </Brand>
               ))}
-          </GridWrapper>
-        </Container>
-      )}}
+            </GridWrapper>
+          </Container>
+        </>
+      )
+    }}
   />
 )
