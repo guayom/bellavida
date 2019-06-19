@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import breakpoint from 'styled-components-breakpoint'
 import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 
@@ -23,11 +22,15 @@ const ImageContainer = styled.div`
   margin-bottom: 10px;
 `
 
-const ItemImage = ({title, slug, image, path}) => (
+const ItemImage = ({ title, slug, image, path }) => (
   <Container>
     <Link to={path + "/" + slug}>
       <ImageContainer>
-        <Img fluid={image} alt={title} />
+        <Img
+          fluid={image}
+          alt={title}
+          style={{ width: "auto", height: "150px" }}
+        />
       </ImageContainer>
       <Title>{title}</Title>
     </Link>

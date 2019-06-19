@@ -141,7 +141,7 @@ async function createProductPages(graphql, actions, reporter) {
     reporter.info(`Creating page: ${path} -> ${translation}`)
     createPage({
       path,
-      component: require.resolve("./src/templates/list-page.js"),
+      component: require.resolve("./src/templates/products.js"),
       context: {
         id: `products-${locale}`,
         locale: locale,
@@ -209,13 +209,13 @@ async function createBrandPages(graphql, actions, reporter) {
   ]
   BrandIndexPages.forEach(({ path, locale, pageTitle }) => {
     const translation = BrandIndexPages.find(p => p.locale !== locale).path
-    reporter.info(`Creating page: ${path} -> ${translation}`)
+    reporter.info(`Creating BRANDS INDEX page: ${path} -> ${translation}`)
     createPage({
       path,
-      component: require.resolve("./src/templates/list-page.js"),
+      component: require.resolve("./src/templates/brands.js"),
       context: {
         id: `brands-${locale}`,
-        locale: locale,
+        locale,
         pageTitle,
         translation,
       },
@@ -237,7 +237,7 @@ async function createBrandPages(graphql, actions, reporter) {
     ).node
     const translation =
       prefixes[translationNode.node_locale] + translationNode.slug
-    reporter.info(`Creating page: ${path} -> ${translation}`)
+    reporter.info(`Creating BRAND page: ${path} -> ${translation}`)
 
     createPage({
       path,
