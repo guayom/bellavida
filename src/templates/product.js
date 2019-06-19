@@ -10,25 +10,24 @@ const propTypes = {
   data: PropTypes.object.isRequired
 };
 
-class ProductTemplate extends React.Component {
-  render() {
-    const product = this.props.data.contentfulProduct;
-    const data = this.props.data
+const ProductTemplate = ({ data, pageContext }) => {
+  const product = data.contentfulProduct
 
-    return (
-      <Layout data={ data } locale={this.props.pageContext.locale} translation={this.props.pageContext.translation}>
-        <Helmet title={product.title} />
-        <InternalHero title={product.title} image={product.image} />
-        <Wrapper>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: product.description.childMarkdownRemark.html
-            }}
-          />
-        </Wrapper>
-      </Layout>
-    );
-  }
+  return (
+    <Layout
+      {...pageContext}
+    >
+      <Helmet title={product.title} />
+      <InternalHero title={product.title} image={product.image} />
+      <Wrapper>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: product.description.childMarkdownRemark.html,
+          }}
+        />
+      </Wrapper>
+    </Layout>
+  )
 }
 
 ProductTemplate.propTypes = propTypes;
@@ -45,8 +44,8 @@ export const pageQuery = graphql`
         }
       }
       image {
-        fixed(width: 1240, height:300) {
-          ...GatsbyContentfulFixed
+        fluid {
+          ...GatsbyContentfulFluid
         }
       }
     }
@@ -104,4 +103,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

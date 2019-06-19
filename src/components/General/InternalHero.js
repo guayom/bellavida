@@ -46,10 +46,13 @@ const TitleContainer = styled.h1`
   }
 `
 
+// TODO Make a srcSet
+// <Img fluid={{ ...image.fluid, sizes: '(max-width: 512px) 20vw, (max-width: 768px) 35vw, 430px' }} />
+// https://github.com/gatsbyjs/gatsby/issues/11851
+
 function ShowHero(image, title) {
-  console.log({image})
   if (image) {
-    return <Img fluid={image.fluid} alt={title} title={title} />
+     return <Img fluid={image.fluid} alt={title} title={title} style={{width: 'auto', height: '400px'}}/>
   } else {
     return null
   }
