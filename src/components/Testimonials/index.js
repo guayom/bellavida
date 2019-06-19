@@ -78,7 +78,6 @@ class Testimonials extends React.Component {
 
   setSliderPosition(change){
     var sliderWidth = this.slidingDiv.getBoundingClientRect().width
-    var sliderPosition = this.slidingDiv
     var visibleSlide = this.getNextSlideIndex(change)
     var sliderPosition = visibleSlide * (sliderWidth * -1)
     this.setState({visibleSlide, sliderPosition})

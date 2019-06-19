@@ -141,7 +141,6 @@ class Slider extends React.Component {
   render() {
     var visibleSlideIndex = this.state.visibleSlide
     var visibleSlide = this.props.slides[visibleSlideIndex].node
-    var visibleSlideImage = visibleSlide.image.resolutions
 
     return(
       <Container>

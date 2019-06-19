@@ -78,6 +78,7 @@ async function createSimplePages(graphql, actions, reporter) {
         id: edge.node.id,
         contentful_id,
         pageTitle: edge.node.title,
+        locale: node_locale,
         translation,
       },
     })
@@ -89,22 +90,46 @@ async function createSimplePages(graphql, actions, reporter) {
 // Create Contact Pages
 async function createContactPages(actions, reporter) {
   const { createPage, createPageDependency } = actions
-  const contactPages = [
-    { locale: "en", path: "/en/contact-us/", pageTitle: "Contact Us" },
-    { locale: "es", path: "/es/contactenos/", pageTitle: "Contáctenos" },
-  ]
-  contactPages.forEach(({ path, locale, pageTitle }) => {
-    const translation = contactPages.find(p => p.locale !== locale).path
-    const id = `contact-${locale}`
-    reporter.info(`Creating page: ${path} -> ${translation}`)
+  // const contactPages = [
+  //   { locale: "en", path: "/en/contact-us/", pageTitle: "Contact Us" },
+  //   { locale: "es", path: "/es/contactenos/", pageTitle: "Contáctenos" },
+  // ]
+  // contactPages.forEach( page => {
+  //   const translation = contactPages.find(p => p.locale !== page.locale).path
+  //   const id = `contact-${page.locale}`
+  //   reporter.info(`Creating page: ${page.path} -> ${page.translation}`)
 
-    createPage({
-      path,
-      component: require.resolve("./src/templates/contact.js"),
-      context: { id, locale, translation, pageTitle },
-    })
+  //   createPage({
+  //     path: page.path,
+  //     component: require.resolve("./src/templates/contact.js"),
+  //     context: { id: page.id, locale: page.locale, translation, pageTitle: page.pageTitle },
+  //   })
 
-    createPageDependency({ path, nodeId: id })
+  //   createPageDependency({ path: page.path, nodeId: id })
+  // })
+
+  reporter.info(`Creating page: "/en/contact-us/"`)
+  createPage({
+    path: "/en/contact-us/",
+    component: require.resolve("./src/templates/contact.js"),
+    context: {
+      id: `contact-en`,
+      locale: "en",
+      translation: "/es/contactenos/",
+      pageTitle: "Contact Us",
+    },
+  })
+
+  reporter.info(`Creating page: "/es/contactactenos/"`)
+  createPage({
+    path: "/es/contactenos/",
+    component: require.resolve("./src/templates/contact.js"),
+    context: {
+      id: `contact-en`,
+      locale: "es",
+      translation: "/en/contact-us/",
+      pageTitle: "Contáctenos",
+    },
   })
 }
 

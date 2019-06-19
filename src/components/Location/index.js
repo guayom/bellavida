@@ -1,7 +1,6 @@
 import React from 'react'
 import TitleBar from  '../../components/General/TitleBar'
 import styled from 'styled-components'
-import breakpoint from 'styled-components-breakpoint'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
 const Container = styled.div`
