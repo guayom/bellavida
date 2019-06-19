@@ -90,23 +90,7 @@ async function createSimplePages(graphql, actions, reporter) {
 // Create Contact Pages
 async function createContactPages(actions, reporter) {
   const { createPage, createPageDependency } = actions
-  // const contactPages = [
-  //   { locale: "en", path: "/en/contact-us/", pageTitle: "Contact Us" },
-  //   { locale: "es", path: "/es/contactenos/", pageTitle: "Contáctenos" },
-  // ]
-  // contactPages.forEach( page => {
-  //   const translation = contactPages.find(p => p.locale !== page.locale).path
-  //   const id = `contact-${page.locale}`
-  //   reporter.info(`Creating page: ${page.path} -> ${page.translation}`)
-
-  //   createPage({
-  //     path: page.path,
-  //     component: require.resolve("./src/templates/contact.js"),
-  //     context: { id: page.id, locale: page.locale, translation, pageTitle: page.pageTitle },
-  //   })
-
   //   createPageDependency({ path: page.path, nodeId: id })
-  // })
 
   reporter.info(`Creating page: "/en/contact-us/"`)
   createPage({
@@ -129,6 +113,35 @@ async function createContactPages(actions, reporter) {
       locale: "es",
       translation: "/en/contact-us/",
       pageTitle: "Contáctenos",
+    },
+  })
+}
+
+// Create Environment index pages
+async function createContactPages(actions, reporter) {
+  const { createPage, createPageDependency } = actions
+
+  reporter.info(`Creating page: /en/environment/`)
+  createPage({
+    path: `/en/environment/" : "medio-ambiente"}`,
+    component: require.resolve("./src/templates/environment.js"),
+    context: {
+      id: `environmnent-en`,
+      locale: "en",
+      pageTitle: "Environment",
+      translation: `/es/medio-ambiente"/`,
+    },
+  })
+
+  reporter.info(`Creating page: /es/medio-ambiente/`)
+  createPage({
+    path: `/es/medio-ambiente/`,
+    component: require.resolve("./src/templates/environment.js"),
+    context: {
+      id: `environmnent-es`,
+      locale: "es",
+      pageTitle: "Medio Ambiente",
+      translation: '/en/environment/'
     },
   })
 }
