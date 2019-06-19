@@ -23,8 +23,8 @@ const Grid = styled.ul`
 
 const AllProductsPageTemplate = ({ data: {products}, pageContext }) => {
   const localizedData = {
-    en: {path: "/products/", title: "Products"},
-    es: {path: "/productos/", title: "Productos"}
+    en: {path: "/en/products/", title: "Products"},
+    es: {path: "/es/productos/", title: "Productos"}
   }
   const title = localizedData[pageContext.locale].title
 
