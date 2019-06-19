@@ -155,7 +155,7 @@ const QuickAcessLinks = [
   { en: { node: { id: 4, slug: "/en/service-center/", title: "Service center" } }, es: { node: { id: 4, slug: "/es/centro-de-servicio/", title: "Centro de servicio" } }},
   { en: { node: { id: 5, slug: "/en/environment/", title: "Environment" } }, es: { node: { id: 5, slug: "/es/medio-ambiente/", title: "Medio ambiente" } }},
   { en: { node: { id: 6, slug: "/en/projects/", title: "Projects" } }, es: { node: { id: 6, slug: "/es/proyectos/", title: "Proyectos" } }},
-  { en: { node: { id: 7, slug: "/en/contact-us/", title: "Contact us" } }, es: { node: { id: 7, slug: "/es/contacto/", title: "Contacto" } }},
+  { en: { node: { id: 7, slug: "/en/contact-us/", title: "Contact us" } }, es: { node: { id: 7, slug: "/es/contactenos/", title: "Contacto" } }},
   { en: { node: { id: 8, slug: "/en/sitemap/", title: "Sitemap" } }, es: { node: { id: 8, slug: "/es/mapa-de-sitio/", title: "Mapa de sitio" } }},
 ]
 

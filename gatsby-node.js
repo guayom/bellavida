@@ -89,8 +89,7 @@ async function createSimplePages(graphql, actions, reporter) {
 
 // Create Contact Pages
 async function createContactPages(actions, reporter) {
-  const { createPage, createPageDependency } = actions
-  //   createPageDependency({ path: page.path, nodeId: id })
+  const { createPage } = actions
 
   reporter.info(`Creating page: "/en/contact-us/"`)
   createPage({
@@ -109,7 +108,7 @@ async function createContactPages(actions, reporter) {
     path: "/es/contactenos/",
     component: require.resolve("./src/templates/contact.js"),
     context: {
-      id: `contact-en`,
+      id: `contact-es`,
       locale: "es",
       translation: "/en/contact-us/",
       pageTitle: "Contáctenos",
@@ -118,7 +117,7 @@ async function createContactPages(actions, reporter) {
 }
 
 // Create Environment index pages
-async function createContactPages(actions, reporter) {
+async function createEnvironmentPages(actions, reporter) {
   const { createPage, createPageDependency } = actions
 
   reporter.info(`Creating page: /en/environment/`)
@@ -364,6 +363,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   await createHomePages(actions, reporter)
   await createSimplePages(graphql, actions, reporter)
   await createContactPages(actions, reporter)
+  await createEnvironmentPages(actions, reporter)
   await createProductPages(graphql, actions, reporter)
   await createProjectPages(graphql, actions, reporter)
   await createBrandPages(graphql, actions, reporter)
