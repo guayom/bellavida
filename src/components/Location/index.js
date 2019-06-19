@@ -16,16 +16,18 @@ const MarkerContainer = styled.div`
   text-align: center;
   width: 80px;
   height: 80px;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
   border-radius: 50%;
+  cursor: pointer;
+  transition: background .3s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.5);
+  }
 
   path {
     fill: red;
   }
-`
-
-const IconContainer = styled.div`
-  border: solid orange 1px;
 `
 
 const Text = styled.div`
@@ -35,12 +37,18 @@ const Text = styled.div`
   color: #fff;
 `
 
-const AnyReactComponent = ({ text }) => (
-  <MarkerContainer>
+const AnyReactComponent = ({ text, lat, lng }) => (
+  <MarkerContainer
+    onClick={() =>
+      window.open(
+        `http://maps.google.com/maps?q=${lat},${lng}&ll=${lat},${lng}&z=17`,
+        "_blank"
+      )
+    }
+  >
     <div>
       <MdLocationOn />
     </div>
-
     <Text>{text}</Text>
   </MarkerContainer>
 )
