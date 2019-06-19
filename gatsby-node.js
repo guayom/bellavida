@@ -123,13 +123,13 @@ async function createContactPages(actions, reporter) {
 
   reporter.info(`Creating page: /en/environment/`)
   createPage({
-    path: `/en/environment/" : "medio-ambiente"}`,
+    path: `/en/environment/`,
     component: require.resolve("./src/templates/environment.js"),
     context: {
       id: `environmnent-en`,
       locale: "en",
       pageTitle: "Environment",
-      translation: `/es/medio-ambiente"/`,
+      translation: `/es/medio-ambiente/`,
     },
   })
 
@@ -143,6 +143,79 @@ async function createContactPages(actions, reporter) {
       pageTitle: "Medio Ambiente",
       translation: '/en/environment/'
     },
+  })
+}
+
+// Create Project index pages
+async function createProjectPages(graphql, actions, reporter) {
+  const { createPage, createPageDependency } = actions
+
+  reporter.info(`Creating page: /en/projects/`)
+  createPage({
+    path: `/en/projects/`,
+    component: require.resolve("./src/templates/projects.js"),
+    context: {
+      id: `projects-en`,
+      locale: "en",
+      pageTitle: "Projects",
+      translation: `/es/proyectos/`,
+    },
+  })
+
+  reporter.info(`Creating page: /es/proyectos/`)
+  createPage({
+    path: `/es/proyectos/`,
+    component: require.resolve("./src/templates/projects.js"),
+    context: {
+      id: `projects-es`,
+      locale: "es",
+      pageTitle: "Proyectos",
+      translation: '/en/projects/'
+    },
+  })
+
+  const result = await graphql(`
+    {
+      products: allContentfulProject {
+        edges {
+          node {
+            id
+            contentful_id
+            node_locale
+            slug
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const projectEdges = (result.data.products || {}).edges || []
+
+  projectEdges.forEach(edge => {
+    const { id, contentful_id, node_locale, slug } = edge.node
+    const prefixes = {
+      en: "/en/projects/",
+      es: "/es/proyectos/",
+    }
+    const path = `${prefixes[node_locale]}${slug}/`
+    const translationNode = projectEdges.find(
+      p =>
+        p.node.contentful_id === contentful_id &&
+        p.node.node_locale !== node_locale
+    ).node
+    const translation =
+      prefixes[translationNode.node_locale] + translationNode.slug
+    reporter.info(`Creating page: ${path} -> ${translation}`)
+
+    createPage({
+      path,
+      component: require.resolve("./src/templates/project.js"),
+      context: { id, contentful_id, locale: node_locale, translation },
+    })
+
+    createPageDependency({ path, nodeId: id })
   })
 }
 
@@ -292,5 +365,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   await createSimplePages(graphql, actions, reporter)
   await createContactPages(actions, reporter)
   await createProductPages(graphql, actions, reporter)
+  await createProjectPages(graphql, actions, reporter)
   await createBrandPages(graphql, actions, reporter)
 }
