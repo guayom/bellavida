@@ -5,7 +5,7 @@ import styled from "styled-components"
 import breakpoint from "styled-components-breakpoint"
 
 const MenuContainer = styled.div`
-  z-index: 25;
+  z-index: 10;
   display: block;
   position: absolute;
   left: 0;

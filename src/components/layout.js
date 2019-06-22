@@ -6,11 +6,13 @@ import Footer from "../components/Footer"
 import "./main.css"
 import styled, { ThemeProvider } from "styled-components"
 import BrandsBar from "../components/Brands/Home"
+import ContactButton from '../components/General/ContactButton'
 
 const MainContainer = styled.div`
   background: #fff;
   max-width: 1240px;
   margin: 0 auto;
+  position: relative;
 `
 
 const defaultTheme = {
@@ -43,10 +45,8 @@ const TemplateWrapper = ({ children, locale, translation }) => (
       <Header locale={locale} translation={translation} />
       {children}
       <BrandsBar locale={locale} />
-      <Footer
-        translation={translation}
-        locale={locale}
-      />
+      <Footer translation={translation} locale={locale} />
+      <ContactButton locale={locale} />
     </MainContainer>
   </ThemeProvider>
 )
