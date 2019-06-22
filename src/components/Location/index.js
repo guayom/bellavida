@@ -20,6 +20,8 @@ const MarkerContainer = styled.div`
   border-radius: 50%;
   cursor: pointer;
   transition: background .3s ease;
+  margin-top: -40px;
+  margin-left: -40px;
 
   &:hover {
     background: rgba(0, 0, 0, 0.5);
@@ -57,9 +59,9 @@ class SimpleMap extends Component {
   static defaultProps = {
     center: {
       lat: 9.98,
-      lng: -84.68,
+      lng: -84.83,
     },
-    zoom: 8,
+    zoom: 7.8,
   }
   render() {
     return (
@@ -73,8 +75,8 @@ class SimpleMap extends Component {
             defaultZoom={this.props.zoom}
           >
             <AnyReactComponent
-              lat={9.953068}
-              lng={-84.159372}
+              lat={9.953229}
+              lng={-84.157156}
               text="San José"
             />
             <AnyReactComponent
