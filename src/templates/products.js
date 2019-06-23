@@ -6,6 +6,7 @@ import breakpoint from "styled-components-breakpoint"
 import ItemImage from "../components/General/ItemImage"
 import Layout from "../components/layout"
 import { graphql } from "gatsby"
+import DownloadFileButton from "../components/General/DownloadFileButton"
 
 const Grid = styled.ul`
   display: grid;
@@ -21,7 +22,7 @@ const Grid = styled.ul`
   `}
 `
 
-const AllProductsPageTemplate = ({ data: {products}, pageContext }) => {
+const AllProductsPageTemplate = ({ data: {products, brochure}, pageContext }) => {
   const localizedData = {
     en: {path: "/en/products/", title: "Products"},
     es: {path: "/es/productos/", title: "Productos"}
@@ -44,6 +45,7 @@ const AllProductsPageTemplate = ({ data: {products}, pageContext }) => {
             />
           ))}
         </Grid>
+        <DownloadFileButton title={brochure.title} url={brochure.file.url} />
       </Wrapper>
     </Layout>
   )
@@ -72,6 +74,13 @@ export const productsQuery = graphql`
           }
         }
       }
+    }
+    brochure: contentfulAsset(contentful_id: {eq: "qJhVbONXYV0Tlj2fEiTyv"}, node_locale: {eq: $locale}) {
+      file {
+        url
+      }
+      title
+      description
     }
   }
 `

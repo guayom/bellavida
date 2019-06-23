@@ -5,7 +5,7 @@ import Wrapper from "../components/Layout/Wrapper";
 import InternalHero from "../components/General/InternalHero";
 import Layout from "../components/layout";
 import { graphql } from "gatsby";
-import { FaDownload } from 'react-icons/fa'
+import DownloadFileButton from '../components/General/DownloadFileButton'
 
 const propTypes = {
   data: PropTypes.object.isRequired
@@ -25,24 +25,10 @@ const ProductTemplate = ({ data, pageContext }) => {
           }}
         />
         {product.pdf && (
-          <a
-            style={{
-              display: `inline-block`,
-              padding: "8px 20px",
-              background: "#93c548",
-              fontSize: "14px",
-              lineHeight: "14px",
-              color: "#fff",
-              textDecoration: `none`,
-              borderRadius: `4px`,
-              border: 0,
-            }}
-            href={product.pdf.file.url}
-            target="_blank"
-            download={product.pdf.title}
-          >
-            {product.pdf.title} <FaDownload />
-          </a>
+          <DownloadFileButton
+            title={product.pdf.title}
+            url={product.pdf.file.url}
+          />
         )}
       </Wrapper>
     </Layout>
