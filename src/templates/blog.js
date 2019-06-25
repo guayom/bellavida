@@ -61,7 +61,7 @@ export const postsQuery = graphql`
           slug
           title
           node_locale
-          createdAt(formatString: "MMMM Do, YYYY")
+          createdAt(locale: $locale, formatString: "MMMM Do, YYYY")
           image {
             fluid {
               ...GatsbyContentfulFluid
