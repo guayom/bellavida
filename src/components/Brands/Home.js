@@ -24,7 +24,7 @@ const Container = styled.div`
 
 const GridWrapper = styled(Wrapper)`
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(${props => props.quantity + 1}, 1fr);
   grid-column-gap: 30px;
   align-content: center;
   align-items: center;
@@ -32,7 +32,6 @@ const GridWrapper = styled(Wrapper)`
   text-align: center;
 
   ${breakpoint("tablet")`
-    grid-template-columns: repeat(16, 1fr);
     grid-column-gap: 60px;
   `}
 `
