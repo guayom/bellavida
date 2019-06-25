@@ -352,6 +352,18 @@ export default ({ locale, expanded, handleClick }) => (
         },
         {
           en: {
+            title: "Blog",
+            slug: "blog",
+            id: "blog",
+          },
+          es: {
+            title: "Blog",
+            slug: "blog",
+            id: "blog",
+          },
+        },
+        {
+          en: {
             title: "Contact us",
             slug: "contact-us",
             id: "contact-us",

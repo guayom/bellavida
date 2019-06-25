@@ -4,6 +4,7 @@ import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 
 const Container = styled.div`
+  margin-bottom: 20px;
   a:hover {
     text-decoration: none;
   }
@@ -16,13 +17,14 @@ const Container = styled.div`
 const Title = styled.h3`
   font-size: 20px;
   color: ${props => props.theme.grayMedium};
+  margin-bottom: 5px;
 `
 
 const ImageContainer = styled.div`
   margin-bottom: 10px;
 `
 
-const ItemImage = ({ title, slug, image, path }) => (
+const ItemImage = ({ title, slug, image, path, createdAt = false }) => (
   <Container>
     <Link to={path + "/" + slug}>
       <ImageContainer>
@@ -33,6 +35,7 @@ const ItemImage = ({ title, slug, image, path }) => (
         />
       </ImageContainer>
       <Title>{title}</Title>
+      {createdAt && <p><small>{createdAt}</small></p>}
     </Link>
   </Container>
 )

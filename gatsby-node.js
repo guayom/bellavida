@@ -359,6 +359,75 @@ async function createBrandPages(graphql, actions, reporter) {
   })
 }
 
+// Create BLOG pages
+async function createBlogPostPages(graphql, actions, reporter) {
+  const { createPage, createPageDependency } = actions
+  
+  const result = await graphql(`
+    {
+      posts: allContentfulBlogPost {
+        edges {
+          node {
+            id
+            contentful_id
+            node_locale
+            slug
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) throw result.errors
+
+  const postsEdges = (result.data.posts || {}).edges || []
+
+  // Generate Blog index pages
+  const BlogIndexPages = [
+    { locale: "en", path: "/en/blog/", pageTitle: "Our Blog" },
+    { locale: "es", path: "/es/blog/", pageTitle: "Nuestro Blog" },
+  ]
+  BlogIndexPages.forEach(({ path, locale, pageTitle }) => {
+    const translation = BlogIndexPages.find(p => p.locale !== locale).path
+    reporter.info(`Creating page: ${path} -> ${translation}`)
+    createPage({
+      path,
+      component: require.resolve("./src/templates/blog.js"),
+      context: {
+        id: `blog-${locale}`,
+        locale: locale,
+        pageTitle,
+        translation,
+      },
+    })
+  })
+
+  postsEdges.forEach(edge => {
+    const { id, contentful_id, node_locale, slug } = edge.node
+    const prefixes = {
+      en: "/en/blog/",
+      es: "/es/blog/",
+    }
+    const path = `${prefixes[node_locale]}${slug}/`
+    const translationNode = postsEdges.find(
+      p =>
+        p.node.contentful_id === contentful_id &&
+        p.node.node_locale !== node_locale
+    ).node
+    const translation =
+      prefixes[translationNode.node_locale] + translationNode.slug
+    reporter.info(`Creating page: ${path} -> ${translation}`)
+
+    createPage({
+      path,
+      component: require.resolve("./src/templates/post.js"),
+      context: { id, contentful_id, locale: node_locale, translation },
+    })
+
+    createPageDependency({ path, nodeId: id })
+  })
+}
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   await createHomePages(actions, reporter)
   await createSimplePages(graphql, actions, reporter)
@@ -366,5 +435,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   await createEnvironmentPages(actions, reporter)
   await createProductPages(graphql, actions, reporter)
   await createProjectPages(graphql, actions, reporter)
+  await createBlogPostPages(graphql, actions, reporter)
   await createBrandPages(graphql, actions, reporter)
 }
