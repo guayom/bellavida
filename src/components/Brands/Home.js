@@ -66,7 +66,7 @@ export default ({ locale }) => (
               size
               website
               logo {
-                fluid {
+                fluid(maxWidth: 300) {
                   ...GatsbyContentfulFluid
                 }
               }
