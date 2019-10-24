@@ -70,7 +70,7 @@ const SinglePageTemplate = ({ pageContext }) => {
             <PhoneNumbers />
             <h4>{locale === "en" ? "Social Networks" : "Redes Sociales"}:</h4>
             <a
-              href="https://www.facebook.com/BellaVidaCostaRicaWindowsDoors"
+              href="https://www.facebook.com/bellavidacostarica/"
               target="_blank"
               rel="noopener noreferrer"
             >
